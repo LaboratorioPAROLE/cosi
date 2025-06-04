@@ -67,11 +67,14 @@ COSÌ builds on MDMA’s strengths, especially in operationalizing objective cri
 
 COSÌ consists of **two parts**:
 
-1. **Website**  
-   - User interface to explore each DM’s frequency, functions, and usage profiles.
+## Project Structure
 
-2. **Open Repository**  
-   - Data files, annotation guidelines, substitution test results, and occurrence contexts.
+- **Website** *(to be developed)*
+    - Planned: A user interface to explore each DM’s frequency, functions, and usage profiles.
+
+- **Open Repository**
+    - Includes: Data files, annotation guidelines, substitution test results, and occurrence contexts.
+
 
 For each DM, you will find:
 
