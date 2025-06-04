@@ -161,7 +161,7 @@ Laboratorio PAROLE, DipSUm, Università di Salerno
 
 
 ---
-## License
+# License
 
 **License**
 
