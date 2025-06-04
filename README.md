@@ -4,7 +4,7 @@
 _Miriam Voghera¹, Andrea Sansò¹, Iolanda Alfano¹, Alfonsina Buoniconto¹, Giovanni Di Paola¹, Pasquale Esposito¹, Flavio Pisciotta¹, Carmela Sammarco¹, Luisa Troncone¹_
 
 
-**¹ Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno**
+¹ Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno
 ---
 
 ## Table of Contents
