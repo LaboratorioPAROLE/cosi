@@ -120,12 +120,17 @@ Functional annotation draws on literature, adapted for transparency and practica
 
 ## References
 
-- Biber, D., et al. (1994). [Title].  
-- Briz, A., et al. (2008). _Diccionario de Partículas Discursivas del Español (DPDE)_.  
-- Bolly, C., et al. (2015). [Title].  
-- Mauri, C., et al. (2019). [Title].  
-- Voghera, M., et al. (2014). [Title].  
-- Pannitto, G. & Mauri, C. (2024). [Title].  
+Bolly, C. T., Crible, L., Degand, L., & Uygur-Distexhe, D. (2015). MDMA. Un modèle pour l’identification et l’annotation des marqueurs discursifs “potentiels” en context. Discours, 16, 3–32.
+Briz, A., Pons Bordería, S., & Portolés, J. (2008). Diccionario de partículas discursivas del español. http://www.dpde.es
+Chiarcos, C., Hellmann, S., & Nordhoff, S. (2012). Linked Data in Linguistics: Representing and Connecting Language Data and Language Metadata. Springer.
+Crible, L., & Cuenca, M.-J. (2017). Discourse markers in speech: Characteristics and challenges for corpus annotation. Dialogue and Discourse, 8(2), 149–166. https://doi.org/10.5087/dad
+Crible, L., & Zufferey, S. (2015). Using a unified taxonomy to annotate discourse markers in speech and writing. 14–22.
+Fedriani, C., & Sansò, A. (2017). Introduction. Pragmatic markers, discourse markers and modal particles: What do we know and where do we go from here? In C. Fedriani & A. Sansò (Eds.), Pragmatic Markers, Discourse Markers and Modal Particles. New Perspectives (pp. 1–33). John Benjamins.
+Jucker, A. H., & Ziv, Y. (1998). Discourse markers: Introduction. In A. H. Jucker & Y. Ziv (Eds.), Discourse Markers (pp. 1–12). John Benjamins.
+Mauri, C., Ballarè, S., Goria, E., Cerruti, M., & Suriano, F. (2019). KIParla corpus: A new resource for spoken Italian. Proceedings of the 6th Italian Conference on Computational Linguistics CLiC-it.
+Sansò, A. (2020). I segnali discorsivi. Carocci.
+Schiffrin, D. (1987). Discourse Markers. Cambridge University Press.
+
 
 ---
 
