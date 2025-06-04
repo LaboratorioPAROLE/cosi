@@ -21,6 +21,7 @@ Miriam Voghera, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di
   - [Annotation Schema Design](#annotation-schema-design)
   - [Interoperability](#interoperability-with-the-source-corpus)
 - [References](#references)
+- [License] (#License)
 
 ---
 
@@ -160,6 +161,7 @@ Laboratorio PAROLE, DipSUm, Università di Salerno
 
 
 ---
+##License
 
 **License**
 
