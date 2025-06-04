@@ -159,4 +159,8 @@ Laboratorio PAROLE, DipSUm, Università di Salerno
 | Luisa Troncone       | ltroncone@unisa.it         |
 
 
+---
 
+**License**
+
+COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano  © 2025 by Laboratorio PAROLE Unisa is licensed under Creative Commons Attribution 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/
