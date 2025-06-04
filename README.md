@@ -1,3 +1,1 @@
-**COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano
-**
-
+**COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano**
