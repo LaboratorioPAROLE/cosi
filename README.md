@@ -148,7 +148,7 @@ Laboratorio PAROLE, DipSUm, Università di Salerno
 | Iolanda Alfano       | ialfano@unisa.it           |
 | Alfonsina Buoniconto | abuoniconto@unisa.it       |
 | Giovanni Di Paola    | gdipaola@unisa.it          |
-| Pasquale Esposito    | pasesposito@unisait        |
+| Pasquale Esposito    | pasesposito@unisa.it        |
 | Flavio Pisciotta     | fpisciotta@unisa.it        |
 | Carmela Sammarco     | csammarco@unisa.it         |
 | Luisa Troncone       | ltroncone@unisa.it         |
