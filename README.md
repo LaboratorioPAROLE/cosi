@@ -139,4 +139,19 @@ Functional annotation draws on literature, adapted for transparency and practica
 
 Laboratorio PAROLE, DipSUm, Università di Salerno
 
+## Team Contacts
+
+| Name                 | Email                      |
+|----------------------|----------------------------|
+| Miriam Voghera       | voghera@unisa.it           |
+| Andrea Sansò         | asanso@unisa.it            |
+| Iolanda Alfano       | ialfano@unisa.it           |
+| Alfonsina Buoniconto | abuoniconto@unisa.it       |
+| Giovanni Di Paola    | gdipaola@unisa.it          |
+| Pasquale Esposito    | pasepsosito@unisait        |
+| Flavio Pisciotta     | fpisciotta@unisa.it        |
+| Carmela Sammarco     | csammarco@unisa.it         |
+| Luisa Troncone       | ltroncone@unisa.it         |
+
+
 
