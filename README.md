@@ -1,9 +1,9 @@
 # COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano
 
 ## Authors
-_Miriam Voghera¹, Andrea Sansò¹, Iolanda Alfano¹, Alfonsina Buoniconto¹, Giovanni Di Paola¹, Pasquale Esposito¹, Flavio Pisciotta¹, Carmela Sammarco¹, Luisa Troncone¹_
+**Miriam Voghera¹*,°, Andrea Sansò¹°, Iolanda Alfano¹°, Alfonsina Buoniconto¹°, Giovanni Di Paola¹°, Pasquale Esposito¹°, Flavio Pisciotta¹°, Carmela Sammarco¹°, Luisa Troncone¹°**  
+¹ Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno
 
-1 Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno
 ---
 
 ## Table of Contents
