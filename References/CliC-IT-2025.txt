@@ -1,0 +1,20 @@
+Berners-Lee, T. (2006). Linked Data – Design Issues. https://www.w3.org/DesignIssues/LinkedData.html
+Bolly, C. T., Crible, L., Degand, L., & Uygur-Distexhe, D. (2015). MDMA. Un modèle pour l’identification et l’annotation des marqueurs discursifs “potentiels” en context. Discours, 16, 3–32.
+Briz, A., Pons Bordería, S., & Portolés, J. (2008). Diccionario de partículas discursivas del español. http://www.dpde.es
+Chiarcos, C., Hellmann, S., & Nordhoff, S. (2012a). Linked Data in Linguistics: Introduction and Overview. In Linked Data in Linguistics (pp. 1–27). Springer.
+Chiarcos, C., Hellmann, S., & Nordhoff, S. (2012b). Linked Data in Linguistics: Representing and Connecting Language Data and Language Metadata. Springer.
+Cimiano, P., McCrae, J. P., & Buitelaar, P. (2011). LexInfo: A declarative model for the lexicon-ontology interface. Web Semantics: Science, Services and Agents on the World Wide Web, 9(1), 29–51.
+Crible, L., & Cuenca, M.-J. (2017). Discourse markers in speech: Characteristics and challenges for corpus annotation. Dialogue and Discourse, 8(2), 149–166. https://doi.org/10.5087/dad
+Crible, L., & Zufferey, S. (2015). Using a unified taxonomy to annotate discourse markers in speech and writing. 14–22.
+Fedriani, C., & Sansò, A. (2017). Introduction. Pragmatic markers, discourse markers and modal particles: What do we know and where do we go from here? In C. Fedriani & A. Sansò (Eds.), Pragmatic Markers, Discourse Markers and Modal Particles. New Perspectives (pp. 1–33). John Benjamins.
+Ghezzi, C., Molinelli, P., & Ghezzi, C. (Eds.). (2014). Discourse and pragmatic markers from Latin to the romance languages. Oxford University Press. https://doi.org/10.1093/acprof:oso/9780199681600.001.0001
+Jaccard, P. (1912). THE DISTRIBUTION OF THE FLORA IN THE ALPINE ZONE.1. New Phytologist, 11(2), 37–50. https://doi.org/10.1111/j.1469-8137.1912.tb05611.x
+Jucker, A. H., & Ziv, Y. (1998). Discourse markers: Introduction. In A. H. Jucker & Y. Ziv (Eds.), Discourse Markers (pp. 1–12). John Benjamins.
+Mauri, C., Ballarè, S., Goria, E., Cerruti, M., & Suriano, F. (2019). KIParla corpus: A new resource for spoken Italian. Proceedings of the 6th Italian Conference on Computational Linguistics CLiC-it.
+McCrae, J. P., Chiarcos, C., & Cimiano, P. (2017). The OntoLex-Lemon Model: Development and Applications. Proceedings of eLex 2017.
+Sansò, A. (2020). I segnali discorsivi. Carocci.
+Schiffrin, D. (1987). Discourse Markers. Cambridge University Press.
+Voghera, M. (2017). Dal parlato alla grammatica: Costruzione e forma dei testi spontanei (1a edizione). Carocci editore.
+Voghera, M. (2022). From Speaking to Grammar. Peter Lang GmbH, Internationaler Verlag der Wissenschaften.
+Waltereit, R. (2015). Discourse and Pragmatic Markers from Latin to the Romance Languages. Journal of Pragmatics, 81, 74–76. https://doi.org/10.1016/j.pragma.2015.04.004
+Wilkinson, M. D., Dumontier, M., Aalbersberg, Ij. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.-W., da Silva Santos, L. B., Bourne, P. E., Bouwman, J., Brookes, A. J., Clark, T., Crosas, M., Dillo, I., Dumon, O., Edmunds, S., Evelo, C. T., Finkers, R., … Mons, A. (2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, 3, 160018. https://doi.org/10.1038/sdata.2016.18
