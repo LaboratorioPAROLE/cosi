@@ -1,19 +1,19 @@
 # COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano
 
-## Authors
+## Members
 
 Miriam Voghera, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone
 
 **Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno**
 
 
-## Introduction
+## Introduction to the project
 
 **COSÌ** (Catalogo Online dei Segnali discorsivi dell'Italiano) is a project under elaboration at University of Salerno, which aims to build an open online catalog of Italian discourse markers. It will provide a comprehensive, corpus-based resource for the analysis, annotation, and exploration of discourse markers (DMs) in contemporary spoken Italian.
 
 ---
 
-## Background and Motivation
+# Motivation
 
 To our knowledge, the only existing online resource entirely devoted to DMs is the _Diccionario de Partículas Discursivas del Español_ (DPDE; Briz et al. 2008). While excellent, its static design presents certain limitations that COSÌ aims to overcome:
 
