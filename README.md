@@ -13,7 +13,7 @@ Miriam Voghera, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di
 
 ---
 
-# Motivation
+### Motivation
 
 To our knowledge, the only existing online resource entirely devoted to DMs is the _Diccionario de Partículas Discursivas del Español_ (DPDE; Briz et al. 2008). While excellent, its static design presents certain limitations that COSÌ aims to overcome:
 
@@ -26,7 +26,7 @@ COSÌ is grounded in the philosophy of **linked data**, focusing on interoperabi
 
 ---
 
-## Annotation Initiatives
+### Annotation Initiatives
 
 The main prior annotation model for DMs is **MDMA** (Bolly et al., 2015). It:
 
@@ -43,11 +43,11 @@ COSÌ builds on MDMA’s strengths, especially in operationalizing objective cri
 
 ---
 
-### General Architecture
+## General Architecture
 
 COSÌ consists of **two parts**:
 
-## Project Structure
+### Project Structure
 
 - **Website** *(to be developed)*
     - Planned: A user interface to explore each DM’s frequency, functions, and usage profiles.
