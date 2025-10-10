@@ -1,0 +1,13 @@
+HOW TO ANNOTATE THE SHEET
+
+The sheet is made up of 56 columns.
+The first columns concern the metadata; you can ignore them BUT DO NOT DELETE THEM (at most, you can HIDE them, e.g., select the column, right-click and click on HIDE).
+For each occurrence of the SD, you must first decide WHETHER it is SD or not. If it is not, enter 1 in the “Non SD” column. The columns “Test 1”, “Test 2”, and “Test 3” are for the tests that the interns will use to decide if it is SD, so for the purposes of annotation you can IGNORE them.
+If you decide that in that occurrence it is SD, enter 1 in the SD column.
+If you notice that it appears in a cluster of SD, enter 1 in the Cumulo column.
+Leave all cells blank where you do not enter a 1.
+Once you have determined that it is SD, you need to decide its function(s), again entering 1 in the cell(s) corresponding to the function(s) you consider appropriate.
+If it is multifunctional (i.e., it shows more than one function), enter a 1 in the multifunctionality column.
+Column AY is for doubts (“”).
+Column AZ is for comments.
+We recommend DOWNLOADING the Excel file and annotating it locally, and only uploading it afterwards. If necessary, we can merge them all at the end, but this way everyone keeps their own doubts, etc.
