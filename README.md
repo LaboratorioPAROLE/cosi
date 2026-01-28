@@ -96,6 +96,7 @@ For questions or contributions, please contact the members of Laboratorio PAROLE
 | Giovanni Di Paola    | gdipaola(@)unisa.it          |
 | Pasquale Esposito    | pasesposito(@)unisa.it        |
 | Flavio Pisciotta     | fpisciotta(@)unisa.it        |
+| Giuseppe Pisegna     | gpisegna(@)unisa.it        |
 | Carmela Sammarco     | csammarco(@)unisa.it         |
 | Luisa Troncone       | ltroncone(@)unisa.it         |
 
