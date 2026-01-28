@@ -2,7 +2,7 @@
 
 ## Members
 
-Miriam Voghera, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone
+Miriam Voghera, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone
 
 **Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno**
 
