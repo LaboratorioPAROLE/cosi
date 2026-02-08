@@ -61,8 +61,14 @@ L'annotazione funzionale è basata sullo schema già noto in letteratura da Bazz
 | Luisa Troncone       | ltroncone(@)unisa.it         |
 
 ---
-# Prodotti della ricerca
+## Prodotti della ricerca
+### Presentazioni
+* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. Talking Data - Methodological and theoretical challenges raised by spoken interaction data. Università di Bologna.
+* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone. 2026. Segnali discorsivi e tipi di interazione: uno studio corpus-based a partire da COSÌ (Catalogo Online dei Segnali discorsivi dell’Italiano). XXVI AItLA - L’interazione comunicativa: relazioni, pratiche, prospettive. Università di Bologna.
+* Pisciotta, Flavio, Luisa Troncone, Giovanni Di Paola, Miriam Voghera, Andrea Sansò, Alfonsina Buoniconto, Carmela Sammarco, Pasquale Esposito, Iolanda Alfano. 2026, da presentare. Coppie funzionalmente simili di segnali discorsivi italiani e distribuzione sociolinguistica: uno studio quantitativo corpus-based. DISROM9 - Congresso Internazionale sui Marcatori Discorsivi nelle Lingue Romanze. Università di Oviedo.
 
+### Articoli
+* Pisciotta, Flavio, Luisa Troncone, Giovanni Di Paola, Alfonsina Buoniconto, Carmela Sammarco, Pasquale Esposito, Iolanda Alfano, Andrea Sansò, Miriam Voghera. Submitted. Towards COSÌ: designing the First Database of Italian Discourse Markers.
 
 ---
 # Licenza
