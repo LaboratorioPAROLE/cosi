@@ -206,7 +206,7 @@ for csv_file in CSV_FOLDER.glob("*.csv"):
             "topic", "year", "collection-point",
 
             # speaker metadata
-            "occupation", "gender", "school-region", "age-range",
+            "occupation", "gender", "region", "age-range",
 
             # annotation
             "SegnDisc", "Func:Interazionale",
@@ -264,7 +264,11 @@ for csv_file in CSV_FOLDER.glob("*.csv"):
                 # speaker
                 "occupation": speaker_meta.get("occupation", "_"),
                 "gender": speaker_meta.get("gender", "_"),
-                "school-region": speaker_meta.get("school-region", "_"),
+                "region": (
+    speaker_meta.get("school-region")
+    or speaker_meta.get("birth-region")
+    or "_"
+),
                 "age-range": speaker_meta.get("age-range", "_"),
 
                 # annotation
