@@ -1,0 +1,209 @@
+file: comunque.tsv
+counts:
+  ntokens: 800
+  nSD: 541
+macrofunctions_SD:
+  Interazionale: 53
+  Metatestuale: 338
+  Cognitiva: 169
+microfunctions_SD:
+  Interazionale:
+    Presa di turno: 49
+    Richiesta di attenzione: 3
+    Interruzione: 1
+    Accordo: 3
+  Metatestuale:
+    Introduzione o ripresa del topic: 159
+    Chiusura del topic: 51
+    Filler: 64
+    Prolettico: 80
+    Riformulazione: 2
+    Citazione/Discorso Riportato: 2
+  Cognitiva:
+    Intensificazione: 22
+    Specificazione: 61
+    Marcatura dell'inferenza: 79
+    Attenuazione: 6
+    Approssimazione: 2
+    Modulazione del grado di confidenza: 1
+metadata_SD:
+  type:
+    free-conversation:
+      count: 160
+      fpmw: 245.09879013109725
+    semistructured-interview:
+      count: 329
+      fpmw: 246.61836744637552
+    office-hours:
+      count: 11
+      fpmw: 158.28704636371486
+    exam:
+      count: 22
+      fpmw: 354.3300745703748
+    lecture:
+      count: 19
+      fpmw: 90.69385572994234
+  participants-relationship:
+    symmetric:
+      count: 211
+    asymmetric:
+      count: 330
+  topic:
+    free:
+      count: 171
+    fixed:
+      count: 370
+  year:
+    '2022':
+      count: 101
+    '2023':
+      count: 36
+    '2019':
+      count: 154
+    '2018':
+      count: 112
+    '2020':
+      count: 70
+    '2021':
+      count: 34
+    '2024':
+      count: 34
+  occupation:
+    0-Retired:
+      count: 44
+    4-Clerical-Workers:
+      count: 26
+    0-Students:
+      count: 261
+    5-Service-Workers:
+      count: 28
+    2-Professionals:
+      count: 108
+    7-Plant-Operators:
+      count: 21
+    0-Unemployed:
+      count: 15
+    3-Technicians:
+      count: 16
+    6-Craft-Workers:
+      count: 12
+    1-Managers:
+      count: 4
+    N/A:
+      count: 1
+  gender:
+    F:
+      count: 329
+    M:
+      count: 207
+  region:
+    puglia:
+      count: 27
+      fpmw: 246.69925533372927
+    emilia-romagna:
+      count: 171
+      fpmw: 208.20929051771057
+    piemonte:
+      count: 101
+      fpmw: 203.3907861960083
+    lombardia:
+      count: 27
+      fpmw: 292.2900383224717
+    calabria:
+      count: 12
+      fpmw: 156.06101985876478
+    toscana:
+      count: 7
+      fpmw: 125.99218848431397
+    basilicata:
+      count: 9
+      fpmw: 140.69534767383692
+    sicilia:
+      count: 39
+      fpmw: 429.72365463440434
+    campania:
+      count: 28
+      fpmw: 376.7846810113977
+    sardegna:
+      count: 12
+      fpmw: 268.9557791873053
+    lazio:
+      count: 14
+      fpmw: 235.10050546608676
+    umbria:
+      count: 20
+      fpmw: 602.972655190087
+    estero:
+      count: 5
+      fpmw: 119.88107797065311
+    marche:
+      count: 17
+      fpmw: 292.61911319195815
+    friuli-venezia-giulia:
+      count: 7
+      fpmw: 392.0909651039041
+    veneto:
+      count: 14
+      fpmw: 186.86599038974907
+    trentino-alto-adige:
+      count: 6
+      fpmw: 488.162069807176
+    abruzzo:
+      count: 13
+      fpmw: 334.58588562310183
+    liguria:
+      count: 3
+      fpmw: 425.7130693912303
+    N/A:
+      count: 2
+    valle-d-aosta:
+      count: 2
+      fpmw: 120.3224642040669
+  age-range:
+    81-85:
+      count: 8
+      fpmw: 155.45148941958303
+    46-50:
+      count: 22
+      fpmw: 228.4503795391533
+    21-25:
+      count: 265
+      fpmw: 313.50261685957923
+    36-40:
+      count: 30
+      fpmw: 323.4571095872687
+    51-55:
+      count: 18
+      fpmw: 108.35149224082926
+    16-20:
+      count: 19
+      fpmw: 228.38459966583727
+    76-80:
+      count: 7
+      fpmw: 97.8131768322504
+    26-30:
+      count: 66
+      fpmw: 273.34512306742926
+    56-60:
+      count: 21
+      fpmw: 174.54617993217633
+    66-70:
+      count: 6
+      fpmw: 83.47593806085395
+    31-35:
+      count: 28
+      fpmw: 192.7140330229261
+    61-65:
+      count: 18
+      fpmw: 197.2148875327322
+    71-75:
+      count: 6
+      fpmw: 65.64838723795351
+    41-45:
+      count: 10
+      fpmw: 190.89069598747756
+    over85:
+      count: 10
+      fpmw: 142.36902050113895
+    n/a:
+      count: 2

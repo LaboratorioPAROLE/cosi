@@ -1,0 +1,62 @@
+corpus: 2327922
+
+type:
+  semistructured-interview:
+    relabel: "intervista semistrutturata"
+    freq: 1334045
+  lecture:
+    relabel: "lezione"
+    freq: 209496
+  free-conversation:
+    relabel: "conversazione libera"
+    freq: 652798
+  office-hours:
+    relabel: "ricevimento studenti"
+    freq: 69494
+  exam:
+    relabel: "esame"
+    freq: 62089
+
+region:
+  emilia-romagna: 821289
+  piemonte: 496581
+  puglia: 109445
+  lombardia: 92374
+  sicilia: 90756
+  calabria: 76893
+  veneto: 74920
+  campania: 74313
+  basilicata: 63968
+  lazio: 59549
+  marche: 58096
+  toscana: 55559
+  sardegna: 44617
+  estero: 41708
+  abruzzo: 38854
+  umbria: 33169
+  unknown: 20505
+  "===NONE===": 15904
+  friuli-venezia-giulia: 17853
+  valle-d-aosta: 16622
+  trentino-alto-adige: 12291
+  liguria: 7047
+  molise: 5609
+
+age-range:
+  "21-25": 845288
+  "26-30": 241453
+  "51-55": 166126
+  "31-35": 145293
+  "56-60": 120312
+  "46-50": 96301
+  "36-40": 92748
+  "71-75": 91396
+  "61-65": 91271
+  "16-20": 83193
+  "66-70": 71877
+  "76-80": 71565
+  "over85": 70240
+  "41-45": 52386
+  "81-85": 51463
+  unknown: 21106
+  "===NONE===": 15904

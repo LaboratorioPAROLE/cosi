@@ -1,0 +1,183 @@
+file: direi.tsv
+counts:
+  ntokens: 344
+  nSD: 103
+macrofunctions_SD:
+  Interazionale: 9
+  Metatestuale: 27
+  Cognitiva: 78
+microfunctions_SD:
+  Interazionale:
+    Richiesta di accordo/conferma: 1
+    Accordo: 4
+    Strategia di cortesia: 1
+    Conferma dell'attenzione: 1
+    Cessione del turno: 2
+  Metatestuale:
+    Riformulazione: 5
+    Esemplificazione: 2
+    Filler: 17
+    Introduzione o ripresa del topic: 4
+    Prolettico: 2
+    Chiusura del topic: 2
+  Cognitiva:
+    Intensificazione: 15
+    Approssimazione: 8
+    Attenuazione: 8
+    Modulazione del grado di confidenza: 48
+    Specificazione: 3
+metadata_SD:
+  type:
+    semistructured-interview:
+      count: 71
+      fpmw: 53.22159297474973
+    free-conversation:
+      count: 10
+      fpmw: 15.318674383193578
+    lecture:
+      count: 10
+      fpmw: 47.73360827891702
+    office-hours:
+      count: 10
+      fpmw: 143.89731487610442
+    exam:
+      count: 2
+      fpmw: 32.21182496094316
+  participants-relationship:
+    asymmetric:
+      count: 79
+    symmetric:
+      count: 24
+  topic:
+    fixed:
+      count: 83
+    free:
+      count: 20
+  year:
+    '2022':
+      count: 26
+    '2019':
+      count: 24
+    '2018':
+      count: 30
+    '2020':
+      count: 3
+    '2023':
+      count: 7
+    '2021':
+      count: 6
+    '2024':
+      count: 7
+  occupation:
+    2-Professionals:
+      count: 31
+    0-Students:
+      count: 44
+    7-Plant-Operators:
+      count: 1
+    5-Service-Workers:
+      count: 2
+    3-Technicians:
+      count: 3
+    6-Craft-Workers:
+      count: 5
+    0-Retired:
+      count: 8
+    4-Clerical-Workers:
+      count: 7
+    1-Managers:
+      count: 1
+  gender:
+    F:
+      count: 48
+    M:
+      count: 54
+  region:
+    emilia-romagna:
+      count: 53
+      fpmw: 64.53270407858865
+    sicilia:
+      count: 4
+      fpmw: 44.074220988144035
+    puglia:
+      count: 2
+      fpmw: 18.274018913609574
+    lombardia:
+      count: 9
+      fpmw: 97.43001277415723
+    piemonte:
+      count: 22
+      fpmw: 44.30294352784339
+    veneto:
+      count: 1
+      fpmw: 13.347570742124933
+    friuli-venezia-giulia:
+      count: 1
+      fpmw: 56.01299501484345
+    basilicata:
+      count: 1
+      fpmw: 15.632816408204102
+    lazio:
+      count: 3
+      fpmw: 50.37867974273288
+    trentino-alto-adige:
+      count: 1
+      fpmw: 81.36034496786266
+    valle-d-aosta:
+      count: 1
+      fpmw: 60.16123210203345
+    calabria:
+      count: 1
+      fpmw: 13.005084988230399
+    abruzzo:
+      count: 1
+      fpmw: 25.737375817161684
+    marche:
+      count: 1
+      fpmw: 17.212889011291658
+    sardegna:
+      count: 1
+      fpmw: 22.412981598942107
+  age-range:
+    61-65:
+      count: 6
+      fpmw: 65.73829584424406
+    21-25:
+      count: 47
+      fpmw: 55.602350914717825
+    26-30:
+      count: 13
+      fpmw: 53.84070605873607
+    31-35:
+      count: 4
+      fpmw: 27.530576146132297
+    56-60:
+      count: 2
+      fpmw: 16.623445707826317
+    46-50:
+      count: 2
+      fpmw: 20.76821632174121
+    51-55:
+      count: 6
+      fpmw: 36.11716408027642
+    66-70:
+      count: 3
+      fpmw: 41.737969030426974
+    41-45:
+      count: 5
+      fpmw: 95.44534799373878
+    36-40:
+      count: 3
+      fpmw: 32.34571095872687
+    over85:
+      count: 3
+      fpmw: 42.710706150341686
+    76-80:
+      count: 2
+      fpmw: 27.946621952071542
+    16-20:
+      count: 5
+      fpmw: 60.10121043837823
+    71-75:
+      count: 1
+      fpmw: 10.941397872992255

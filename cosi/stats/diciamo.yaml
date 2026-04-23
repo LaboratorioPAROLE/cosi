@@ -1,0 +1,208 @@
+file: diciamo.tsv
+counts:
+  ntokens: 800
+  nSD: 628
+macrofunctions_SD:
+  Interazionale: 15
+  Metatestuale: 255
+  Cognitiva: 407
+microfunctions_SD:
+  Interazionale:
+    Accordo: 1
+    Conferma dell'attenzione: 2
+    Presa di turno: 9
+    Interruzione: 1
+    Strategia di cortesia: 3
+  Metatestuale:
+    Filler: 115
+    Introduzione o ripresa del topic: 27
+    Riformulazione: 39
+    Prolettico: 64
+    Esemplificazione: 21
+    Chiusura del topic: 3
+  Cognitiva:
+    Approssimazione: 160
+    Modulazione del grado di confidenza: 4
+    Attenuazione: 239
+    Marcatura dell'inferenza: 18
+metadata_SD:
+  type:
+    free-conversation:
+      count: 34
+      fpmw: 52.08349290285816
+    semistructured-interview:
+      count: 382
+      fpmw: 286.3471622021746
+    office-hours:
+      count: 28
+      fpmw: 402.91248165309236
+    exam:
+      count: 93
+      fpmw: 1497.849860683857
+    lecture:
+      count: 91
+      fpmw: 434.3758353381449
+  participants-relationship:
+    symmetric:
+      count: 82
+    asymmetric:
+      count: 546
+  topic:
+    free:
+      count: 62
+    fixed:
+      count: 566
+  year:
+    '2022':
+      count: 161
+    '2023':
+      count: 40
+    '2018':
+      count: 188
+    '2019':
+      count: 167
+    '2021':
+      count: 22
+    '2020':
+      count: 14
+    '2024':
+      count: 36
+  occupation:
+    0-Retired:
+      count: 47
+    4-Clerical-Workers:
+      count: 30
+    7-Plant-Operators:
+      count: 39
+    0-Students:
+      count: 246
+    2-Professionals:
+      count: 186
+    6-Craft-Workers:
+      count: 11
+    5-Service-Workers:
+      count: 44
+    3-Technicians:
+      count: 11
+    1-Managers:
+      count: 7
+    0-Unemployed:
+      count: 3
+    8-Elementary:
+      count: 1
+  gender:
+    F:
+      count: 325
+    M:
+      count: 300
+  region:
+    puglia:
+      count: 13
+      fpmw: 118.78112293846225
+    emilia-romagna:
+      count: 277
+      fpmw: 337.2746986748879
+    calabria:
+      count: 46
+      fpmw: 598.2339094585983
+    piemonte:
+      count: 105
+      fpmw: 211.44586683743438
+    sardegna:
+      count: 7
+      fpmw: 156.89087119259477
+    basilicata:
+      count: 4
+      fpmw: 62.53126563281641
+    lazio:
+      count: 11
+      fpmw: 184.72182572335387
+    umbria:
+      count: 10
+      fpmw: 301.4863275950435
+    estero:
+      count: 3
+      fpmw: 71.92864678239187
+    marche:
+      count: 14
+      fpmw: 240.98044615808317
+    sicilia:
+      count: 76
+      fpmw: 837.4101987747367
+    friuli-venezia-giulia:
+      count: 5
+      fpmw: 280.0649750742172
+    lombardia:
+      count: 17
+      fpmw: 184.0344685734081
+    veneto:
+      count: 3
+      fpmw: 40.0427122263748
+    abruzzo:
+      count: 11
+      fpmw: 283.11113398877853
+    toscana:
+      count: 5
+      fpmw: 89.99442034593855
+    N/A:
+      count: 8
+    campania:
+      count: 4
+      fpmw: 53.826383001628244
+    valle-d-aosta:
+      count: 1
+      fpmw: 60.16123210203345
+    liguria:
+      count: 2
+      fpmw: 283.80871292748685
+    trentino-alto-adige:
+      count: 3
+      fpmw: 244.081034903588
+  age-range:
+    81-85:
+      count: 2
+      fpmw: 38.86287235489576
+    46-50:
+      count: 56
+      fpmw: 581.5100570087537
+    21-25:
+      count: 250
+      fpmw: 295.75718571658416
+    36-40:
+      count: 31
+      fpmw: 334.23901324017766
+    61-65:
+      count: 24
+      fpmw: 262.95318337697626
+    56-60:
+      count: 15
+      fpmw: 124.67584280869738
+    26-30:
+      count: 52
+      fpmw: 215.36282423494427
+    51-55:
+      count: 53
+      fpmw: 319.03494937577506
+    31-35:
+      count: 28
+      fpmw: 192.7140330229261
+    76-80:
+      count: 9
+      fpmw: 125.75979878432194
+    41-45:
+      count: 34
+      fpmw: 649.0283663574237
+    16-20:
+      count: 24
+      fpmw: 288.4858101042155
+    71-75:
+      count: 20
+      fpmw: 218.82795745984507
+    66-70:
+      count: 10
+      fpmw: 139.1265634347566
+    over85:
+      count: 9
+      fpmw: 128.13211845102506
+    n/a:
+      count: 8

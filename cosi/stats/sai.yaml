@@ -1,0 +1,206 @@
+file: sai.tsv
+counts:
+  ntokens: 800
+  nSD: 282
+macrofunctions_SD:
+  Interazionale: 226
+  Metatestuale: 116
+  Cognitiva: 31
+microfunctions_SD:
+  Interazionale:
+    Marcatura della conoscenza condivisa: 188
+    Richiesta di accordo/conferma: 49
+    Cessione del turno: 6
+    Presa di turno: 9
+    Interruzione: 1
+    Richiesta di attenzione: 2
+  Metatestuale:
+    Riformulazione: 10
+    Marca di generalizzazione: 22
+    Filler: 30
+    Esemplificazione: 24
+    Citazione/Discorso Riportato: 3
+    Introduzione o ripresa del topic: 24
+    Chiusura del topic: 2
+    Prolettico: 2
+  Cognitiva:
+    Attenuazione: 4
+    Marcatura dell'inferenza: 9
+    Approssimazione: 7
+    Modulazione del grado di confidenza: 9
+    Intensificazione: 1
+    Specificazione: 1
+metadata_SD:
+  type:
+    semistructured-interview:
+      count: 190
+      fpmw: 142.42398120003446
+    free-conversation:
+      count: 91
+      fpmw: 139.39993688706153
+    lecture:
+      count: 1
+      fpmw: 4.773360827891702
+  participants-relationship:
+    asymmetric:
+      count: 177
+    symmetric:
+      count: 105
+  topic:
+    fixed:
+      count: 191
+    free:
+      count: 91
+  year:
+    '2019':
+      count: 61
+    '2023':
+      count: 20
+    '2022':
+      count: 63
+    '2021':
+      count: 28
+    '2024':
+      count: 35
+    '2018':
+      count: 27
+    '2020':
+      count: 48
+  occupation:
+    0-Retired:
+      count: 62
+    0-Students:
+      count: 57
+    5-Service-Workers:
+      count: 18
+    7-Plant-Operators:
+      count: 16
+    2-Professionals:
+      count: 61
+    4-Clerical-Workers:
+      count: 17
+    3-Technicians:
+      count: 26
+    0-Unemployed:
+      count: 4
+    1-Managers:
+      count: 3
+    6-Craft-Workers:
+      count: 7
+    8-Elementary:
+      count: 6
+    N/A:
+      count: 4
+  gender:
+    F:
+      count: 175
+    M:
+      count: 106
+  region:
+    piemonte:
+      count: 50
+      fpmw: 100.6885080178259
+    sardegna:
+      count: 4
+      fpmw: 89.65192639576843
+    emilia-romagna:
+      count: 133
+      fpmw: 161.94055929155266
+    puglia:
+      count: 10
+      fpmw: 91.37009456804788
+    lombardia:
+      count: 8
+      fpmw: 86.60445579925087
+    basilicata:
+      count: 8
+      fpmw: 125.06253126563281
+    campania:
+      count: 10
+      fpmw: 134.5659575040706
+    friuli-venezia-giulia:
+      count: 1
+      fpmw: 56.01299501484345
+    lazio:
+      count: 9
+      fpmw: 151.13603922819863
+    marche:
+      count: 6
+      fpmw: 103.27733406774992
+    veneto:
+      count: 7
+      fpmw: 93.43299519487454
+    umbria:
+      count: 2
+      fpmw: 60.29726551900871
+    toscana:
+      count: 9
+      fpmw: 161.9899566226894
+    calabria:
+      count: 2
+      fpmw: 26.010169976460798
+    liguria:
+      count: 1
+      fpmw: 141.90435646374343
+    N/A:
+      count: 1
+    estero:
+      count: 8
+      fpmw: 191.809724753045
+    abruzzo:
+      count: 7
+      fpmw: 180.16163072013177
+    molise:
+      count: 3
+      fpmw: 534.8546978070957
+    sicilia:
+      count: 2
+      fpmw: 22.037110494072017
+  age-range:
+    over85:
+      count: 7
+      fpmw: 99.65831435079727
+    21-25:
+      count: 80
+      fpmw: 94.64229942930693
+    51-55:
+      count: 17
+      fpmw: 102.33196489411652
+    66-70:
+      count: 3
+      fpmw: 41.737969030426974
+    76-80:
+      count: 9
+      fpmw: 125.75979878432194
+    71-75:
+      count: 25
+      fpmw: 273.53494682480635
+    31-35:
+      count: 13
+      fpmw: 89.47437247492998
+    36-40:
+      count: 9
+      fpmw: 97.0371328761806
+    46-50:
+      count: 9
+      fpmw: 93.45697344783544
+    61-65:
+      count: 28
+      fpmw: 306.77871393980564
+    26-30:
+      count: 31
+      fpmw: 128.38937598621678
+    81-85:
+      count: 11
+      fpmw: 213.74579795192662
+    56-60:
+      count: 35
+      fpmw: 290.91029988696056
+    41-45:
+      count: 1
+      fpmw: 19.08906959874776
+    n/a:
+      count: 1
+    16-20:
+      count: 2
+      fpmw: 24.040484175351292
