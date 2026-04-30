@@ -1,0 +1,217 @@
+file: va_bene.tsv
+counts:
+  ntokens: 800
+  nSD: 641
+macrofunctions_SD:
+  Interazionale: 494
+  Metatestuale: 258
+  Cognitiva: 76
+microfunctions_SD:
+  Interazionale:
+    Accordo: 290
+    Cessione del turno: 19
+    Richiesta di accordo/conferma: 64
+    Conferma dell'attenzione: 143
+    Strategia di cortesia: 35
+    Presa di turno: 40
+    Marcatura della conoscenza condivisa: 12
+    Interruzione: 5
+    Richiesta di attenzione: 14
+  Metatestuale:
+    Introduzione o ripresa del topic: 105
+    Chiusura del topic: 154
+    Filler: 26
+    Prolettico: 13
+    Riformulazione: 5
+    Citazione/Discorso Riportato: 18
+    Marca di generalizzazione: 3
+    Esemplificazione: 3
+  Cognitiva:
+    Marcatura dell'inferenza: 11
+    Modulazione del grado di confidenza: 16
+    Attenuazione: 38
+    Intensificazione: 16
+    Approssimazione: 1
+metadata_SD:
+  type:
+    free-conversation:
+      count: 123
+      fpmw: 188.41969491328098
+    semistructured-interview:
+      count: 277
+      fpmw: 207.6391725916292
+    office-hours:
+      count: 98
+      fpmw: 1410.1936857858232
+    exam:
+      count: 27
+      fpmw: 434.8596369727327
+    lecture:
+      count: 116
+      fpmw: 553.7098560354374
+  participants-relationship:
+    symmetric:
+      count: 154
+    asymmetric:
+      count: 487
+  topic:
+    free:
+      count: 221
+    fixed:
+      count: 420
+  year:
+    '2022':
+      count: 66
+    '2023':
+      count: 28
+    '2019':
+      count: 267
+    '2018':
+      count: 188
+    '2020':
+      count: 58
+    '2021':
+      count: 15
+    '2024':
+      count: 19
+  occupation:
+    2-Professionals:
+      count: 292
+    0-Retired:
+      count: 33
+    0-Students:
+      count: 254
+    5-Service-Workers:
+      count: 12
+    7-Plant-Operators:
+      count: 11
+    6-Craft-Workers:
+      count: 2
+    0-Unemployed:
+      count: 8
+    3-Technicians:
+      count: 5
+    8-Elementary:
+      count: 3
+    1-Managers:
+      count: 3
+    4-Clerical-Workers:
+      count: 5
+    N/A:
+      count: 1
+  gender:
+    F:
+      count: 473
+    M:
+      count: 156
+  region:
+    emilia-romagna:
+      count: 144
+      fpmw: 175.3341393833352
+    puglia:
+      count: 8
+      fpmw: 73.0960756544383
+    lombardia:
+      count: 83
+      fpmw: 898.5212289172279
+    piemonte:
+      count: 131
+      fpmw: 263.80389100670385
+    toscana:
+      count: 57
+      fpmw: 1025.9363919436996
+    calabria:
+      count: 9
+      fpmw: 117.04576489407357
+    campania:
+      count: 11
+      fpmw: 148.02255325447769
+    basilicata:
+      count: 25
+      fpmw: 390.8204102051025
+    sicilia:
+      count: 42
+      fpmw: 462.7793203755124
+    marche:
+      count: 20
+      fpmw: 344.2577802258331
+    veneto:
+      count: 14
+      fpmw: 186.86599038974907
+    abruzzo:
+      count: 23
+      fpmw: 591.9596437947187
+    estero:
+      count: 8
+      fpmw: 191.809724753045
+    trentino-alto-adige:
+      count: 6
+      fpmw: 488.162069807176
+    sardegna:
+      count: 11
+      fpmw: 246.5427975883632
+    lazio:
+      count: 10
+      fpmw: 167.92893247577624
+    umbria:
+      count: 2
+      fpmw: 60.29726551900871
+    N/A:
+      count: 2
+    molise:
+      count: 1
+      fpmw: 178.2848992690319
+    valle-d-aosta:
+      count: 21
+      fpmw: 1263.3858741427023
+    friuli-venezia-giulia:
+      count: 1
+      fpmw: 56.01299501484345
+  age-range:
+    26-30:
+      count: 107
+      fpmw: 443.1504267911353
+    over85:
+      count: 7
+      fpmw: 99.65831435079727
+    81-85:
+      count: 9
+      fpmw: 174.8829255970309
+    21-25:
+      count: 229
+      fpmw: 270.91358211639107
+    61-65:
+      count: 16
+      fpmw: 175.3021222513175
+    51-55:
+      count: 30
+      fpmw: 180.58582040138208
+    76-80:
+      count: 5
+      fpmw: 69.86655488017885
+    41-45:
+      count: 31
+      fpmw: 591.7611575611804
+    56-60:
+      count: 31
+      fpmw: 257.66340847130795
+    66-70:
+      count: 57
+      fpmw: 793.0214115781126
+    46-50:
+      count: 11
+      fpmw: 114.22518976957664
+    31-35:
+      count: 28
+      fpmw: 192.7140330229261
+    16-20:
+      count: 10
+      fpmw: 120.20242087675646
+    36-40:
+      count: 53
+      fpmw: 571.4408936041748
+    n/a:
+      count: 2
+    71-75:
+      count: 3
+      fpmw: 32.82419361897676

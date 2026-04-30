@@ -1,0 +1,21 @@
+nomeSD: sai
+file: sai.tsv
+nOccTot: 1444
+fascia_frequenza: medio-bassa
+varianti: ~
+
+source:
+  lemma: sapere
+  pos: verbo
+  form: PRS.IND.2SG
+
+descrizione_macro: |
+  Sai può svolgere funzioni che ricadono all’interno di tutte e tre le macrofunzioni individuate da Bazzanella (cfr. 2011), anche se in proporzioni differenti. Un’analisi quantitativa delle tre macrofunzioni mostra come in 255 occasioni differenti sai ricopre una funzione interazionale, mentre sono minori - ma non inesistenti - i casi in cui lo stesso segnale discorsivo ricopre funzioni metatestuali (n=117) o cognitive (n=2). Il Grafico 2 fornisce un’idea della distribuzione delle macrofunzioni nell’analisi condotta. La forte predominanza della funzione interazionale sottolinea il ruolo centrale che sai svolge nella negoziazione della conoscenza condivisa tra parlante e ascoltatore e nella gestione dell’informazione di un testo.
+
+descrizione_micro: |
+  La principale funzione interazionale di sai è quella di marcatore di una conoscenza condivisa tra i due parlanti, come avviene nell’esempio (1)
+
+grafici:
+  type: ../imgs/sai/type.html
+  age: ../imgs/sai/age.html
+  region: ../imgs/sai/region_map.html

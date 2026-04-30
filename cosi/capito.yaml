@@ -1,0 +1,21 @@
+nomeSD: capito
+file: capito.tsv
+nOccTot: 2067
+fascia_frequenza: medio-bassa
+varianti: ~
+
+source:
+  lemma: capire
+  pos: verbo
+  form: PTCP.PST
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/capito/type.html
+  age: ../imgs/capito/age.html
+  region: ../imgs/capito/region_map.html
