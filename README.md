@@ -1,7 +1,7 @@
 # Materiali aggiuntivi
 
-In questa cartella troverete alcuni materiali di appendice al poster "Segnali discorsivi e tipi di interazione", da presentare all'AItLA 2026 a Forlì.
-Per tutti i grafici, si veda la cartella aitla2026_materials
+In questa cartella troverete alcuni materiali di appendice al poster, e al relativo articolo, "Segnali discorsivi e tipi di interazione", presentato all'AItLA 2026 a Forlì.
+Per tutti i grafici, si veda la cartella publications/aitla2026_materials
 
 ## Calcolo del peso delle macro- e microfunzioni
 
