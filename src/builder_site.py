@@ -3,6 +3,7 @@ import json
 import csv
 from pathlib import Path
 from example_builder import build_example
+import shutil
 
 # =========================
 # PATH
@@ -14,11 +15,13 @@ SIGNALS_DIR = PROJECT_ROOT / "cosi"
 STATS_DIR = PROJECT_ROOT / "cosi" / "stats"
 TSV_DIR = PROJECT_ROOT / "data" / "tsv"
 
-SITE_DIR = PROJECT_ROOT / "site"
-SIGNAL_PAGES_DIR = SITE_DIR / "segnali"
+DOCS_DIR = PROJECT_ROOT / "docs"
+SIGNAL_PAGES_DIR = DOCS_DIR / "segnali"
 
-SITE_DIR.mkdir(parents=True, exist_ok=True)
+DOCS_DIR.mkdir(parents=True, exist_ok=True)
 SIGNAL_PAGES_DIR.mkdir(parents=True, exist_ok=True)
+
+DOCS_IMGS_DIR = DOCS_DIR / "imgs"
 
 # =========================
 # COLORI
@@ -382,9 +385,9 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     micro_html += "</table>"
 
     # Percorsi relativi ai JSON dei grafici (generati da generate_plots_data.py)
-    type_json = f"../../cosi/imgs/{name}/type.json"
-    age_json = f"../../cosi/imgs/{name}/age.json"
-    region_json = f"../../cosi/imgs/{name}/region_map.json"
+    type_json = f"../imgs/{name}/type.json"
+    age_json = f"../imgs/{name}/age.json"
+    region_json = f"../imgs/{name}/region_map.json"
 
     body = f"""
 <div class="card">
@@ -523,14 +526,14 @@ home_body = """
 </div>
 """
 
-(SITE_DIR / "index.html").write_text(
+(DOCS_DIR / "index.html").write_text(
     base_html("Home", home_body, base_path=""),
     encoding="utf-8"
 )
 
-(SITE_DIR / "search.html").write_text(base_html("Home", index_body, base_path=""), encoding="utf-8")
+(DOCS_DIR / "search.html").write_text(base_html("Home", index_body, base_path=""), encoding="utf-8")
 
-(SITE_DIR / "data.js").write_text(
+(DOCS_DIR / "data.js").write_text(
     "const DATA = " + json.dumps(search_index, ensure_ascii=False, indent=2),
     encoding="utf-8"
 )

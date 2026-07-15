@@ -7,8 +7,10 @@ import plotly.express as px
 # PATH
 # =========================
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
 YAML_DIR = PROJECT_ROOT / "cosi" / "stats"
-OUT_DIR = PROJECT_ROOT / "cosi" / "imgs"
+
+OUT_DIR = PROJECT_ROOT / "docs" / "imgs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # =========================
