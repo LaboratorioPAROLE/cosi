@@ -47,7 +47,7 @@ micro_macro = pd.DataFrame({
 })
 
 
-df = pd.read_csv("dataset.csv", sep=';', dtype=str, encoding='cp1252')
+df = pd.read_csv("../dataset.csv", sep=';', dtype=str, encoding='cp1252')
 df.columns = [c.strip().replace('.', ' ').replace(' ', '_') for c in df.columns]
 
 # Pulizia
@@ -61,7 +61,7 @@ df_clean = df_clean.assign(Microfunzione=df_clean['Microfunzione'].str.split(r'\
 # -----------------------------
 # Selezione SD
 # -----------------------------
-sd_focus = "dunque"
+sd_focus = "comunque"
 df_t = df_clean[df_clean['type'] == sd_focus]
 
 # Seleziona solo microfunzioni ≥10 occorrenze
@@ -111,7 +111,7 @@ for _, row in residui_long.iterrows():
 edge_labels = {
     (u, v): f"{G[u][v]['weight']:.2f}"
     for u, v in G.edges()
-    if G[u][v]['weight'] >= 1.64
+    if G[u][v]['weight'] >= 2
 }
 
 

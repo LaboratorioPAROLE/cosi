@@ -81,6 +81,16 @@ def clean_type(x):
         return None
     return TYPE_MAP.get(x, x)
 
+
+def save_fig_json(fig, path):
+    """
+    Salva solo i dati necessari a Plotly.js per ridisegnare il grafico
+    (fig.to_json() usa il PlotlyJSONEncoder, gestisce numpy/pandas correttamente).
+    Niente libreria Plotly duplicata: il file pesa KB, non MB.
+    """
+    path.write_text(fig.to_json(), encoding="utf-8")
+
+
 # =========================
 # PROCESS FILES
 # =========================
@@ -124,7 +134,7 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
 
             fig.update_layout(title="Distribuzione per tipo di interazione", title_x=0.5)
 
-            fig.write_html(out_folder / "type.html")
+            save_fig_json(fig, out_folder / "type.json")
 
     # =========================
     # 2. AGE BARPLOT
@@ -159,7 +169,7 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
 
             fig.update_layout(title="Distribuzione per età", title_x=0.5)
 
-            fig.write_html(out_folder / "age.html")
+            save_fig_json(fig, out_folder / "age.json")
 
     # =========================
     # 3. REGION MAP
@@ -209,11 +219,11 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                   "Freq: %{customdata[0]}<br>" +
                   "Freq (norm.): %{customdata[1]}",
                     customdata=df[["Freq_display", "Freq_norm_display"]].values)
-            
+
             fig.update_geos(fitbounds="locations", visible=False)
 
             fig.update_layout(title="Distribuzione geografica", title_x=0.5)
 
-            fig.write_html(out_folder / "region_map.html")
+            save_fig_json(fig, out_folder / "region_map.json")
 
-    print(f"Creati grafici per {yaml_file.stem}")
+    print(f"Creati dati grafici (JSON) per {yaml_file.stem}")

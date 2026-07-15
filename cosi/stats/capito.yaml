@@ -1,164 +1,160 @@
 file: capito.tsv
 counts:
   ntokens: 800
-  nSD: 120
+  nSD: 201
 macrofunctions_SD:
-  Interazionale: 116
-  Metatestuale: 8
+  Interazionale: 199
+  Metatestuale: 6
   Cognitiva: 0
 microfunctions_SD:
   Interazionale:
-    Richiesta di accordo/conferma: 99
-    Marcatura della conoscenza condivisa: 17
-    Cessione del turno: 1
+    Richiesta di accordo/conferma: 162
+    Marcatura della conoscenza condivisa: 37
   Metatestuale:
-    Filler: 8
+    Filler: 6
   Cognitiva: {}
 metadata_SD:
   type:
     free-conversation:
-      count: 65
-      fpmw: 99.57138349075825
+      count: 107
+      fpmw: 163.90981590017128
     semistructured-interview:
-      count: 52
-      fpmw: 38.979194854746275
+      count: 88
+      fpmw: 65.96479129264755
     lecture:
-      count: 3
-      fpmw: 14.320082483675106
+      count: 5
+      fpmw: 23.86680413945851
+    office-hours:
+      count: 1
+      fpmw: 14.38973148761044
   participants-relationship:
     symmetric:
-      count: 72
+      count: 118
     asymmetric:
-      count: 48
+      count: 83
   topic:
     free:
-      count: 65
+      count: 108
     fixed:
-      count: 55
+      count: 93
   year:
     '2022':
-      count: 30
+      count: 40
     '2020':
-      count: 23
+      count: 42
     '2018':
-      count: 24
+      count: 40
     '2024':
-      count: 12
+      count: 22
     '2021':
-      count: 10
+      count: 16
     '2023':
-      count: 6
+      count: 17
     '2019':
-      count: 15
+      count: 24
   occupation:
     2-Professionals:
-      count: 14
+      count: 31
     0-Retired:
-      count: 22
+      count: 31
     5-Service-Workers:
       count: 7
     0-Students:
-      count: 53
+      count: 92
     3-Technicians:
-      count: 6
+      count: 7
     6-Craft-Workers:
-      count: 2
+      count: 4
     4-Clerical-Workers:
-      count: 10
+      count: 14
     7-Plant-Operators:
       count: 2
     0-Unemployed:
-      count: 2
+      count: 9
     N/A:
+      count: 2
+    8-Elementary:
       count: 2
   gender:
     F:
-      count: 74
+      count: 120
     M:
-      count: 46
+      count: 81
   region:
     emilia-romagna:
-      count: 49
-      fpmw: 59.66231131794046
+      count: 75
+      fpmw: 91.31986426215376
     puglia:
-      count: 8
-      fpmw: 73.0960756544383
+      count: 16
+      fpmw: 146.1921513088766
     toscana:
-      count: 10
-      fpmw: 179.9888406918771
+      count: 11
+      fpmw: 197.9877247610648
     basilicata:
       count: 7
       fpmw: 109.42971485742872
     sardegna:
-      count: 5
-      fpmw: 112.06490799471054
+      count: 6
+      fpmw: 134.47788959365266
     sicilia:
-      count: 6
-      fpmw: 66.11133148221606
+      count: 7
+      fpmw: 77.12988672925206
     campania:
-      count: 2
-      fpmw: 26.913191500814122
+      count: 7
+      fpmw: 94.19617025284943
     marche:
-      count: 3
-      fpmw: 51.63866703387496
+      count: 4
+      fpmw: 68.85155604516663
     calabria:
-      count: 6
-      fpmw: 78.03050992938239
+      count: 8
+      fpmw: 104.04067990584319
     abruzzo:
-      count: 4
-      fpmw: 102.94950326864674
+      count: 7
+      fpmw: 180.16163072013177
     piemonte:
-      count: 10
-      fpmw: 20.13770160356518
+      count: 13
+      fpmw: 26.179012084634735
     lazio:
-      count: 3
-      fpmw: 50.37867974273288
+      count: 16
+      fpmw: 268.686291961242
     liguria:
-      count: 2
-      fpmw: 283.80871292748685
+      count: 7
+      fpmw: 993.330495246204
     lombardia:
-      count: 1
-      fpmw: 10.825556974906359
+      count: 4
+      fpmw: 43.302227899625436
     umbria:
-      count: 2
-      fpmw: 60.29726551900871
+      count: 4
+      fpmw: 120.59453103801742
     veneto:
-      count: 2
-      fpmw: 26.695141484249866
-  age-range:
-    26-30:
-      count: 19
-      fpmw: 78.69026270122963
-    81-85:
-      count: 7
-      fpmw: 136.02005324213513
-    21-25:
-      count: 46
-      fpmw: 54.41932217185149
-    51-55:
-      count: 9
-      fpmw: 54.17574612041463
-    36-40:
+      count: 4
+      fpmw: 53.39028296849973
+    trentino-alto-adige:
+      count: 4
+      fpmw: 325.44137987145064
+    N/A:
       count: 1
-      fpmw: 10.781903652908959
-    31-35:
-      count: 4
-      fpmw: 27.530576146132297
-    56-60:
-      count: 6
-      fpmw: 49.870337123478954
-    66-70:
-      count: 2
-      fpmw: 27.825312686951317
-    76-80:
-      count: 7
-      fpmw: 97.8131768322504
-    16-20:
-      count: 12
-      fpmw: 144.24290505210774
-    over85:
+  age-range:
+    21-30:
+      count: 115
+      fpmw: 105.82098218434751
+    '>71':
+      count: 29
+      fpmw: 101.87449062754686
+    51-60:
+      count: 22
+      fpmw: 76.80545179061437
+    31-40:
+      count: 13
+      fpmw: 54.612440713994644
+    61-70:
       count: 3
-      fpmw: 42.710706150341686
-    71-75:
-      count: 4
-      fpmw: 43.76559149196902
+      fpmw: 18.3882119302719
+    16-20:
+      count: 17
+      fpmw: 204.344115490486
+    41-50:
+      count: 1
+      fpmw: 6.725537538587771
+    n/a:
+      count: 1

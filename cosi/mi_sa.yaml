@@ -1,0 +1,19 @@
+nomeSD: mi sa
+file: mi_sa.tsv
+nOccTot: 314
+fascia_frequenza: medio-bassa
+varianti: me sa
+
+source:
+  lemma: sapere
+  pos: pronome + verbo
+  form: PRS.IND.3SG
+
+descrizione_macro: |
+  
+descrizione_micro: |
+ 
+grafici:
+  type: ../imgs/mi_sa/type.html
+  age: ../imgs/mi_sa/age.html
+  region: ../imgs/mi_sa/region_map.html

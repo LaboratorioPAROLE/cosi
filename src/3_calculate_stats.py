@@ -25,10 +25,45 @@ with open(PROJECT_ROOT / "project_materials" / "corpus-data.yaml", encoding="utf
 def norm(x):
     return str(x).strip().lower().replace(" ", "")
 
+
 AGE_MAP = {
-    "over85": "over85",
-    "over 85": "over85"
+    "16-20":"16-20",
+    "21-25": "21-30",
+    "26-30": "21-30",
+
+    "31-35": "31-40",
+    "36-40": "31-40",
+
+    "41-45": "41-50",
+    "46-50": "41-50",
+
+    "51-55": "51-60",
+    "56-60": "51-60",
+
+    "61-65": "61-70",
+    "66-70": "61-70",
+
+    "71-75": ">71",
+    "76-80": ">71",
+    "81-85": ">71",
+    "over85": ">71",
+    "over 85": ">71"
 }
+
+from collections import defaultdict
+
+CORPUS_AGE = defaultdict(int)
+
+for k, v in corpus_data["age-range"].items():
+
+    k_norm = norm(k)
+    bucket = AGE_MAP.get(k_norm)
+
+    if bucket is None:
+        continue
+
+    CORPUS_AGE[bucket] += v
+
 
 def norm_age(x):
     return AGE_MAP.get(norm(x), norm(x))
@@ -53,7 +88,7 @@ def get_total(field, key):
         return corpus_data["region"].get(key)
 
     elif field == "age-range":
-        return corpus_data["age-range"].get(key)
+        return CORPUS_AGE.get(canon(field, key))
 
     return None
 

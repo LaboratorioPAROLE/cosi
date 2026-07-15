@@ -1,0 +1,19 @@
+nomeSD: va bene
+file: va_bene.tsv
+nOccTot: 1580
+fascia_frequenza: medio-alta
+varianti: ~
+
+source:
+  lemma: andare bene
+  pos: verbo + aggettivo
+  form: PRS.IND.3SG
+
+descrizione_macro: |
+  
+descrizione_micro: |
+ 
+grafici:
+  type: ../imgs/va_bene/type.html
+  age: ../imgs/va_bene/age.html
+  region: ../imgs/va_bene/region_map.html

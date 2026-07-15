@@ -29,6 +29,9 @@ COLOR_MAP = {
     "Cognitiva": "#d6eaff"
 }
 
+# Versione di Plotly.js caricata da CDN, una sola volta per pagina
+PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
+
 # =========================
 # HTML BASE
 # =========================
@@ -42,6 +45,10 @@ def base_html(title, body, base_path=""):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Plotly.js caricato una sola volta da CDN: le pagine dei singoli grafici
+     contengono solo dati (JSON), non la libreria -->
+<script src="{PLOTLY_CDN}"></script>
 
 <style>
 body {{
@@ -104,10 +111,9 @@ input {{
     font-size: 12px;
 }}
 
-iframe {{
+.plot-container {{
     width: 100%;
     height: 400px;
-    border: none;
 }}
 
 .example {{
@@ -201,6 +207,23 @@ function toggle(id) {{
     const el = document.getElementById(id);
     el.style.display = (el.style.display === "none") ? "table-row" : "none";
 }}
+
+// Carica un JSON con {{data, layout}} generato da fig.to_json() e lo disegna
+// nel div indicato. Usata per i grafici Plotly della pagina segnale.
+function loadPlot(divId, jsonPath) {{
+    fetch(jsonPath)
+        .then(r => {{
+            if (!r.ok) throw new Error("Impossibile caricare " + jsonPath);
+            return r.json();
+        }})
+        .then(fig => {{
+            Plotly.newPlot(divId, fig.data, fig.layout, {{responsive: true}});
+        }})
+        .catch(err => {{
+            document.getElementById(divId).innerText = "Grafico non disponibile";
+            console.error(err);
+        }});
+}}
 </script>
 
 <header class="header">
@@ -270,9 +293,9 @@ def get_examples(tsv_path, target_micro, max_examples=2):
                 continue
 
             examples.append({
-    "html": build_example(row, PROJECT_ROOT),
-    "audio": row.get("audio", "")
-})
+                "html": build_example(row, PROJECT_ROOT),
+                "audio": row.get("audio", "")
+            })
 
             if len(examples) >= max_examples:
                 break
@@ -298,6 +321,10 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
     ntokens = stats["counts"]["ntokens"]
     nSD = stats["counts"]["nSD"]
+    varianti = signal["varianti"]
+
+    if varianti is None:
+        varianti = "-"
 
     macro = stats["macrofunctions_SD"]
     micro = stats["microfunctions_SD"]
@@ -354,6 +381,11 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
     micro_html += "</table>"
 
+    # Percorsi relativi ai JSON dei grafici (generati da generate_plots_data.py)
+    type_json = f"../../cosi/imgs/{name}/type.json"
+    age_json = f"../../cosi/imgs/{name}/age.json"
+    region_json = f"../../cosi/imgs/{name}/region_map.json"
+
     body = f"""
 <div class="card">
 
@@ -362,13 +394,17 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     </h2>
 
     <div style="font-size: 1rem; color: #555; margin-bottom: 1rem;">
-        <b>{signal["source"]["lemma"]}</b>
+        da <b>{signal["source"]["lemma"]}</b>
         <span style="color:#888;">({signal["source"]["pos"]})</span>
     </div>
 
     <div style="font-size: 0.95rem; color: #666;">
         <b>Frequenza:</b>
         Occorrenze analizzate: {ntokens} | Segnali Discorsivi: {nSD}
+    </div>
+    <br>
+    <div style="font-size: 0.95rem; color: #666;">
+        <b>Varianti incluse:</b> <i>{varianti}</i>
     </div>
 
 </div>
@@ -387,18 +423,24 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
 <div class="card">
     <h3>Tipi di interazione</h3>
-    <iframe src="../../cosi/imgs/{name}/type.html"></iframe>
+    <div id="plot-type" class="plot-container"></div>
 </div>
 
 <div class="card">
     <h3>Età</h3>
-    <iframe src="../../cosi/imgs/{name}/age.html"></iframe>
+    <div id="plot-age" class="plot-container"></div>
 </div>
 
 <div class="card">
     <h3>Regioni</h3>
-    <iframe src="../../cosi/imgs/{name}/region_map.html"></iframe>
+    <div id="plot-region" class="plot-container"></div>
 </div>
+
+<script>
+    loadPlot('plot-type', '{type_json}');
+    loadPlot('plot-age', '{age_json}');
+    loadPlot('plot-region', '{region_json}');
+</script>
 """
 
     # base_path per file dentro /segnali
@@ -408,7 +450,6 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     search_index.append({
         "lemma": signal["nomeSD"],
         "frequenza": signal["fascia_frequenza"],
-        #"macro": ", ".join([m[0] for m in macro_sorted[:3]]),
         "micro": ", ".join([k for _, k, _ in micro_sorted[:5]]),
         "link": f"segnali/{name}.html"
     })
@@ -454,7 +495,6 @@ function render(filter="") {
         <tr onclick="window.location='${x.link}'" style="cursor:pointer">
             <td><b>${x.lemma}</b></td>
             <td><span class="badge">${x.frequenza}</span></td>
-            
             <td>${x.micro || "-"}</td>
         </tr>`;
     });
@@ -469,7 +509,7 @@ home_body = """
   <h2>Benvenuto in COSÌ</h2>
 
   <p>
-    COSÌ è una risorsa dedicata allo studio dei segnali discorsivi nell’italiano parlato.
+    COSÌ è una risorsa dedicata allo studio dei segnali discorsivi nell'italiano parlato.
   </p>
 
   <p>

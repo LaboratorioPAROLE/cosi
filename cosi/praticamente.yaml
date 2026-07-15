@@ -1,0 +1,19 @@
+nomeSD: praticamente
+file: praticamente.tsv
+nOccTot: 1079
+fascia_frequenza: medio-alta
+varianti: ~
+
+source:
+  lemma: praticamente
+  pos: avverbio
+  form:  ~
+
+descrizione_macro: |
+  
+descrizione_micro: |
+  
+grafici:
+  type: ../imgs/praticamente/type.html
+  age: ../imgs/praticamente/age.html
+  region: ../imgs/praticamente/region_map.html

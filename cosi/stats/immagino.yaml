@@ -1,0 +1,154 @@
+file: immagino.tsv
+counts:
+  ntokens: 353
+  nSD: 187
+macrofunctions_SD:
+  Interazionale: 137
+  Metatestuale: 8
+  Cognitiva: 102
+microfunctions_SD:
+  Interazionale:
+    Accordo: 34
+    Conferma dell'attenzione: 52
+    Cessione del turno: 28
+    Richiesta di accordo/conferma: 51
+  Metatestuale:
+    Filler: 8
+  Cognitiva:
+    Marcatura dell'inferenza: 60
+    Modulazione del grado di confidenza: 44
+    Attenuazione: 8
+    Approssimazione: 2
+metadata_SD:
+  type:
+    semistructured-interview:
+      count: 157
+      fpmw: 117.68718446529165
+    free-conversation:
+      count: 20
+      fpmw: 30.637348766387156
+    office-hours:
+      count: 5
+      fpmw: 71.94865743805221
+    lecture:
+      count: 4
+      fpmw: 19.09344331156681
+    exam:
+      count: 1
+      fpmw: 16.10591248047158
+  participants-relationship:
+    asymmetric:
+      count: 154
+    symmetric:
+      count: 33
+  topic:
+    fixed:
+      count: 162
+    free:
+      count: 25
+  year:
+    '2022':
+      count: 103
+    '2018':
+      count: 19
+    '2023':
+      count: 6
+    '2020':
+      count: 11
+    '2019':
+      count: 30
+    '2024':
+      count: 16
+    '2021':
+      count: 2
+  occupation:
+    0-Students:
+      count: 143
+    5-Service-Workers:
+      count: 2
+    2-Professionals:
+      count: 31
+    7-Plant-Operators:
+      count: 3
+    3-Technicians:
+      count: 1
+    0-Retired:
+      count: 3
+    8-Elementary:
+      count: 1
+    4-Clerical-Workers:
+      count: 2
+  gender:
+    F:
+      count: 142
+    M:
+      count: 44
+  region:
+    calabria:
+      count: 5
+      fpmw: 65.025424941152
+    emilia-romagna:
+      count: 114
+      fpmw: 138.80619367847373
+    basilicata:
+      count: 1
+      fpmw: 15.632816408204102
+    piemonte:
+      count: 19
+      fpmw: 38.26163304677384
+    campania:
+      count: 2
+      fpmw: 26.913191500814122
+    friuli-venezia-giulia:
+      count: 2
+      fpmw: 112.0259900296869
+    marche:
+      count: 4
+      fpmw: 68.85155604516663
+    lombardia:
+      count: 18
+      fpmw: 194.86002554831447
+    sicilia:
+      count: 2
+      fpmw: 22.037110494072017
+    sardegna:
+      count: 4
+      fpmw: 89.65192639576843
+    abruzzo:
+      count: 2
+      fpmw: 51.47475163432337
+    estero:
+      count: 2
+      fpmw: 47.95243118826125
+    N/A:
+      count: 1
+    trentino-alto-adige:
+      count: 9
+      fpmw: 732.243104710764
+    veneto:
+      count: 1
+      fpmw: 13.347570742124933
+  age-range:
+    21-30:
+      count: 163
+      fpmw: 149.98973996564038
+    '>71':
+      count: 3
+      fpmw: 10.538740409746227
+    31-40:
+      count: 7
+      fpmw: 29.40669884599712
+    16-20:
+      count: 4
+      fpmw: 48.080968350702584
+    51-60:
+      count: 4
+      fpmw: 13.964627598293522
+    41-50:
+      count: 3
+      fpmw: 20.176612615763315
+    n/a:
+      count: 1
+    61-70:
+      count: 1
+      fpmw: 6.1294039767573
