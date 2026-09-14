@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COSÌ - Guida alle funzioni</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Interazionale = arancio, Metatestuale = verde, Cognitiva = blu */
+    --interazionale: #ff922b;
+    --interazionale-bg: #fff3e6;
+    --metatestuale: #51cf66;
+    --metatestuale-bg: #eafaec;
+    --cognitiva: #4dabf7;
+    --cognitiva-bg: #eaf5ff;
+
+    --ink:#1a1a1a;
+    --muted:#666;
+    --card:#ffffff;
+    --page:#f5f7fa;
+    --border:#e9ecef;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--page);
+    color: var(--ink);
+  }
+
+  /* ---- Header coerente col sito COSÌ ---- */
+  .header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    padding: 1rem 1.2rem 1.4rem;
+    text-align: center;
+  }
+
+  .home-link {
+    position: absolute;
+    top: 1rem;
+    left: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #095775;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .home-link:hover { color: #b51700; }
+
+  .home-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .header-title {
+    margin: 0.4rem 0 0.3rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #095775;
+  }
+
+  .header-subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(9, 87, 117, 0.75);
+  }
+
+  .container {
+    max-width: 1240px;
+    margin: auto;
+    padding: 2rem 1.2rem 4rem;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 1.6rem 1.8rem;
+    margin-bottom: 1.6rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  .card h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 1.1rem;
+  }
+
+  .intro p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0.3rem 0 0;
+  }
+
+  .intro .example-line {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    color: var(--ink);
+  }
+
+  /* ---- Griglia di scelta (macrofunzioni / mesofunzioni): definizione sempre visibile ---- */
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .choice-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    background: #fafbfc;
+    transition: all 0.15s ease;
+  }
+
+  .choice-card:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+
+  .choice-card .name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .choice-card .subtype {
+    font-size: 0.74rem;
+    font-style: italic;
+    color: #999;
+    margin: 0 0 6px 17px;
+  }
+
+  .choice-card .def {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+  .choice-card.interazionale { border-color: #ffd8a8; }
+  .choice-card.metatestuale  { border-color: #b2f2bb; }
+  .choice-card.cognitiva     { border-color: #a5d8ff; }
+
+  .choice-card.interazionale .dot { background: var(--interazionale); }
+  .choice-card.metatestuale  .dot { background: var(--metatestuale); }
+  .choice-card.cognitiva     .dot { background: var(--cognitiva); }
+
+  .choice-card.interazionale.active { background: var(--interazionale-bg); border-color: var(--interazionale); box-shadow: 0 4px 12px rgba(255,146,43,0.2); }
+  .choice-card.metatestuale.active  { background: var(--metatestuale-bg); border-color: var(--metatestuale); box-shadow: 0 4px 12px rgba(81,207,102,0.2); }
+  .choice-card.cognitiva.active     { background: var(--cognitiva-bg); border-color: var(--cognitiva); box-shadow: 0 4px 12px rgba(77,171,247,0.2); }
+
+  /* ---- Colonne microfunzioni (tutte affiancate, indipendentemente dalla macro) ---- */
+  .dominio-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
+  .dominio-column {
+    background: #fafbfc;
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    min-width: 240px;
+    flex: 1 1 260px;
+    border-top: 4px solid var(--border);
+  }
+
+  .dominio-column.interazionale { border-top-color: var(--interazionale); }
+  .dominio-column.metatestuale  { border-top-color: var(--metatestuale); }
+  .dominio-column.cognitiva     { border-top-color: var(--cognitiva); }
+
+  .dominio-column-title {
+    font-size: 0.86rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .ruolo-group { margin-bottom: 14px; }
+  .ruolo-group:last-child { margin-bottom: 0; }
+
+  .ruolo-group-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .micro-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .micro-item {
+    padding: 9px 12px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 0.87rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    user-select: none;
+  }
+
+  .micro-item:hover { background: #f1f3f5; }
+
+  .micro-item.active {
+    color: white;
+    font-weight: 700;
+    border-color: transparent;
+  }
+
+  .micro-item.active.interazionale { background: var(--interazionale); box-shadow: 0 3px 10px rgba(255,146,43,0.35); }
+  .micro-item.active.metatestuale  { background: var(--metatestuale); box-shadow: 0 3px 10px rgba(81,207,102,0.35); }
+  .micro-item.active.cognitiva     { background: var(--cognitiva); box-shadow: 0 3px 10px rgba(77,171,247,0.35); }
+
+  .micro-item.active:hover { filter: brightness(1.05); }
+
+  .empty-hint {
+    font-size: 0.85rem;
+    color: #adb5bd;
+    text-align: center;
+    padding: 1.5rem 0;
+    width: 100%;
+  }
+
+  /* ---- Tooltip (solo per le microfunzioni) ---- */
+  #tooltip {
+    position: fixed;
+    max-width: 280px;
+    background: #1a1a1a;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    z-index: 1000;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+
+  #tooltip.visible { opacity: 1; transform: translateY(0); }
+  #tooltip .tt-ex { color: #ffd8a8; font-style: italic; margin-top: 6px; display: block; }
+
+  @media (max-width: 600px) {
+    .container { padding: 1.4rem 0.8rem 3rem; }
+    .card { padding: 1.2rem; }
+    .header { padding-top: 3.2rem; }
+    .home-link { font-size: 0; }
+    .home-link svg { width: 20px; height: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="home-link" href="https://laboratorioparole.github.io/cosi/index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11.5 12 4l9 7.5"></path>
+      <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"></path>
+    </svg>
+    Torna alla Home
+  </a>
+  <h1 class="header-title">Si fa COSÌ</h1>
+  <p class="header-subtitle">Pannello di supporto all'annotazione delle funzioni dei segnali discorsivi</p>
+</header>
+
+<div class="container">
+
+  <div class="card intro">
+    <h3 style="text-transform:none; letter-spacing:normal; color:var(--ink);">Come funziona</h3>
+    <p>Questa pagina aiuta a decidere quale funzione (o quali funzioni) svolge un determinato segnale discorsivo.
+    Il criterio è la corrispondenza con la definizione: se la frase <i>"Viene utilizzato per…"</i> di una voce risulta vera
+    per il segnale che stai analizzando, allora quella funzione va attivata.</p>
+    <p>Puoi procedere per gradi:</p>
+    <ul style="font-size:0.92rem; color:var(--muted); line-height:1.6; margin:0.3rem 0; padding-left:1.3rem;">
+      <li>leggi le definizioni delle <b>macrofunzioni</b> e attiva quelle pertinenti</li>
+      <li>nella fascia successiva compariranno le <b>mesofunzioni</b> di tutte le macrofunzioni attive</li>
+      <li>ogni mesofunzione attivata apre una colonna con le sue <b>microfunzioni</b></li>
+    </ul>
+    <p>Tutte le selezioni restano attive insieme: puoi combinare macrofunzioni, mesofunzioni e colonne diverse in
+    parallelo, senza che una scelta escluda le altre.</p>
+  </div>
+
+  <div class="card">
+    <h3>Macrofunzione</h3>
+    <p class="section-subtitle">L'elemento di uno scambio comunicativo su cui agisce il segnale discorsivo</p>
+    <div class="choice-grid" id="macro-grid"></div>
+  </div>
+
+  <div class="card" id="dominio-card" style="display:none;">
+    <h3>Mesofunzione</h3>
+    <p class="section-subtitle">Il dominio su cui opera il segnale discorsivo</p>
+    <div class="choice-grid" id="dominio-grid"></div>
+  </div>
+
+  <div class="card" id="micro-card" style="display:none;">
+    <h3>Microfunzione</h3>
+    <p class="section-subtitle">La funzione svolta dal segnale discorsivo</p>
+    <div class="dominio-columns" id="dominio-columns"></div>
+  </div>
+
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+/* ============================= DATI ============================= */
+
+const MACRO = [
+  {
+    id: 'interazionale',
+    nome: "Interazione con l'interlocutore/trice",
+    sottotipo: 'Funzione Interazionale',
+    def: "Viene utilizzato per gestire il rapporto con l'interlocutore/trice e/o la struttura dello scambio interattivo."
+  },
+  {
+    id: 'metatestuale',
+    nome: 'Testualità',
+    sottotipo: 'Funzione Metatestuale',
+    def: "Viene utilizzato da chi parla per gestire il flusso della produzione del testo, o per organizzare e strutturare il testo prodotto."
+  },
+  {
+    id: 'cognitiva',
+    nome: 'Soggettività e contenuto proposizionale',
+    sottotipo: 'Funzione Cognitiva',
+    def: "Viene utilizzato per marcare processi cognitivi, la <i>stance</i> o la valutazione di chi parla rispetto all'enunciato o a suoi elementi."
+  }
+];
+
+const DOMINI = [
+  { id: 'scambio',            nome: 'Scambio interattivo',            macro: 'interazionale', def: "Viene utilizzato per organizzare la struttura in turni dello scambio interattivo." },
+  { id: 'rapporto',           nome: "Rapporto con l'interlocutore",   macro: 'interazionale', def: "Viene utilizzato per agire sul rapporto tra i/le partecipanti allo scambio (ad es., tramite coinvolgimento, riferimento al common ground, meccanismi di faccia)." },
+  { id: 'struttura-testo',    nome: 'Struttura del testo',            macro: 'metatestuale',  def: "Viene utilizzato per esplicitare l'organizzazione in parti del testo prodotto da chi parla." },
+  { id: 'formulazione',       nome: 'Processo di formulazione',       macro: 'metatestuale',  def: "Viene utilizzato per organizzare il processo che porta ad una determinata formulazione nel testo." },
+  { id: 'processi-cognitivi', nome: 'Meccanismi cognitivi',           macro: 'cognitiva',     def: "Viene utilizzato per esplicitare la presenza di meccanismi cognitivi." },
+  { id: 'epistemica',         nome: 'Grado di certezza',              macro: 'cognitiva',     def: "Viene usato per aumentare o diminuire il grado di certezza di chi parla rispetto al suo enunciato." },
+  { id: 'riferimento',        nome: 'Riferimento',                    macro: 'cognitiva',     def: "Viene utilizzato per individuare un determinato referente a partire da un elemento presente nell'enunciato." },
+  { id: 'forza-illocutiva',   nome: 'Forza illocutiva',                macro: 'cognitiva',     def: "Viene utilizzato per modificare la forza illocutiva dell'enunciato (ad es., rendendo la formulazione più o meno assertiva)." }
+];
+
+// ruolo: solo per dominio 'rapporto'. Valori: 'Parlante', 'Interlocutore', 'Parlante/Interlocutore'
+const MICRO = [
+  { nome: 'Presa di turno', def: "Segnala che un/a parlante sta iniziando il proprio turno.", esempio: '"allora…", "dunque…"', dominio: 'scambio' },
+  { nome: 'Interruzione', def: "Serve ad interrompere un/a parlante per iniziare il proprio turno.", esempio: '"scusa...", "no…", "però…"', dominio: 'scambio' },
+  { nome: 'Cessione del turno', def: "È usato dal/la parlante per richiedere risposta all'interlocutore/trice o per chiudere il proprio turno.", esempio: '"prego", "va bene?", "no?"', dominio: 'scambio' },
+
+  { nome: 'Marcatura della conoscenza condivisa', def: "È usato dal/la parlante per riconoscere o per assicurarsi che l'altra persona è a conoscenza di una certa informazione.", esempio: '"sai", "non so se mi spiego"', dominio: 'rapporto', ruolo: 'Parlante/Interlocutore' },
+  { nome: 'Richiesta di accordo/conferma', def: "Serve al/la parlante per chiedere all'interlocutore/trice una conferma, di attenzione o di accordo.", esempio: '"capito?", "no?"', dominio: 'rapporto', ruolo: 'Parlante' },
+  { nome: 'Accordo', def: "Serve al/la parlante per segnalare all'interlocutore/trice che è d'accordo con quanto detto prima.", esempio: '"sìsì", "eh direi!"', dominio: 'rapporto', ruolo: 'Interlocutore' },
+  { nome: 'Richiesta di attenzione', def: "Serve al/la parlante per richiamare l'attenzione su ciò che sta per dire.", esempio: '"senti...", "guarda..."', dominio: 'rapporto', ruolo: 'Parlante' },
+  { nome: "Conferma dell'attenzione", def: "Segnala che un/a parlante segue ancora il discorso e/o incoraggia l'interlocutore/trice a continuare.", esempio: '"mhmh", "certo"', dominio: 'rapporto', ruolo: 'Interlocutore' },
+  { nome: 'Strategia di cortesia', def: "Serve al/la parlante come strategia di mantenimento della faccia.", esempio: '"gentilmente", "scusa"', dominio: 'rapporto', ruolo: 'Parlante/Interlocutore' },
+
+  { nome: 'Gestione del topic', def: "È usato dal/la parlante per introdurre o riprendere un topic.", esempio: '"quindi…", "dopodiché..."', dominio: 'struttura-testo' },
+  { nome: 'Chiusura del topic', def: "È usato dal/la parlante per chiudere un argomento.", esempio: '"ok", "bene", "bon"', dominio: 'struttura-testo' },
+  { nome: 'Citazione/Discorso Riportato', def: "È usato per introdurre qualcosa detto da qualcun altro/a.", esempio: '"mi fa…", "ah…"', dominio: 'struttura-testo' },
+
+  { nome: 'Esemplificazione', def: "Introduce un esempio o parafrasa rispetto a un elemento presente nel testo.", esempio: '"mettiamo", "tipo"', dominio: 'formulazione' },
+  { nome: 'Prolettico/Analettico', def: "Serve al/la parlante per segnalare una formulazione che ritiene adeguata di ciò che sta per dire.", esempio: '"ecco…", "direi…"', dominio: 'formulazione' },
+  { nome: 'Riformulazione', def: "Viene usato per riformulare quanto appena detto, che sia per ragioni stilistiche, di precisione o di cortesia.", esempio: '"cioè nel senso...", "dico..."', dominio: 'formulazione' },
+  { nome: 'Filler', def: "Viene usato dal/la parlante come pausa piena per coprire i tempi di formulazione.", esempio: '"quindi direi tipo", "mh diciamo"', dominio: 'formulazione' },
+  { nome: 'Marca di generalizzazione', def: "È un modo di rimandare a una categoria più ampia che il/la parlante dà per condivisa.", esempio: '"eccetera", "capito no"', dominio: 'formulazione' },
+
+  { nome: "Marcatura dell'inferenza", def: "Serve per segnalare che il/la parlante è arrivato/a a una conclusione per deduzione.", esempio: '"allora", "quindi", "insomma"', dominio: 'processi-cognitivi' },
+  { nome: 'Modulazione del grado di confidenza', def: "Serve per segnalare che il/la parlante non è completamente sicuro/a di ciò che sostiene.", esempio: '"mi pare", "credo"', dominio: 'epistemica' },
+  { nome: 'Approssimazione', def: "È usato per rendere più vago quello che si dice.", esempio: '"diciamo", "tipo"', dominio: 'riferimento' },
+  { nome: 'Specificazione', def: "È usato per rendere meno vago quello che si dice.", esempio: '"proprio", "letteralmente"', dominio: 'riferimento' },
+  { nome: 'Attenuazione', def: "Serve al/la parlante per mitigare la portata di un certo termine o espressione.", esempio: '"direi", "tipo"', dominio: 'forza-illocutiva' },
+  { nome: 'Intensificazione', def: "Serve al/la parlante per intensificare un certo termine o espressione.", esempio: '"decisamente", "assolutamente"', dominio: 'forza-illocutiva' }
+];
+
+const RUOLO_ORDER = ['Parlante', 'Interlocutore', 'Parlante/Interlocutore'];
+const RUOLO_LABEL = {
+  'Parlante': 'Parlante',
+  'Interlocutore': 'Interlocutore',
+  'Parlante/Interlocutore': 'Parlante e Interlocutore'
+};
+
+/* ============================= STATO ============================= */
+
+const state = {
+  macro: new Set(),
+  dominio: new Set(),
+  micro: new Set()   // chiavi "dominioId|nomeMicrofunzione"
+};
+
+/* ============================= RENDER ============================= */
+
+const macroGrid = document.getElementById('macro-grid');
+const dominioCard = document.getElementById('dominio-card');
+const dominioGrid = document.getElementById('dominio-grid');
+const microCard = document.getElementById('micro-card');
+const dominioColumns = document.getElementById('dominio-columns');
+const tooltip = document.getElementById('tooltip');
+
+function renderMacroGrid() {
+  macroGrid.innerHTML = MACRO.map(m => `
+    <div class="choice-card ${m.id} ${state.macro.has(m.id) ? 'active' : ''}" data-macro="${m.id}">
+      <div class="name"><span class="dot"></span>${m.nome}</div>
+      <div class="subtype">${m.sottotipo}</div>
+      <div class="def">${m.def}</div>
+    </div>
+  `).join('');
+
+  macroGrid.querySelectorAll('.choice-card').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-macro');
+      toggleSet(state.macro, id);
+      if (!state.macro.has(id)) {
+        DOMINI.filter(d => d.macro === id).forEach(d => state.dominio.delete(d.id));
+      }
+      renderAll();
+    });
+  });
+}
+
+function renderDominioSection() {
+  const activeMacros = MACRO.filter(m => state.macro.has(m.id));
+
+  if (activeMacros.length === 0) {
+    dominioCard.style.display = 'none';
+    return;
+  }
+  dominioCard.style.display = '';
+
+  const domini = DOMINI.filter(d => state.macro.has(d.macro));
+
+  dominioGrid.innerHTML = domini.map(d => `
+    <div class="choice-card ${d.macro} ${state.dominio.has(d.id) ? 'active' : ''}" data-dominio="${d.id}">
+      <div class="name"><span class="dot"></span>${d.nome}</div>
+      <div class="def">${d.def}</div>
+    </div>
+  `).join('');
+
+  dominioGrid.querySelectorAll('.choice-card').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-dominio');
+      toggleSet(state.dominio, id);
+      renderAll();
+    });
+  });
+}
+
+function microItemHtml(mi, macroClass) {
+  const key = mi.dominio + '|' + mi.nome;
+  const active = state.micro.has(key);
+  return `
+    <div class="micro-item ${active ? 'active ' + macroClass : ''}"
+         data-key="${escapeAttr(key)}"
+         data-def="${escapeAttr(mi.def)}" data-ex="${escapeAttr(mi.esempio)}">
+      ${mi.nome}
+    </div>
+  `;
+}
+
+function renderMicroSection() {
+  const activeDomini = DOMINI.filter(d => state.dominio.has(d.id));
+
+  if (activeDomini.length === 0) {
+    microCard.style.display = 'none';
+    return;
+  }
+  microCard.style.display = '';
+
+  dominioColumns.innerHTML = activeDomini.map(d => {
+    if (d.id === 'rapporto') {
+      const groupsHtml = RUOLO_ORDER.map(r => {
+        const items = MICRO.filter(mi => mi.dominio === d.id && mi.ruolo === r);
+        if (items.length === 0) return '';
+        return `
+          <div class="ruolo-group">
+            <div class="ruolo-group-title">Utilizzato da: ${RUOLO_LABEL[r]}</div>
+            <div class="micro-list">${items.map(mi => microItemHtml(mi, d.macro)).join('')}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="dominio-column ${d.macro}">
+          <div class="dominio-column-title">${d.nome}</div>
+          ${groupsHtml}
+        </div>
+      `;
+    }
+
+    const micros = MICRO.filter(mi => mi.dominio === d.id);
+    return `
+      <div class="dominio-column ${d.macro}">
+        <div class="dominio-column-title">${d.nome}</div>
+        <div class="micro-list">${micros.map(mi => microItemHtml(mi, d.macro)).join('')}</div>
+      </div>
+    `;
+  }).join('');
+
+  dominioColumns.querySelectorAll('.micro-item').forEach(el => {
+    el.addEventListener('mouseenter', (e) => showTooltip(e, el));
+    el.addEventListener('mousemove', (e) => positionTooltip(e));
+    el.addEventListener('mouseleave', hideTooltip);
+    el.addEventListener('click', () => {
+      const key = el.getAttribute('data-key');
+      toggleSet(state.micro, key);
+      renderMicroSection();
+    });
+  });
+}
+
+function renderAll() {
+  renderMacroGrid();
+  renderDominioSection();
+  renderMicroSection();
+}
+
+/* ============================= HELPERS ============================= */
+
+function toggleSet(set, id) {
+  if (set.has(id)) set.delete(id); else set.add(id);
+}
+
+function escapeAttr(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+function showTooltip(e, el) {
+  const def = el.getAttribute('data-def');
+  const ex = el.getAttribute('data-ex');
+  tooltip.innerHTML = `<span class="tt-def">${def}</span><span class="tt-ex">Es: ${ex}</span>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+}
+
+function positionTooltip(e) {
+  const offset = 16;
+  let x = e.clientX + offset;
+  let y = e.clientY + offset;
+  const rect = tooltip.getBoundingClientRect();
+  if (x + rect.width > window.innerWidth - 10) x = e.clientX - rect.width - offset;
+  if (y + rect.height > window.innerHeight - 10) y = e.clientY - rect.height - offset;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+
+function hideTooltip() {
+  tooltip.classList.remove('visible');
+}
+
+/* ============================= INIT ============================= */
+renderAll();
+</script>
+
+</body>
+</html>
