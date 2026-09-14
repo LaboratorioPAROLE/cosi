@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prodotti della ricerca – COSÌ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.6rem 1rem 0 1rem;
+    text-align: center;
+}
+
+.brand img {
+    height: 250px;
+    width: auto;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 6px 0 10px 0;
+    background: white;
+    margin-top: 6px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #095775;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.navbar a:hover {
+    color: #b51700;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 22px;
+    background: white;
+    min-width: 160px;
+    border: 1px solid #eee;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background: #f5f7fa;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- Prodotti della ricerca --- */
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0;
+    color: #1e3c72;
+    border-bottom: 2px solid #eef1f6;
+    padding-bottom: 0.6rem;
+}
+
+.section-icon {
+    font-size: 1.4rem;
+}
+
+.badge {
+    background: #2a5298;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.product {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.product:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.product-authors {
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+}
+
+.product-title {
+    font-weight: 600;
+    font-size: 1.0rem;
+    margin: 0 0 4px 0;
+}
+
+.product-meta {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+}
+
+.status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.status-forthcoming {
+    background: #fdecea;
+    color: #b51700;
+}
+
+.status-published {
+    background: #e6f4ea;
+    color: #1e7e34;
+}
+
+.intro {
+    color: #444;
+}
+
+.empty-note {
+    color: #888;
+    font-style: italic;
+    font-size: 0.92rem;
+    padding: 0.4rem 0;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="brand">
+        <img src="logo_cosi.png" alt="COSÌ logo">
+    </div>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#">Chi siamo</a>
+        <div class="dropdown">
+            <a href="#">Progetto ▾</a>
+            <div class="dropdown-content">
+                <a href="#">Obiettivi del progetto</a>
+                <a href="#">Architettura del database</a>
+                <a href="#">Schema di annotazione</a>
+            </div>
+        </div>
+        <a href="search.html">Cerca nel database</a>
+        <a href="prodotti.html">Prodotti della ricerca</a>
+        <a href="#">Contatti</a>
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2 style="margin-top:0; color:#1e3c72;">Prodotti della ricerca</h2>
+        <p class="intro">
+            In questa sezione sono raccolti i prodotti scientifici realizzati
+            nell'ambito del progetto COSÌ, organizzati per tipologia:
+            articoli e pubblicazioni, poster e presentazioni a convegni.
+        </p>
+    </div>
+
+    <!-- ARTICOLI / PUBBLICAZIONI -->
+    <div class="card">
+        <h3 class="section-title">
+            <span class="section-icon">&#128196;</span>
+            Articoli e pubblicazioni
+            <span class="badge">Pubblicazioni</span>
+        </h3>
+
+        <div class="product">
+            <p class="product-authors">
+                Voghera, M., Sansò, A., Alfano, I., Buoniconto, A., Cataldo, V.,
+                Di Paola, G., Esposito, P., Pisciotta, F., Sammarco, C., Troncone, L.
+                <span class="status status-forthcoming">in revisione</span>
+            </p>
+            <p class="product-title">
+                Segnali discorsivi e tipi di interazione: uno studio corpus-based
+                a partire da COSÌ (Catalogo Online dei Segnali discorsivi dell'Italiano).
+            </p>
+        </div>
+
+        <div class="product">
+            <p class="product-authors">
+                Troncone, L. &amp; Pisciotta, F.
+                <span class="status status-forthcoming">in stampa, 2026</span>
+            </p>
+            <p class="product-title">
+                Percorsi di grammaticalizzazione e di pragmaticalizzazione:
+                una microdiacronia di <em>mi sa</em>.
+            </p>
+            <p class="product-meta">
+                In A. M. Thornton, L. Corona &amp; F. Cominetti (a cura di),
+                <em>Atti del LVIII Congresso SLI 2025, Grammaticalizzazione</em>.
+                Università dell'Aquila.
+            </p>
+        </div>
+    </div>
+
+    <!-- POSTER -->
+    <div class="card">
+        <h3 class="section-title">
+            <span class="section-icon">&#128204;</span>
+            Poster
+            <span class="badge">Poster</span>
+        </h3>
+
+        <p class="empty-note">Nessun poster disponibile al momento.</p>
+    </div>
+
+    <!-- PRESENTAZIONI -->
+    <div class="card">
+        <h3 class="section-title">
+            <span class="section-icon">&#127908;</span>
+            Presentazioni a convegni
+            <span class="badge">Convegni</span>
+        </h3>
+
+        <div class="product">
+            <p class="product-authors">
+                Troncone, L., Pisciotta, F., Alfano, I., Buoniconto, A., Di Paola, G.,
+                Sammarco, C., Sansò, A., Voghera, M. (2026).
+            </p>
+            <p class="product-title">
+                L'annotazione come pratica interpretativa: il caso dei segnali discorsivi.
+            </p>
+            <p class="product-meta">
+                LIX Congresso Internazionale della Società di Linguistica Italiana (SLI),
+                Alma Mater Studiorum – Università di Bologna.
+            </p>
+        </div>
+
+        <div class="product">
+            <p class="product-authors">
+                Voghera, M., Sansò, A., Alfano, I., Buoniconto, A., Cataldo, V.,
+                Di Paola, G., Esposito, P., Pisciotta, F., Sammarco, C., Troncone, L. (2026).
+            </p>
+            <p class="product-title">
+                Coppie funzionalmente simili di segnali discorsivi italiani e distribuzione
+                sociolinguistica: uno studio quantitativo corpus-based.
+            </p>
+            <p class="product-meta">
+                IX Congresso Internazionale sui Marcatori Discorsivi nelle Lingue Romanze
+                (DISROM9), Università di Oviedo.
+            </p>
+        </div>
+
+        <div class="product">
+            <p class="product-authors">
+                Pisciotta, F. &amp; Troncone, L. (2026).
+            </p>
+            <p class="product-title">
+                Competizione nel dominio dei segnali discorsivi? Il caso di
+                <em>mi sembra</em>, <em>mi pare</em>, <em>mi sa</em>.
+            </p>
+            <p class="product-meta">
+                IX Congresso Internazionale sui Marcatori Discorsivi nelle Lingue Romanze
+                (DISROM9), Università di Oviedo.
+            </p>
+        </div>
+
+        <div class="product">
+            <p class="product-authors">
+                Voghera, M., Sansò, A., Alfano, I., Buoniconto, A., Cataldo, V.,
+                Di Paola, G., Esposito, P., Pisciotta, F., Sammarco, C., Troncone, L. (2025).
+            </p>
+            <p class="product-title">
+                COSÌ: an online repertoire of Italian discourse markers.
+            </p>
+            <p class="product-meta">
+                Talking Data – Methodological and theoretical challenges raised by spoken
+                interaction data, Università di Bologna.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
