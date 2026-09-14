@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti – COSÌ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.6rem 1.5rem 0 1.5rem;
+}
+
+.brand .logo-main {
+    height: 250px;
+    width: auto;
+    display: block;
+}
+
+.brand .logo-side {
+    height: 90px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+    .brand .logo-main { height: 150px; }
+    .brand .logo-side { height: 55px; }
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 6px 0 10px 0;
+    background: white;
+    margin-top: 6px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #095775;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.navbar a:hover {
+    color: #b51700;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 22px;
+    background: white;
+    min-width: 160px;
+    border: 1px solid #eee;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background: #f5f7fa;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- Contatti --- */
+
+.section-title {
+    margin-top: 0;
+    color: #1e3c72;
+    border-bottom: 2px solid #eef1f6;
+    padding-bottom: 0.6rem;
+}
+
+.contact-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #2a5298;
+    margin: 0 0 1rem 0;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.contact-row:last-child {
+    border-bottom: none;
+}
+
+.contact-icon {
+    font-size: 1.4rem;
+    width: 32px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.contact-text {
+    font-size: 0.98rem;
+    line-height: 1.4;
+}
+
+.contact-text .who {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.contact-text a {
+    color: #095775;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-text a:hover {
+    color: #b51700;
+}
+
+.contact-text .note {
+    color: #888;
+    font-size: 0.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="brand">
+        <img class="logo-main" src="logo_cosi.png" alt="COSÌ logo">
+    </div>
+
+     <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="chi_siamo.html">Chi siamo</a>
+        <div class="dropdown">
+            <a href="progetto.html">Progetto ▾</a>
+            <div class="dropdown-content">
+                <a href="architettura.html">Architettura del database</a>
+                <a href="schema_annotazione.html">Schema di annotazione</a>
+            </div>
+        </div>
+        <a href="search.html">Cerca nel database</a>
+        <a href="prodotti.html">Prodotti della ricerca</a>
+        <a href="contatti.html">Contatti</a>
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2 class="section-title">Architettura del database</h2>
+        <p class="contact-text" style="color:#444;">
+            Under construction! 🚧 🚧
+        </p>
+    </div>
+
+    
+    </div>
+
+</div>
+
+</body>
+</html>
