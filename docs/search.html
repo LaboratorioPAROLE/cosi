@@ -7,8 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- Plotly.js caricato una sola volta da CDN: le pagine dei singoli grafici
-     contengono solo dati (JSON), non la libreria -->
+<!-- Plotly.js caricato una sola volta da CDN -->
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
@@ -169,8 +168,6 @@ function toggle(id) {
     el.style.display = (el.style.display === "none") ? "table-row" : "none";
 }
 
-// Carica un JSON con {data, layout} generato da fig.to_json() e lo disegna
-// nel div indicato. Usata per i grafici Plotly della pagina segnale.
 function loadPlot(divId, jsonPath) {
     fetch(jsonPath)
         .then(r => {
@@ -199,9 +196,8 @@ function loadPlot(divId, jsonPath) {
         <div class="dropdown">
             <a href="#">Progetto ▾</a>
             <div class="dropdown-content">
-                <a href="#">Obiettivi del progetto</a>
-                <a href="#">Architettura del database</a>
-                <a href="#">Schema di annotazione</a>
+                <a href="architettura.html">Architettura del database</a>
+                <a href="schema_annotazione.html">Schema di annotazione</a>
             </div>
         </div>
         <a href="search.html">Cerca nel database</a>
