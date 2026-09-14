@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi siamo – COSÌ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.6rem 1rem 0 1rem;
+    text-align: center;
+}
+
+.brand img {
+    height: 250px;
+    width: auto;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 6px 0 10px 0;
+    background: white;
+    margin-top: 6px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #095775;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.navbar a:hover {
+    color: #b51700;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 22px;
+    background: white;
+    min-width: 160px;
+    border: 1px solid #eee;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background: #f5f7fa;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- Chi siamo --- */
+
+.section-title {
+    margin-top: 0;
+    color: #1e3c72;
+    border-bottom: 2px solid #eef1f6;
+    padding-bottom: 0.6rem;
+}
+
+.intro {
+    color: #444;
+    line-height: 1.6;
+}
+
+.intro a {
+    color: #095775;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.intro a:hover {
+    color: #b51700;
+}
+
+.team-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #2a5298;
+    margin: 0.5rem 0 1.2rem 0;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.member {
+    text-align: center;
+}
+
+.member-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e3e8f0;
+    margin: 0 auto 0.8rem auto;
+    display: block;
+    border: 3px solid #eef1f6;
+}
+
+.member-photo-placeholder {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #e3e8f0;
+    margin: 0 auto 0.8rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9aa8bd;
+    font-size: 2.2rem;
+    font-weight: 600;
+    border: 3px solid #eef1f6;
+}
+
+.member-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 3px 0;
+    color: #1a1a1a;
+}
+
+.member-desc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="brand">
+        <img src="logo_cosi.png" alt="COSÌ logo">
+    </div>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <div class="dropdown">
+            <a href="#">Progetto ▾</a>
+            <div class="dropdown-content">
+                <a href="#">Obiettivi del progetto</a>
+                <a href="#">Architettura del database</a>
+                <a href="#">Schema di annotazione</a>
+            </div>
+        </div>
+        <a href="search.html">Cerca nel database</a>
+        <a href="prodotti.html">Prodotti della ricerca</a>
+        <a href="#">Contatti</a>
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <!-- INTRODUZIONE -->
+    <div class="card">
+        <h2 class="section-title">Chi siamo</h2>
+        <p class="intro">
+            COSÌ (Catalogo Online dei Segnali discorsivi dell'Italiano) è un progetto
+            di ricerca dedicato allo studio dei segnali discorsivi dell'italiano parlato,
+            sviluppato nell'ambito del Laboratorio P.A.R.O.L.E. del Dipartimento di Studi
+            Umanistici dell'Università degli Studi di Salerno.
+        </p>
+    </div>
+
+    <!-- LABORATORIO PAROLE -->
+    <div class="card">
+        <h2 class="section-title">Il Laboratorio P.A.R.O.L.E.</h2>
+        <p class="intro">
+            Il <b>Laboratorio per l'Analisi, la Ricerca e l'Osservazione delle Lingue
+            Europee (P.A.R.O.L.E.)</b>, istituito nel 2005 con fondi di Ateneo, è attivo
+            nel campo dell'analisi linguistica presso il Dipartimento di Studi Umanistici
+            dell'Università degli Studi di Salerno.
+        </p>
+        <p class="intro">
+            Il laboratorio svolge attività di ricerca nell'ambito della linguistica
+            generale, della linguistica dei corpora, della tipologia linguistica,
+            dell'educazione linguistica, della didattica delle lingue straniere e dello
+            studio e dell'insegnamento dell'italiano L2. Accanto alla ricerca, il
+            laboratorio porta avanti attività didattica di supporto ai corsi di studio
+            triennali e magistrali del Dipartimento e al Dottorato in Studi letterari,
+            linguistici e storici, oltre ad attività di terza missione e public engagement
+            nel campo dell'educazione linguistica.
+        </p>
+        <p class="intro">
+            Il progetto COSÌ è uno dei progetti di ricerca in corso presso il laboratorio.
+            Per maggiori informazioni sul laboratorio e sulle sue attività è possibile
+            consultare la
+            <a href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
+            pagina ufficiale sul sito del DipSUm - UniSa</a>.
+        </p>
+    </div>
+
+    <!-- RESPONSABILI SCIENTIFICI -->
+    <div class="card">
+        <h2 class="section-title">Il gruppo di ricerca</h2>
+        <p class="team-label">Responsabili scientifici</p>
+
+        <div class="team-grid">
+
+            <div class="member">
+                <img class="member-photo" src="foto/voghera.jpg" alt="Miriam Voghera"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>MV</div>'">
+                <p class="member-name">Miriam Voghera</p>
+                <p class="member-desc">Responsabile scientifica<br>Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/sanso.jpg" alt="Andrea Sansò"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>AS</div>'">
+                <p class="member-name">Andrea Sansò</p>
+                <p class="member-desc">Responsabile scientifico<br>Università di Salerno</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- GRUPPO DI RICERCA -->
+    <div class="card">
+        <p class="team-label">Gruppo di ricerca</p>
+
+        <div class="team-grid">
+
+            <div class="member">
+                <img class="member-photo" src="foto/alfano.jpg" alt="Iolanda Alfano"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>IA</div>'">
+                <p class="member-name">Iolanda Alfano</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/buoniconto.jpg" alt="Alfonsina Buoniconto"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>AB</div>'">
+                <p class="member-name">Alfonsina Buoniconto</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/dipaola.jpg" alt="Giovanni Di Paola"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>GD</div>'">
+                <p class="member-name">Giovanni Di Paola</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/esposito.jpg" alt="Pasquale Esposito"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>PE</div>'">
+                <p class="member-name">Pasquale Esposito</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/pisciotta.jpg" alt="Flavio Pisciotta"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>FP</div>'">
+                <p class="member-name">Flavio Pisciotta</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/pisegna.jpg" alt="Giuseppe Pisegna"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>GP</div>'">
+                <p class="member-name">Giuseppe Pisegna</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/sammarco.jpg" alt="Carmela Sammarco"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>CS</div>'">
+                <p class="member-name">Carmela Sammarco</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+            <div class="member">
+                <img class="member-photo" src="foto/troncone.jpg" alt="Luisa Troncone"
+                     onerror="this.outerHTML='<div class=member-photo-placeholder>LT</div>'">
+                <p class="member-name">Luisa Troncone</p>
+                <p class="member-desc">Università di Salerno</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
