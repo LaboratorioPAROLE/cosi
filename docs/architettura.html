@@ -36,31 +36,17 @@ body {
 
 .brand {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0.6rem 1.5rem 0 1.5rem;
+    padding: 0.6rem 1rem 0 1rem;
+    text-align: center;
 }
 
-.brand .logo-main {
+.brand img {
     height: 250px;
     width: auto;
+    margin-bottom: 8px;
     display: block;
-}
-
-.brand .logo-side {
-    height: 90px;
-    width: auto;
-    display: block;
-    flex-shrink: 0;
-}
-
-@media (max-width: 700px) {
-    .brand .logo-main { height: 150px; }
-    .brand .logo-side { height: 55px; }
 }
 
 .navbar {
