@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -16,13 +17,6 @@ body {
     font-family: 'Inter', sans-serif;
     background: #f5f7fa;
     color: #1a1a1a;
-}
-
-header {
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
-    color: white;
-    padding: 2rem;
-    text-align: center;
 }
 
 .container {
@@ -105,9 +99,9 @@ input {
 }
 
 .brand img {
-    height:250px;
+    height: 250px;
     width: auto;
-    margin-bottom: 8;
+    margin-bottom: 8px;
     display: block;
 }
 
@@ -117,7 +111,7 @@ input {
     gap: 24px;
     padding: 6px 0 10px 0;
     background: white;
-    margin-top: 6;
+    margin-top: 6px;
 }
 
 .navbar a {
@@ -159,13 +153,18 @@ input {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 </style>
 
 <script>
 function toggle(id) {
     const el = document.getElementById(id);
-    el.style.display = (el.style.display === "none") ? "table-row" : "none";
+    const arrow = document.getElementById('arrow-' + id);
+    const isHidden = el.style.display === "none";
+
+    el.style.display = isHidden ? "table-row" : "none";
+    if (arrow) {
+        arrow.textContent = isHidden ? "▲" : "↕";
+    }
 }
 
 function loadPlot(divId, jsonPath) {

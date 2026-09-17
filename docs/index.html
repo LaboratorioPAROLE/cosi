@@ -4,12 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COSÌ –  Catalogo Online dei Segnali discorsivi Italiani</title>
-     
+<title>Home</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- Plotly.js caricato una sola volta da CDN: le pagine dei singoli grafici
-     contengono solo dati (JSON), non la libreria -->
+<!-- Plotly.js caricato una sola volta da CDN -->
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
@@ -18,13 +17,6 @@ body {
     font-family: 'Inter', sans-serif;
     background: #f5f7fa;
     color: #1a1a1a;
-}
-
-header {
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
-    color: white;
-    padding: 2rem;
-    text-align: center;
 }
 
 .container {
@@ -107,7 +99,7 @@ input {
 }
 
 .brand img {
-    height:250px;
+    height: 250px;
     width: auto;
     margin-bottom: 8px;
     display: block;
@@ -161,17 +153,20 @@ input {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 </style>
 
 <script>
 function toggle(id) {
     const el = document.getElementById(id);
-    el.style.display = (el.style.display === "none") ? "table-row" : "none";
+    const arrow = document.getElementById('arrow-' + id);
+    const isHidden = el.style.display === "none";
+
+    el.style.display = isHidden ? "table-row" : "none";
+    if (arrow) {
+        arrow.textContent = isHidden ? "▲" : "↕";
+    }
 }
 
-// Carica un JSON con {data, layout} generato da fig.to_json() e lo disegna
-// nel div indicato. Usata per i grafici Plotly della pagina segnale.
 function loadPlot(divId, jsonPath) {
     fetch(jsonPath)
         .then(r => {
@@ -194,7 +189,7 @@ function loadPlot(divId, jsonPath) {
         <img src="logo_cosi.png" alt="COSÌ logo">
     </div>
 
-     <nav class="navbar">
+    <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="chi_siamo.html">Chi siamo</a>
         <div class="dropdown">
@@ -226,7 +221,7 @@ function loadPlot(divId, jsonPath) {
   </p>
 
   <p>
-    Vai alla sezione <a href ="search.html">Cerca nel database</a> per esplorare i dati.
+    Vai alla sezione <b>Cerca nel database</b> per esplorare i dati.
   </p>
 </div>
 

@@ -46,11 +46,11 @@ def base_html(title, body, base_path=""):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- Plotly.js caricato una sola volta da CDN: le pagine dei singoli grafici
-     contengono solo dati (JSON), non la libreria -->
+<!-- Plotly.js caricato una sola volta da CDN -->
 <script src="{PLOTLY_CDN}"></script>
 
 <style>
@@ -59,13 +59,6 @@ body {{
     font-family: 'Inter', sans-serif;
     background: #f5f7fa;
     color: #1a1a1a;
-}}
-
-header {{
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
-    color: white;
-    padding: 2rem;
-    text-align: center;
 }}
 
 .container {{
@@ -148,9 +141,9 @@ input {{
 }}
 
 .brand img {{
-    height:250px;
+    height: 250px;
     width: auto;
-    margin-bottom: 8;
+    margin-bottom: 8px;
     display: block;
 }}
 
@@ -160,7 +153,7 @@ input {{
     gap: 24px;
     padding: 6px 0 10px 0;
     background: white;
-    margin-top: 6;
+    margin-top: 6px;
 }}
 
 .navbar a {{
@@ -202,17 +195,20 @@ input {{
 .dropdown:hover .dropdown-content {{
     display: block;
 }}
-
 </style>
 
 <script>
 function toggle(id) {{
     const el = document.getElementById(id);
-    el.style.display = (el.style.display === "none") ? "table-row" : "none";
+    const arrow = document.getElementById('arrow-' + id);
+    const isHidden = el.style.display === "none";
+
+    el.style.display = isHidden ? "table-row" : "none";
+    if (arrow) {{
+        arrow.textContent = isHidden ? "▲" : "↕";
+    }}
 }}
 
-// Carica un JSON con {{data, layout}} generato da fig.to_json() e lo disegna
-// nel div indicato. Usata per i grafici Plotly della pagina segnale.
 function loadPlot(divId, jsonPath) {{
     fetch(jsonPath)
         .then(r => {{
@@ -237,18 +233,17 @@ function loadPlot(divId, jsonPath) {{
 
     <nav class="navbar">
         <a href="{base_path}index.html">Home</a>
-        <a href="#">Chi siamo</a>
+        <a href="{base_path}chi_siamo.html">Chi siamo</a>
         <div class="dropdown">
-            <a href="#">Progetto ▾</a>
+            <a href="{base_path}progetto.html">Progetto ▾</a>
             <div class="dropdown-content">
-                <a href="#">Obiettivi del progetto</a>
-                <a href="#">Architettura del database</a>
-                <a href="#">Schema di annotazione</a>
+                <a href="{base_path}architettura.html">Architettura del database</a>
+                <a href="{base_path}schema_annotazione.html">Schema di annotazione</a>
             </div>
         </div>
         <a href="{base_path}search.html">Cerca nel database</a>
-        <a href="#">Prodotti della ricerca</a>
-        <a href="#">Contatti</a>
+        <a href="{base_path}prodotti.html">Prodotti della ricerca</a>
+        <a href="{base_path}contatti.html">Contatti</a>
     </nav>
 
 </header>
@@ -343,7 +338,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     micro_flat = [(m, k, v) for m, vals in micro.items() for k, v in vals.items()]
     micro_sorted = sorted(micro_flat, key=lambda x: -x[2])
 
-    micro_html = "<table><tr><th>Macro</th><th>Micro</th><th>Freq</th></tr>"
+    micro_html = "<table><tr><th style='width:30px;'></th><th>Macro</th><th>Micro</th><th>Freq</th></tr>"
 
     for i, (m, k, v) in enumerate(micro_sorted[:10]):
 
@@ -372,19 +367,19 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
         micro_html += f"""
 <tr style="background:{color}; cursor:pointer;" onclick="toggle('ex{i}')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex{i}">↕</span></td>
     <td>{m}</td>
     <td>{k}</td>
     <td>{v}</td>
 </tr>
 
 <tr id="ex{i}" style="display:none; background:#fafafa">
-    <td colspan="3">{examples_html}</td>
+    <td colspan="4">{examples_html}</td>
 </tr>
 """
 
     micro_html += "</table>"
 
-    # Percorsi relativi ai JSON dei grafici (generati da generate_plots_data.py)
     type_json = f"../imgs/{name}/type.json"
     age_json = f"../imgs/{name}/age.json"
     region_json = f"../imgs/{name}/region_map.json"
@@ -446,7 +441,6 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 </script>
 """
 
-    # base_path per file dentro /segnali
     html = base_html(name, body, base_path="../")
     (SIGNAL_PAGES_DIR / f"{name}.html").write_text(html, encoding="utf-8")
 

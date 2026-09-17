@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mi_sa</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -16,13 +17,6 @@ body {
     font-family: 'Inter', sans-serif;
     background: #f5f7fa;
     color: #1a1a1a;
-}
-
-header {
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
-    color: white;
-    padding: 2rem;
-    text-align: center;
 }
 
 .container {
@@ -105,9 +99,9 @@ input {
 }
 
 .brand img {
-    height:250px;
+    height: 250px;
     width: auto;
-    margin-bottom: 8;
+    margin-bottom: 8px;
     display: block;
 }
 
@@ -117,7 +111,7 @@ input {
     gap: 24px;
     padding: 6px 0 10px 0;
     background: white;
-    margin-top: 6;
+    margin-top: 6px;
 }
 
 .navbar a {
@@ -159,13 +153,18 @@ input {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 </style>
 
 <script>
 function toggle(id) {
     const el = document.getElementById(id);
-    el.style.display = (el.style.display === "none") ? "table-row" : "none";
+    const arrow = document.getElementById('arrow-' + id);
+    const isHidden = el.style.display === "none";
+
+    el.style.display = isHidden ? "table-row" : "none";
+    if (arrow) {
+        arrow.textContent = isHidden ? "▲" : "↕";
+    }
 }
 
 function loadPlot(divId, jsonPath) {
@@ -194,7 +193,7 @@ function loadPlot(divId, jsonPath) {
         <a href="../index.html">Home</a>
         <a href="../chi_siamo.html">Chi siamo</a>
         <div class="dropdown">
-            <a href="#">Progetto ▾</a>
+            <a href="../progetto.html">Progetto ▾</a>
             <div class="dropdown-content">
                 <a href="../architettura.html">Architettura del database</a>
                 <a href="../schema_annotazione.html">Schema di annotazione</a>
@@ -239,15 +238,16 @@ function loadPlot(divId, jsonPath) {
 
 <div class="card">
     <h3>Microfunzioni</h3>
-    <table><tr><th>Macro</th><th>Micro</th><th>Freq</th></tr>
+    <table><tr><th style='width:30px;'></th><th>Macro</th><th>Micro</th><th>Freq</th></tr>
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex0')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex0">↕</span></td>
     <td>Cognitiva</td>
     <td>Modulazione del grado di confidenza</td>
     <td>57</td>
 </tr>
 
 <tr id="ex0" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -319,13 +319,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex1')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex1">↕</span></td>
     <td>Interazionale</td>
     <td>Strategia di cortesia</td>
     <td>36</td>
 </tr>
 
 <tr id="ex1" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -397,13 +398,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex2')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex2">↕</span></td>
     <td>Cognitiva</td>
     <td>Attenuazione</td>
     <td>19</td>
 </tr>
 
 <tr id="ex2" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -475,13 +477,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex3')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex3">↕</span></td>
     <td>Cognitiva</td>
     <td>Approssimazione</td>
     <td>6</td>
 </tr>
 
 <tr id="ex3" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -553,13 +556,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex4')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex4">↕</span></td>
     <td>Interazionale</td>
     <td>Richiesta di accordo/conferma</td>
     <td>3</td>
 </tr>
 
 <tr id="ex4" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -631,13 +635,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex5')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex5">↕</span></td>
     <td>Interazionale</td>
     <td>Conferma dell'attenzione</td>
     <td>3</td>
 </tr>
 
 <tr id="ex5" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -709,13 +714,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex6')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex6">↕</span></td>
     <td>Cognitiva</td>
     <td>Specificazione</td>
     <td>3</td>
 </tr>
 
 <tr id="ex6" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -787,13 +793,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex7')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex7">↕</span></td>
     <td>Interazionale</td>
     <td>Presa di turno</td>
     <td>2</td>
 </tr>
 
 <tr id="ex7" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -865,13 +872,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex8')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex8">↕</span></td>
     <td>Metatestuale</td>
     <td>Riformulazione</td>
     <td>2</td>
 </tr>
 
 <tr id="ex8" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
@@ -943,13 +951,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex9')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex9">↕</span></td>
     <td>Metatestuale</td>
     <td>Introduzione o ripresa del topic</td>
     <td>1</td>
 </tr>
 
 <tr id="ex9" style="display:none; background:#fafafa">
-    <td colspan="3">
+    <td colspan="4">
                 <div class="example">
                     <table>
         <tr>
