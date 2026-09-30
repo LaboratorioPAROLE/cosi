@@ -1,0 +1,21 @@
+nomeSD: dunque
+file: dunque.tsv
+nOccTot: 337
+fascia_frequenza: bassa
+varianti: ~
+
+source:
+  lemma: dunque
+  pos: congiunzione
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/dunque/type.html
+  age: ../imgs/dunque/age.html
+  region: ../imgs/dunque/region_map.html

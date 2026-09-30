@@ -1,0 +1,21 @@
+nomeSD: direi
+file: direi.tsv
+nOccTot: 344
+fascia_frequenza: bassa
+varianti: ~
+
+source:
+  lemma: dire
+  pos: verbo
+  form: PRS.COND.1SG
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/direi/type.html
+  age: ../imgs/direi/age.html
+  region: ../imgs/direi/region_map.html

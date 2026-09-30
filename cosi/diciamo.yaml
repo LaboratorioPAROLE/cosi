@@ -1,0 +1,21 @@
+nomeSD: diciamo
+file: diciamo.tsv
+nOccTot: 3406
+fascia_frequenza: alta
+varianti: ~
+
+source:
+  lemma: dire
+  pos: verbo
+  form: PRS.IND.1PL
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/diciamo/type.html
+  age: ../imgs/diciamo/age.html
+  region: ../imgs/diciamo/region_map.html

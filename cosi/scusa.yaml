@@ -1,0 +1,17 @@
+nomeSD: scusa
+file: scusa.tsv
+nOccTot: 838
+fascia_frequenza: medio-bassa
+varianti: scusami, scusi
+
+source:
+  lemma: scusare
+  pos: verbo
+  form: PRS.IMP.2SG
+
+descrizione_macro: ~
+descrizione_micro: ~
+grafici:
+  type: ../imgs/scusa/type.html
+  age: ../imgs/scusa/age.html
+  region: ../imgs/scusa/region_map.html

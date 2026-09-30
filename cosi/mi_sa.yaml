@@ -1,13 +1,13 @@
 nomeSD: mi sa
 file: mi_sa.tsv
 nOccTot: 314
-fascia_frequenza: medio-bassa
+fascia_frequenza: bassa
 varianti: me sa
 
 source:
-  lemma: sapere
+  lemma: mi + sapere
   pos: pronome + verbo
-  form: PRS.IND.3SG
+  form: 1SG.DAT + PRS.IND.3SG
 
 descrizione_macro: |
   

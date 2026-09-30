@@ -1,0 +1,21 @@
+nomeSD: comunque
+file: comunque.tsv
+nOccTot: 4991
+fascia_frequenza: alta
+varianti: ~
+
+source:
+  lemma: comunque
+  pos: avverbio, congiunzione
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/comunque/type.html
+  age: ../imgs/comunque/age.html
+  region: ../imgs/comunque/region_map.html

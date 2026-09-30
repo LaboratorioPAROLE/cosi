@@ -1,0 +1,21 @@
+nomeSD: immagino
+file: immagino.tsv
+nOccTot: 353
+fascia_frequenza: bassa
+varianti: ~
+
+source:
+  lemma: immaginare
+  pos: verbo
+  form: PRS.IND.1SG
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/immagino/type.html
+  age: ../imgs/immagino/age.html
+  region: ../imgs/immagino/region_map.html

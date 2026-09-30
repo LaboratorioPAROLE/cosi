@@ -1,0 +1,21 @@
+nomeSD: quindi
+file: quindi.tsv
+nOccTot: 12146
+fascia_frequenza: alta
+varianti: ~
+
+source:
+  lemma: quindi
+  pos: congiunzione
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/quindi/type.html
+  age: ../imgs/quindi/age.html
+  region: ../imgs/quindi/region_map.html
