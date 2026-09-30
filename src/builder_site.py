@@ -75,6 +75,19 @@ body {{
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }}
 
+/* Titoli nelle card: coerenti con le pagine statiche */
+.card h2 {{
+    margin-top: 0;
+    color: #1e3c72;
+}}
+
+.card h3 {{
+    margin-top: 0;
+    color: #1e3c72;
+    border-bottom: 2px solid #eef1f6;
+    padding-bottom: 0.6rem;
+}}
+
 table {{
     width: 100%;
     border-collapse: collapse;
@@ -92,6 +105,7 @@ tr:hover {{
 
 input {{
     width: 100%;
+    box-sizing: border-box;
     padding: 0.9rem;
     border-radius: 12px;
     border: 1px solid #ddd;
@@ -132,19 +146,64 @@ input {{
     border-bottom: 1px solid #e5e5e5;
 }}
 
+/* Riga logo: [UNISA + DipSUM] | COSÌ | [PAROLE] */
 .brand {{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.6rem 1rem 0 1rem;
-    text-align: center;
+    --unisa-h: 100px;
+    --dipsum-w: 130px;
+    --stack-gap: 5px;
+    --side-gap: clamp(16px, 6vw, 100px);   /* distanza dal logo COSÌ (non usata con allineamento centrato) */
+    --side-lift: 30px;                     /* quanto salgono dal fondo */
+    --parole-scale: 1.08;                  /* 1 = uguale a UNISA+DipSUM */
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    padding: 0.6rem 1.5rem 0 1.5rem;
 }}
 
-.brand img {{
+.brand img {{ display: block; }}
+
+.brand .logo-main {{
     height: 250px;
     width: auto;
     margin-bottom: 8px;
-    display: block;
+    grid-column: 2;
+}}
+
+.brand .side {{ margin-bottom: var(--side-lift); }}
+
+.brand .side-left {{
+    grid-column: 1;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--stack-gap);
+}}
+
+.brand .side-right {{
+    grid-column: 3;
+    justify-self: center;
+}}
+
+.brand .logo-unisa  {{ height: var(--unisa-h); width: auto; }}
+.brand .logo-dipsum {{ width: var(--dipsum-w); height: auto; }}
+
+/* PAROLE = (UNISA + spazio + DipSUM) * scala. 3.556 = proporzione 2560:720 di DipSUM */
+.brand .logo-parole {{
+    height: calc((var(--unisa-h) + var(--stack-gap) + var(--dipsum-w) / 3.556) * var(--parole-scale));
+    width: auto;
+}}
+
+@media (max-width: 700px) {{
+    .brand {{
+        --unisa-h: 55px;
+        --dipsum-w: 72px;
+        --stack-gap: 4px;
+        --side-lift: 12px;
+        padding: 0.6rem 0.8rem 0 0.8rem;
+    }}
+    .brand .logo-main {{ height: 140px; }}
 }}
 
 .navbar {{
@@ -195,6 +254,61 @@ input {{
 .dropdown:hover .dropdown-content {{
     display: block;
 }}
+
+/* Ricerca avanzata */
+.adv-toggle {{
+    background: none;
+    border: none;
+    padding: 0;
+    color: #095775;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+}}
+
+.adv-toggle:hover {{
+    color: #b51700;
+}}
+
+.adv-panel {{
+    display: none;
+    margin-top: 1rem;
+}}
+
+.adv-panel label {{
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 4px;
+}}
+
+.adv-panel input {{
+    margin-bottom: 0;
+}}
+
+/* Intestazioni ordinabili */
+th.sortable {{
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}}
+
+th.sortable:hover {{
+    color: #b51700;
+}}
+
+th.sortable .sort-icon {{
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.8rem;
+    color: #999;
+}}
+
+th.sortable[aria-sort="ascending"] .sort-icon,
+th.sortable[aria-sort="descending"] .sort-icon {{
+    color: #2a5298;
+}}
 </style>
 
 <script>
@@ -224,11 +338,26 @@ function loadPlot(divId, jsonPath) {{
         }});
 }}
 </script>
+</head>
+<body>
 
 <header class="header">
 
     <div class="brand">
-        <img src="{base_path}logo_cosi.png" alt="COSÌ logo">
+        <div class="side side-left">
+            <a href="https://www.unisa.it" target="_blank" rel="noopener">
+                <img class="logo-unisa" src="{base_path}logo_unisa.png" alt="Università di Salerno">
+            </a>
+            <a href="https://www.dipsum.unisa.it" target="_blank" rel="noopener">
+                <img class="logo-dipsum" src="{base_path}logo_dipsum.png" alt="DipSUM - Dipartimento di Studi Umanistici">
+            </a>
+        </div>
+
+        <img class="logo-main" src="{base_path}logo_cosi.png" alt="COSÌ logo">
+
+        <a class="side side-right" href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
+            <img class="logo-parole" src="{base_path}logo_parole.png" alt="P.A.R.O.L.E.">
+        </a>
     </div>
 
     <nav class="navbar">
@@ -452,20 +581,28 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     })
 
 # =========================
-# INDEX HTML
+# INDEX HTML (pagina di ricerca)
+# NB: stringa raw, NON f-string -> le graffe restano singole
 # =========================
-index_body = """
+index_body = r"""
 <div class="card">
   <h2>Ricerca per segnale discorsivo</h2>
-  <input id="search" placeholder="Cerca segnale...">
+  <input id="search" type="text" placeholder="Cerca segnale...">
+
+  <button type="button" class="adv-toggle" id="advToggle" aria-expanded="false">+ Ricerca avanzata</button>
+
+  <div class="adv-panel" id="advPanel">
+    <label for="searchMicro">Microfunzione</label>
+    <input id="searchMicro" type="text" placeholder="Es. riformulazione, presa di turno...">
+  </div>
 </div>
 
 <div class="card">
 <table>
 <thead>
 <tr>
-<th>Segnale</th>
-<th>Fascia di frequenza</th>
+<th class="sortable" data-key="lemma" aria-sort="none">Segnale<span class="sort-icon">↕</span></th>
+<th class="sortable" data-key="frequenza" aria-sort="none">Fascia di frequenza<span class="sort-icon">↕</span></th>
 <th>Microfunzioni</th>
 </tr>
 </thead>
@@ -478,26 +615,100 @@ index_body = """
 <script>
 const tableBody = document.querySelector("tbody");
 const input = document.getElementById("search");
+const microInput = document.getElementById("searchMicro");
+const advToggle = document.getElementById("advToggle");
+const advPanel = document.getElementById("advPanel");
+const headers = document.querySelectorAll("th.sortable");
 
-function render(filter="") {
-    tableBody.innerHTML = "";
+// Ordine delle fasce di frequenza (dalla più alta alla più bassa)
+const FREQ_ORDER = ["alta", "medio-alta", "medio-bassa", "bassa"];
+const collator = new Intl.Collator("it", { sensitivity: "base" });
 
-    DATA
-    .filter(x =>
-        x.lemma.toLowerCase().includes(filter.toLowerCase()) ||
-        x.micro.toLowerCase().includes(filter.toLowerCase())
-    )
-    .forEach(x => {
-        tableBody.innerHTML += `
-        <tr onclick="window.location='${x.link}'" style="cursor:pointer">
-            <td><b>${x.lemma}</b></td>
-            <td><span class="badge">${x.frequenza}</span></td>
-            <td>${x.micro || "-"}</td>
-        </tr>`;
+let sortKey = null;   // "lemma" | "frequenza" | null (ordine originale)
+let sortDir = "asc";  // "asc" | "desc"
+
+// minuscolo + senza accenti, per una ricerca più tollerante
+function norm(s) {
+    return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function esc(s) {
+    return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[c]);
+}
+
+function freqRank(f) {
+    const i = FREQ_ORDER.indexOf(String(f || "").trim().toLowerCase());
+    return i === -1 ? FREQ_ORDER.length : i; // valori sconosciuti in fondo
+}
+
+function compare(a, b) {
+    let r;
+    if (sortKey === "frequenza") {
+        r = freqRank(a.frequenza) - freqRank(b.frequenza);
+        if (r === 0) r = collator.compare(a.lemma, b.lemma); // a parità, A-Z
+    } else {
+        r = collator.compare(a.lemma, b.lemma);
+    }
+    return sortDir === "asc" ? r : -r;
+}
+
+function updateHeaders() {
+    headers.forEach(th => {
+        const active = th.dataset.key === sortKey;
+        th.setAttribute("aria-sort", active ? (sortDir === "asc" ? "ascending" : "descending") : "none");
+        th.querySelector(".sort-icon").textContent = active ? (sortDir === "asc" ? "▲" : "▼") : "↕";
     });
 }
 
-input.addEventListener("input", e => render(e.target.value));
+function render() {
+    const qLemma = norm(input.value);
+    const qMicro = norm(microInput.value);
+
+    // il segnale si cerca sempre; la microfunzione solo se compilata (AND)
+    let rows = DATA.filter(x =>
+        norm(x.lemma).includes(qLemma) &&
+        (!qMicro || norm(x.micro).includes(qMicro))
+    );
+
+    if (sortKey) rows = rows.slice().sort(compare);
+
+    tableBody.innerHTML = rows.map(x => `
+        <tr onclick="window.location='${esc(x.link)}'" style="cursor:pointer">
+            <td><b>${esc(x.lemma)}</b></td>
+            <td><span class="badge">${esc(x.frequenza)}</span></td>
+            <td>${esc(x.micro) || "-"}</td>
+        </tr>`).join("");
+}
+
+headers.forEach(th => {
+    th.addEventListener("click", () => {
+        const key = th.dataset.key;
+        if (sortKey === key) {
+            sortDir = sortDir === "asc" ? "desc" : "asc";
+        } else {
+            sortKey = key;
+            sortDir = "asc";
+        }
+        updateHeaders();
+        render();
+    });
+});
+
+advToggle.addEventListener("click", () => {
+    const open = advPanel.style.display !== "block";
+    advPanel.style.display = open ? "block" : "none";
+    advToggle.textContent = open ? "− Ricerca avanzata" : "+ Ricerca avanzata";
+    advToggle.setAttribute("aria-expanded", open);
+    if (!open) {          // richiudendo, il filtro microfunzione si azzera
+        microInput.value = "";
+        render();
+    }
+});
+
+input.addEventListener("input", render);
+microInput.addEventListener("input", render);
 render();
 </script>
 """
@@ -525,7 +736,10 @@ home_body = """
     encoding="utf-8"
 )
 
-(DOCS_DIR / "search.html").write_text(base_html("Home", index_body, base_path=""), encoding="utf-8")
+(DOCS_DIR / "search.html").write_text(
+    base_html("Cerca nel database", index_body, base_path=""),
+    encoding="utf-8"
+)
 
 (DOCS_DIR / "data.js").write_text(
     "const DATA = " + json.dumps(search_index, ensure_ascii=False, indent=2),

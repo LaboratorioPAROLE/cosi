@@ -35,18 +35,60 @@ body {
 }
 
 .brand {
+    --unisa-h: 100px;
+    --dipsum-w: 130px;
+    --stack-gap: 5px;
+    --side-lift: 30px;
+    --parole-scale: 1.08;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    padding: 0.6rem 1.5rem 0 1.5rem;
+}
+
+.brand img { display: block; }
+
+.brand .logo-main {
+    height: 250px;
+    width: auto;
+    margin-bottom: 8px;
+    grid-column: 2;
+}
+
+.brand .side { margin-bottom: var(--side-lift); }
+
+.brand .side-left {
+    grid-column: 1;
+    justify-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.6rem 1rem 0 1rem;
-    text-align: center;
+    gap: var(--stack-gap);
 }
 
-.brand img {
-    height:250px;
+.brand .side-right {
+    grid-column: 3;
+    justify-self: center;
+}
+
+.brand .logo-unisa  { height: var(--unisa-h); width: auto; }
+.brand .logo-dipsum { width: var(--dipsum-w); height: auto; }
+
+.brand .logo-parole {
+    height: calc((var(--unisa-h) + var(--stack-gap) + var(--dipsum-w) / 3.556) * var(--parole-scale));
     width: auto;
-    margin-bottom: 8;
-    display: block;
+}
+
+@media (max-width: 700px) {
+    .brand {
+        --unisa-h: 55px;
+        --dipsum-w: 72px;
+        --stack-gap: 4px;
+        --side-lift: 12px;
+        padding: 0.6rem 0.8rem 0 0.8rem;
+    }
+    .brand .logo-main { height: 140px; }
 }
 
 .navbar {
@@ -168,8 +210,21 @@ body {
 <header class="header">
 
     <div class="brand">
-        <img src="logo_cosi.png" alt="COSÌ logo">
+    <div class="side side-left">
+        <a href="https://www.unisa.it" target="_blank" rel="noopener">
+            <img class="logo-unisa" src="logo_unisa.png" alt="Università di Salerno">
+        </a>
+        <a href="https://www.dipsum.unisa.it" target="_blank" rel="noopener">
+            <img class="logo-dipsum" src="logo_dipsum.png" alt="DipSUM - Dipartimento di Studi Umanistici">
+        </a>
     </div>
+
+    <img class="logo-main" src="logo_cosi.png" alt="COSÌ logo">
+
+    <a class="side side-right" href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
+        <img class="logo-parole" src="logo_parole.png" alt="P.A.R.O.L.E.">
+    </a>
+</div>
 
      <nav class="navbar">
         <a href="index.html">Home</a>
