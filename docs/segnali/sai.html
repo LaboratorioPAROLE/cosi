@@ -33,7 +33,7 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* Titoli nelle card: coerenti con le pagine statiche */
+/* Titoli nelle card */
 .card h2 {
     margin-top: 0;
     color: #1e3c72;
@@ -117,34 +117,119 @@ input {
     height: 400px;
 }
 
-.example {
-    padding: 10px 0;
-    border-bottom: 2px solid #ddd;
-    font-size: 0.95rem;
+/* =========================================
+   STILE ESEMPI (SCHEDA / KIPARLA)
+   ========================================= */
+.example-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    margin: 10px 0 14px 0;
+    padding: 12px 16px;
 }
 
-.example:last-child {
+.example-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* Nome corpus + Conv_ID in testo normale con virgola */
+.conv-id {
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.92rem;
+}
+
+.audio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #095775;
+    color: #ffffff !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 16px;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease;
+}
+
+.audio-btn:hover {
+    background-color: #b51700;
+}
+
+.transcript-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transcript-table tr {
+    border-bottom: 1px solid #f8fafc;
+}
+
+.transcript-table tr:last-child {
     border-bottom: none;
 }
 
-.audio {
-    margin-left: 8px;
-    text-decoration: none;
+/* Evidenziazione del turno target: azzurrino leggero e sobrio */
+.transcript-table tr.focus {
+    background-color: #f0f7ff !important;
+    border-left: 3px solid #3182ce;
 }
 
+.speaker-col {
+    width: 80px;
+    min-width: 70px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    vertical-align: top;
+    padding: 6px 10px 6px 8px;
+    font-family: SFMono-Regular, Consolas, monospace;
+}
+
+.text-col {
+    color: #2d3748;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    vertical-align: top;
+    padding: 6px 8px;
+}
+
+/* Parola target in rosso pulito: NO box, NO sfondi, NO bordi */
+.text-col b {
+    font-weight: 700;
+    color: #c53030;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.example-card.error {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    border-color: #fed7d7;
+}
+
+/* =========================================
+   HEADER E NAVBAR
+   ========================================= */
 .header {
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
 }
 
-/* Riga logo: [UNISA + DipSUM] | COSÌ | [PAROLE] */
 .brand {
     --unisa-h: 100px;
     --dipsum-w: 130px;
     --stack-gap: 5px;
-    --side-gap: clamp(16px, 6vw, 100px);   /* distanza dal logo COSÌ (non usata con allineamento centrato) */
-    --side-lift: 30px;                     /* quanto salgono dal fondo */
-    --parole-scale: 1.08;                  /* 1 = uguale a UNISA+DipSUM */
+    --side-gap: clamp(16px, 6vw, 100px);
+    --side-lift: 30px;
+    --parole-scale: 1.08;
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -180,7 +265,6 @@ input {
 .brand .logo-unisa  { height: var(--unisa-h); width: auto; }
 .brand .logo-dipsum { width: var(--dipsum-w); height: auto; }
 
-/* PAROLE = (UNISA + spazio + DipSUM) * scala. 3.556 = proporzione 2560:720 di DipSUM */
 .brand .logo-parole {
     height: calc((var(--unisa-h) + var(--stack-gap) + var(--dipsum-w) / 3.556) * var(--parole-scale));
     width: auto;
@@ -405,13 +489,13 @@ function loadPlot(divId, jsonPath) {
 
 <div class="card">
     <h3>Macrofunzioni</h3>
-    <table><tr><th>Macro</th><th>Freq</th></tr><tr style="background:#ffe0cc"><td>Interazionale</td><td>226</td></tr><tr style="background:#d4f5d4"><td>Metatestuale</td><td>116</td></tr><tr style="background:#d6eaff"><td>Cognitiva</td><td>31</td></tr></table>
+    <table><tr><th>Macrofunzione</th><th>Frequenza</th></tr><tr style="background:#ffe0cc"><td>Interazionale</td><td>226</td></tr><tr style="background:#d4f5d4"><td>Metatestuale</td><td>116</td></tr><tr style="background:#d6eaff"><td>Cognitiva</td><td>31</td></tr></table>
     <p></p>
 </div>
 
 <div class="card">
     <h3>Microfunzioni</h3>
-    <table><tr><th style='width:30px;'></th><th>Macro</th><th>Micro</th><th>Freq</th></tr>
+    <table><tr><th style='width:30px;'></th><th>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex0')">
     <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex0">↕</span></td>
     <td>Interazionale</td>
@@ -420,75 +504,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex0" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>no</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>troppo chiuso</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>c' era <b>sai</b> c' è sempre una cricca che comanda in tutte le</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>eh che si fa un po' gli affari suoi eh</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>in tutte le comunità chiuse</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaTO, PTB009)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2027669&end=2031054" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2027669&end=2031054" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTB009</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2027669&end=2031054" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>va bene io ti ringrazio tantissimo per il tempo</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI035:</td>
+            <td class="text-col">no</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>grazie mille davvero</td>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">troppo chiuso</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TOI035:</td>
+            <td class="text-col">c' era <b>sai</b> c' è sempre una cricca che comanda in tutte le</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>a me è piaciuto raccontare <b>sai</b> ai vecchi piace raccontare la propria vita</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI035:</td>
+            <td class="text-col">eh che si fa un po' gli affari suoi eh</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>ah perfetto a me anche quindi siamo a posto</td>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">in tutte le comunità chiuse</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>((ride))</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaTO, PTB009)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2799369&end=2803502" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2799369&end=2803502" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTB009</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2799369&end=2803502" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOR001:</td>
+            <td class="text-col">va bene io ti ringrazio tantissimo per il tempo</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOR001:</td>
+            <td class="text-col">grazie mille davvero</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">TOI035:</td>
+            <td class="text-col">a me è piaciuto raccontare <b>sai</b> ai vecchi piace raccontare la propria vita</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOR001:</td>
+            <td class="text-col">ah perfetto a me anche quindi siamo a posto</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOI035:</td>
+            <td class="text-col">((ride))</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex1')">
@@ -499,75 +587,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex1" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>mhmh</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>e invece come persone come si è trovato con gli abitanti di borgo panigale</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>ma <b>sai</b> io poi abitavo mh a casteldebole esattamente che era praticamente un paesino di borgo panigale e faceva</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>mhmh</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>ah sì</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=51330&end=59006" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=51330&end=59006" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=51330&end=59006" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>sì sì</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">mhmh</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>s sono un po' dovuti adeguare</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">e invece come persone come si è trovato con gli abitanti di borgo panigale</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">ma <b>sai</b> io poi abitavo mh a casteldebole esattamente che era praticamente un paesino di borgo panigale e faceva</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>parte che <b>sai</b> [PAUSE] il turismo frequenta più ristoranti turistici per cui</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">mhmh</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>mhmh</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">ah sì</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>le osterie di bologna sono ancora un po'</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2098338&end=2103607" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2098338&end=2103607" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2098338&end=2103607" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">sì sì</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR037:</td>
+            <td class="text-col">s sono un po' dovuti adeguare</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">parte che <b>sai</b> [PAUSE] il turismo frequenta più ristoranti turistici per cui</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR037:</td>
+            <td class="text-col">mhmh</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">le osterie di bologna sono ancora un po'</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex2')">
@@ -578,75 +670,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex2" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">TOI071</td>
-            <td>se senti</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI071</td>
-            <td>devi andare fuori torino [PAUSE] per esem~ c' è il mio consuocero che ogni tanto parla</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI071</td>
-            <td>e qualcu~ uno lo senti parlare ma poi <b>sai</b></td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI071</td>
-            <td>non eh</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI071</td>
-            <td>se poi parlano stretto non lo capisco proprio</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaTO, PTB019)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB019&begin=2417887&end=2421585" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB019&begin=2417887&end=2421585" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTB019</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB019&begin=2417887&end=2421585" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>e il tuo locale preferito dove mangiare a bologna qual è</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI071:</td>
+            <td class="text-col">se senti</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>quello che più [PAUSE] mh</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI071:</td>
+            <td class="text-col">devi andare fuori torino [PAUSE] per esem~ c' è il mio consuocero che ogni tanto parla</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TOI071:</td>
+            <td class="text-col">e qualcu~ uno lo senti parlare ma poi <b>sai</b></td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>ma <b>sai</b> io</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI071:</td>
+            <td class="text-col">non eh</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>preferisci</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI071:</td>
+            <td class="text-col">se poi parlano stretto non lo capisco proprio</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>una volta mangiavo volentieri da vito perché poi sai lì si si giocava a carte poi c' era sempre musica sai</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1984767&end=1986558" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1984767&end=1986558" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1984767&end=1986558" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">e il tuo locale preferito dove mangiare a bologna qual è</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">quello che più [PAUSE] mh</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">ma <b>sai</b> io</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">preferisci</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">una volta mangiavo volentieri da vito perché poi sai lì si si giocava a carte poi c' era sempre musica sai</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex3')">
@@ -657,75 +753,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex3" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>mhmh</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>presepe</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>l' andavamo a vedere in chiesa andavam~ lo facciamo anche noi lo facevamo l' abbiam fatto anche il presepe <b>sai</b> con muschio queste cose qui c' era un po' di partecipazione però</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>sì</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>presepe mi ricordo che l' andavamo sempre a vedere in chiesa</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1275371&end=1283413" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1275371&end=1283413" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1275371&end=1283413" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">TOI011</td>
-            <td>tra l' altro dove sono io se ne trovano</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">mhmh</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>sì</td>
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">presepe</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">l' andavamo a vedere in chiesa andavam~ lo facciamo anche noi lo facevamo l' abbiam fatto anche il presepe <b>sai</b> con muschio queste cose qui c' era un po' di partecipazione però</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">TOI011</td>
-            <td>abbastanza quindi cioè non c' è neanche il problema <b>sai</b> che sei in centro le s~ [PAUSE] le spostano tutti</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">sì</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>mhmh mhmh eh sì</td>
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">presepe mi ricordo che l' andavamo sempre a vedere in chiesa</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI011</td>
-            <td>e quindi per me quella roba lì x è stata abbastanza una svolta sì sì sì</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaTO, PTD019)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD019&begin=2768330&end=2773083" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD019&begin=2768330&end=2773083" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTD019</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD019&begin=2768330&end=2773083" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI011:</td>
+            <td class="text-col">tra l' altro dove sono io se ne trovano</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">sì</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TOI011:</td>
+            <td class="text-col">abbastanza quindi cioè non c' è neanche il problema <b>sai</b> che sei in centro le s~ [PAUSE] le spostano tutti</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">mhmh mhmh eh sì</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI011:</td>
+            <td class="text-col">e quindi per me quella roba lì x è stata abbastanza una svolta sì sì sì</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex4')">
@@ -736,75 +836,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex4" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>anche del fatto che comunque n nel~ negli ultimi mesi è saltato fuori che comunque</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>la garisenda è a rischio crollo</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>eh sì beh vabbè sai sono molto attivi una volta <b>sai</b> pro~ eh le torri erano uno simbolo</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>((ride)) sì</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>di potenza delle famiglie per cui tutti tendevano a fare la torre a bologna dove c' eran centinaia di torri</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2134304&end=2140474" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2134304&end=2140474" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2134304&end=2140474" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>no beh</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">anche del fatto che comunque n nel~ negli ultimi mesi è saltato fuori che comunque</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>oddio</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">la garisenda è a rischio crollo</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">eh sì beh vabbè sai sono molto attivi una volta <b>sai</b> pro~ eh le torri erano uno simbolo</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td><b>sai</b> eh mh è chiaro che per noi</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR037:</td>
+            <td class="text-col">((ride)) sì</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>le difficoltà</td>
+            <td class="speaker-col" style="color: #2f855a;">BOI119:</td>
+            <td class="text-col">di potenza delle famiglie per cui tutti tendevano a fare la torre a bologna dove c' eran centinaia di torri</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>erano erano maggiori però poi è anche vero che</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBC015)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=162570&end=166290" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=162570&end=166290" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBC015</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=162570&end=166290" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">no beh</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">oddio</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col"><b>sai</b> eh mh è chiaro che per noi</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">le difficoltà</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">erano erano maggiori però poi è anche vero che</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex5')">
@@ -815,75 +919,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex5" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">BOR026</td>
-            <td>((ride))</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI087</td>
-            <td>pertanto non è che io a san luca ci fossi andato per altri motivi se non quelli ecco</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR026</td>
-            <td>no certo certo sì anch' io mi riferivo al panorama <b>sai</b> al ((ride))</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI088</td>
-            <td>io al panorama e poi io ho anche mangiato su a san luca</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR026</td>
-            <td>sì</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB023)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB023&begin=1536540&end=1541140" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB023&begin=1536540&end=1541140" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB023</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB023&begin=1536540&end=1541140" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>ma sai io</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR026:</td>
+            <td class="text-col">((ride))</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>preferisci</td>
+            <td class="speaker-col" style="color: #2f855a;">BOI087:</td>
+            <td class="text-col">pertanto non è che io a san luca ci fossi andato per altri motivi se non quelli ecco</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOR026:</td>
+            <td class="text-col">no certo certo sì anch' io mi riferivo al panorama <b>sai</b> al ((ride))</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>una volta mangiavo volentieri da vito perché poi sai lì si si giocava a carte poi c' era sempre musica <b>sai</b></td>
+            <td class="speaker-col" style="color: #c53030;">BOI088:</td>
+            <td class="text-col">io al panorama e poi io ho anche mangiato su a san luca</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>andavi lì a mezzanotte perché io</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR026:</td>
+            <td class="text-col">sì</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>ho lavorato sai che facevo il turno al radio taxi di sera delle volte prendevo su le telefona~</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1987756&end=1993594" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1987756&end=1993594" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=1987756&end=1993594" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">ma sai io</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR037:</td>
+            <td class="text-col">preferisci</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">una volta mangiavo volentieri da vito perché poi sai lì si si giocava a carte poi c' era sempre musica <b>sai</b></td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">andavi lì a mezzanotte perché io</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">ho lavorato sai che facevo il turno al radio taxi di sera delle volte prendevo su le telefona~</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex6')">
@@ -894,75 +1002,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex6" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>no</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>troppo chiuso</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>c' era <b>sai</b> c' è sempre una cricca che comanda in tutte le</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOI035</td>
-            <td>eh che si fa un po' gli affari suoi eh</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>in tutte le comunità chiuse</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaTO, PTB009)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2027669&end=2031054" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2027669&end=2031054" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTB009</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTB009&begin=2027669&end=2031054" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">TOI010</td>
-            <td>cioè non [PAUSE] anche perché comunque</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI035:</td>
+            <td class="text-col">no</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">TOI010</td>
-            <td>da da coppia</td>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">troppo chiuso</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TOI035:</td>
+            <td class="text-col">c' era <b>sai</b> c' è sempre una cricca che comanda in tutte le</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">TOI010</td>
-            <td><b>sai</b> da giovane qualcosa magari [PAUSE] lo trovavi no cioè da coppia comunque cosa fai se non s~ se non è il solito museo quelle robe lì</td>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI035:</td>
+            <td class="text-col">eh che si fa un po' gli affari suoi eh</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>mhmh mh</td>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">in tutte le comunità chiuse</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">TOR001</td>
-            <td>mhm</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaTO, PTD019)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD019&begin=2919161&end=2926605" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD019&begin=2919161&end=2926605" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTD019</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD019&begin=2919161&end=2926605" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI010:</td>
+            <td class="text-col">cioè non [PAUSE] anche perché comunque</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI010:</td>
+            <td class="text-col">da da coppia</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TOI010:</td>
+            <td class="text-col"><b>sai</b> da giovane qualcosa magari [PAUSE] lo trovavi no cioè da coppia comunque cosa fai se non s~ se non è il solito museo quelle robe lì</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">mhmh mh</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOR001:</td>
+            <td class="text-col">mhm</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex7')">
@@ -973,75 +1085,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex7" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">BOR010</td>
-            <td>cioè per provare x a aiutare un po'</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR010</td>
-            <td>le persone non lo so ((ride))</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td><b>sai</b> io x allora io intanto son venuto qui</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>che avevo sedici anni per studiare</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>eh perché all' epoca noi eh eravamo tutti qua dentro eravamo duecentodieci</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBC015)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=1358790&end=1361465" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=1358790&end=1361465" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBC015</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=1358790&end=1361465" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">BOR036</td>
-            <td>vabbè già che stia~ già che è venuto in fuori</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR010:</td>
+            <td class="text-col">cioè per provare x a aiutare un po'</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOI098</td>
-            <td>sì sì</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR010:</td>
+            <td class="text-col">le persone non lo so ((ride))</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOI037:</td>
+            <td class="text-col"><b>sai</b> io x allora io intanto son venuto qui</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">BOI097</td>
-            <td><b>sai</b> uno slang bolognese che magari dà a me anche anche</td>
+            <td class="speaker-col" style="color: #2f855a;">BOI037:</td>
+            <td class="text-col">che avevo sedici anni per studiare</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOI097</td>
-            <td>con con altri fuori da da bologna</td>
+            <td class="speaker-col" style="color: #2f855a;">BOI037:</td>
+            <td class="text-col">eh perché all' epoca noi eh eravamo tutti qua dentro eravamo duecentodieci</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI097</td>
-            <td>lo dico così come se fosse normale ma invece magari non capiscono capi'</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB027)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB027&begin=2231562&end=2236167" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB027&begin=2231562&end=2236167" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB027</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB027&begin=2231562&end=2236167" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR036:</td>
+            <td class="text-col">vabbè già che stia~ già che è venuto in fuori</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOI098:</td>
+            <td class="text-col">sì sì</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #c53030;">BOI097:</td>
+            <td class="text-col"><b>sai</b> uno slang bolognese che magari dà a me anche anche</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">BOI097:</td>
+            <td class="text-col">con con altri fuori da da bologna</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">BOI097:</td>
+            <td class="text-col">lo dico così come se fosse normale ma invece magari non capiscono capi'</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex8')">
@@ -1052,75 +1168,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex8" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>o del centro o di fuori per cui abbiamo fatto tante delle volte mangiavamo dove andavano a mangiare gli artisti che facevano teatro al duse</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOR037</td>
-            <td>mh sì</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>stavamo insieme alla notte loro <b>sai</b> ci siam divertiti un sacco cantavamo insieme</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>perché questa era la vita che facevamo a bologna</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI119</td>
-            <td>di notte eh era bellissima ripeto per cui tagliatelle tutte le notti</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBB033)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2016398&end=2021256" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2016398&end=2021256" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB033</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB033&begin=2016398&end=2021256" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>eh i portici che al tempo non erano invasi dai tavolini piuttosto che dai monopattini piuttosto che dalle bici</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">o del centro o di fuori per cui abbiamo fatto tante delle volte mangiavamo dove andavano a mangiare gli artisti che facevano teatro al duse</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOR010</td>
-            <td>eh vabbè</td>
+            <td class="speaker-col" style="color: #2f855a;">BOR037:</td>
+            <td class="text-col">mh sì</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">stavamo insieme alla notte loro <b>sai</b> ci siam divertiti un sacco cantavamo insieme</td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>eh e quindi <b>sai</b></td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">perché questa era la vita che facevamo a bologna</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>la la la città era estremamente vivibile</td>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI119:</td>
+            <td class="text-col">di notte eh era bellissima ripeto per cui tagliatelle tutte le notti</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">BOI037</td>
-            <td>ecco per cui io son rimasto qui</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(ParlaBO, PBC015)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=92945&end=94152" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=92945&end=94152" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBC015</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC015&begin=92945&end=94152" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">eh i portici che al tempo non erano invasi dai tavolini piuttosto che dai monopattini piuttosto che dalle bici</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR010:</td>
+            <td class="text-col">eh vabbè</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">eh e quindi <b>sai</b></td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">la la la città era estremamente vivibile</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI037:</td>
+            <td class="text-col">ecco per cui io son rimasto qui</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex9')">
@@ -1131,75 +1251,79 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr id="ex9" style="display:none; background:#fafafa">
-    <td colspan="4">
-                <div class="example">
-                    <table>
-        <tr>
-            <td style="width:80px; color:#666">PKP037</td>
-            <td>davvero</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">PKP033</td>
-            <td>è da prima che ci sto pensando ma secondo me sì</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">PKP036</td>
-            <td>mi sa di sì <b>sai</b></td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">PKP033</td>
-            <td>quindi mi potete raccontare</td>
-        </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">PKP036</td>
-            <td>perché era ancora un po' estate</td>
-        </tr>
-        </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(KIPasti, KPN031)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN031&begin=493900&end=495080" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
-    </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN031&begin=493900&end=495080" target="_blank"></a>
-                </div>
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIPasti, KPN031</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN031&begin=493900&end=495080" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
                 
-                <div class="example">
-                    <table>
         <tr>
-            <td style="width:80px; color:#666">PKP033</td>
-            <td>qualcuna di te giovane con la lambretta</td>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP037:</td>
+            <td class="text-col">davvero</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">PKP035</td>
-            <td>eh quella tipo tutte quelle mie persona~</td>
+            <td class="speaker-col" style="color: #2f855a;">PKP033:</td>
+            <td class="text-col">è da prima che ci sto pensando ma secondo me sì</td>
         </tr>
-        
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #c53030;">PKP036:</td>
+            <td class="text-col">mi sa di sì <b>sai</b></td>
+        </tr>
+
         <tr>
-            <td style="width:80px; color:#666">PKP033</td>
-            <td>ma me ne hai data qualcuna già x <b>sai</b></td>
+            <td class="speaker-col" style="color: #2f855a;">PKP033:</td>
+            <td class="text-col">quindi mi potete raccontare</td>
         </tr>
-        
+
         <tr>
-            <td style="width:80px; color:#666">PKP035</td>
-            <td>sul cantiere</td>
+            <td class="speaker-col" style="color: #c53030;">PKP036:</td>
+            <td class="text-col">perché era ancora un po' estate</td>
         </tr>
-        
-        <tr>
-            <td style="width:80px; color:#666">PKP035</td>
-            <td>sulle co~</td>
-        </tr>
+            </tbody>
         </table>
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">(KIPasti, KPS004)</b>
-    <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPS004&begin=1457898&end=1459939" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>
     </div>
-     <a class="audio" href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPS004&begin=1457898&end=1459939" target="_blank"></a>
-                </div>
-                </td>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIPasti, KPS004</span>
+            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPS004&begin=1457898&end=1459939" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP033:</td>
+            <td class="text-col">qualcuna di te giovane con la lambretta</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP035:</td>
+            <td class="text-col">eh quella tipo tutte quelle mie persona~</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">PKP033:</td>
+            <td class="text-col">ma me ne hai data qualcuna già x <b>sai</b></td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP035:</td>
+            <td class="text-col">sul cantiere</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP035:</td>
+            <td class="text-col">sulle co~</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
 </tr>
 </table>
     <p></p>

@@ -8,6 +8,14 @@ CORPUS_MAP = {
     "ParlaBO": "ParlaBO/tsv",
 }
 
+# Palette di 5 colori basilari per i parlanti
+SPEAKER_PALETTE = [
+    "#2b6cb0",  # Blu
+    "#2f855a",  # Verde
+    "#c53030",  # Rosso / Mattone
+    "#805ad5",  # Viola
+    "#dd6b20",  # Arancione
+]
 
 def load_tsv(path):
     with open(path, encoding="utf-8") as f:
@@ -49,9 +57,8 @@ def build_example(sd_row, corpus_root):
 
     corpus_path = Path(corpus_root).parent / CORPUS_MAP[corpus] / f"{conv_id}.vert.tsv"
 
-
     if not corpus_path.exists():
-        return "<i>Corpus non trovato</i>"
+        return '<div class="example-card error"><i>Corpus non trovato</i></div>'
 
     rows = load_tsv(corpus_path)
 
@@ -63,44 +70,56 @@ def build_example(sd_row, corpus_root):
             break
 
     if not target:
-        return "<i>Token non trovato</i>"
+        return '<div class="example-card error"><i>Token non trovato</i></div>'
 
     tus = group_by_tu(rows)
     target_tu = target["tu_id"]
 
     context_keys = get_context_turns(tus, target_tu)
 
-    html = "<table>"
+    # Dizionario per assegnare un colore unico a ciascun parlante nell'esempio
+    speaker_colors = {}
 
+    table_rows = []
     for tu in context_keys:
         speaker, text = build_turn(
             tus[tu],
             highlight_token=token_id if tu == target_tu else None
         )
 
-        audio = sd_row.get("audio", "").strip()
+        # Mappatura del colore del parlante (fino a 5 colori)
+        if speaker not in speaker_colors:
+            color_index = len(speaker_colors) % len(SPEAKER_PALETTE)
+            speaker_colors[speaker] = SPEAKER_PALETTE[color_index]
 
+        spk_color = speaker_colors[speaker]
+        is_target = (tu == target_tu)
+        row_class = ' class="focus"' if is_target else ''
 
+        table_rows.append(f"""
+        <tr{row_class}>
+            <td class="speaker-col" style="color: {spk_color};">{speaker}:</td>
+            <td class="text-col">{text}</td>
+        </tr>""")
 
-        html += f"""
-        <tr>
-            <td style="width:80px; color:#666">{speaker}</td>
-            <td>{text}</td>
-        </tr>
-        """
+    table_body = "\n".join(table_rows)
 
-    html += "</table>"
-
-
+    # Gestione Audio e Intestazione
+    audio = sd_row.get("audio", "").strip()
     audio_html = ""
     if audio:
-        audio_html = f'<a href="{audio}" target="_blank" style="margin-left:10px;">🎧 ascolta occorrenza</a>'
+        audio_html = f'<a href="{audio}" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>'
 
-    html += f"""
-    <div style="margin-top:8px;">
-    <b style="font-size:1rem;">({corpus}, {conv_id})</b>
-    {audio_html}
+    return f"""
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">{corpus}, {conv_id}</span>
+            {audio_html}
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                {table_body}
+            </tbody>
+        </table>
     </div>
     """
-
-    return html

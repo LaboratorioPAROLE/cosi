@@ -80,7 +80,7 @@ body {{
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }}
 
-/* Titoli nelle card: coerenti con le pagine statiche */
+/* Titoli nelle card */
 .card h2 {{
     margin-top: 0;
     color: #1e3c72;
@@ -164,34 +164,119 @@ input {{
     height: 400px;
 }}
 
-.example {{
-    padding: 10px 0;
-    border-bottom: 2px solid #ddd;
-    font-size: 0.95rem;
+/* =========================================
+   STILE ESEMPI (SCHEDA / KIPARLA)
+   ========================================= */
+.example-card {{
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    margin: 10px 0 14px 0;
+    padding: 12px 16px;
 }}
 
-.example:last-child {{
+.example-header {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #edf2f7;
+}}
+
+/* Nome corpus + Conv_ID in testo normale con virgola */
+.conv-id {{
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.92rem;
+}}
+
+.audio-btn {{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #095775;
+    color: #ffffff !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 16px;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease;
+}}
+
+.audio-btn:hover {{
+    background-color: #b51700;
+}}
+
+.transcript-table {{
+    width: 100%;
+    border-collapse: collapse;
+}}
+
+.transcript-table tr {{
+    border-bottom: 1px solid #f8fafc;
+}}
+
+.transcript-table tr:last-child {{
     border-bottom: none;
 }}
 
-.audio {{
-    margin-left: 8px;
-    text-decoration: none;
+/* Evidenziazione del turno target: azzurrino leggero e sobrio */
+.transcript-table tr.focus {{
+    background-color: #f0f7ff !important;
+    border-left: 3px solid #3182ce;
 }}
 
+.speaker-col {{
+    width: 80px;
+    min-width: 70px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    vertical-align: top;
+    padding: 6px 10px 6px 8px;
+    font-family: SFMono-Regular, Consolas, monospace;
+}}
+
+.text-col {{
+    color: #2d3748;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    vertical-align: top;
+    padding: 6px 8px;
+}}
+
+/* Parola target in rosso pulito: NO box, NO sfondi, NO bordi */
+.text-col b {{
+    font-weight: 700;
+    color: #c53030;
+    background: none;
+    border: none;
+    padding: 0;
+}}
+
+.example-card.error {{
+    color: #e53e3e;
+    background-color: #fff5f5;
+    border-color: #fed7d7;
+}}
+
+/* =========================================
+   HEADER E NAVBAR
+   ========================================= */
 .header {{
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
 }}
 
-/* Riga logo: [UNISA + DipSUM] | COSÌ | [PAROLE] */
 .brand {{
     --unisa-h: 100px;
     --dipsum-w: 130px;
     --stack-gap: 5px;
-    --side-gap: clamp(16px, 6vw, 100px);   /* distanza dal logo COSÌ (non usata con allineamento centrato) */
-    --side-lift: 30px;                     /* quanto salgono dal fondo */
-    --parole-scale: 1.08;                  /* 1 = uguale a UNISA+DipSUM */
+    --side-gap: clamp(16px, 6vw, 100px);
+    --side-lift: 30px;
+    --parole-scale: 1.08;
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -227,7 +312,6 @@ input {{
 .brand .logo-unisa  {{ height: var(--unisa-h); width: auto; }}
 .brand .logo-dipsum {{ width: var(--dipsum-w); height: auto; }}
 
-/* PAROLE = (UNISA + spazio + DipSUM) * scala. 3.556 = proporzione 2560:720 di DipSUM */
 .brand .logo-parole {{
     height: calc((var(--unisa-h) + var(--stack-gap) + var(--dipsum-w) / 3.556) * var(--parole-scale));
     width: auto;
@@ -496,7 +580,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
     macro_sorted = sorted(macro.items(), key=lambda x: -x[1])
 
-    macro_html = "<table><tr><th>Macro</th><th>Freq</th></tr>"
+    macro_html = "<table><tr><th>Macrofunzione</th><th>Frequenza</th></tr>"
     for m, v in macro_sorted:
         color = COLOR_MAP.get(m, "white")
         macro_html += f'<tr style="background:{color}"><td>{m}</td><td>{v}</td></tr>'
@@ -505,7 +589,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     micro_flat = [(m, k, v) for m, vals in micro.items() for k, v in vals.items()]
     micro_sorted = sorted(micro_flat, key=lambda x: -x[2])
 
-    micro_html = "<table><tr><th style='width:30px;'></th><th>Macro</th><th>Micro</th><th>Freq</th></tr>"
+    micro_html = "<table><tr><th style='width:30px;'></th><th>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>"
 
     for i, (m, k, v) in enumerate(micro_sorted[:10]):
 
@@ -516,19 +600,8 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
         if examples:
             for ex in examples:
-
-                text = ex.get("text", "").strip()
-                audio = ex.get("audio", "").strip()
-                conv_id = ex.get("conv_id", "").strip()
-
-                audio_html = f'<a class="audio" href="{audio}" target="_blank"></a>' if audio else ""
-                conv_html = f" <span style='color:#888'>(conv_id: {conv_id})</span>" if conv_id else ""
-
-                examples_html += f"""
-                <div class="example">
-                    {ex["html"]} {audio_html}
-                </div>
-                """
+                # ex["html"] contiene già l'intera scheda completa stilizzata
+                examples_html += ex["html"]
         else:
             examples_html = "<i>Nessun esempio disponibile</i>"
 
@@ -541,7 +614,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 </tr>
 
 <tr id="ex{i}" style="display:none; background:#fafafa">
-    <td colspan="4">{examples_html}</td>
+    <td colspan="4" style="padding: 10px 15px;">{examples_html}</td>
 </tr>
 """
 
@@ -635,7 +708,6 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
 # =========================
 # INDEX HTML (pagina di ricerca)
-# NB: stringa raw, NON f-string -> le graffe restano singole
 # =========================
 index_body = r"""
 <div class="card">
@@ -673,14 +745,12 @@ const advToggle = document.getElementById("advToggle");
 const advPanel = document.getElementById("advPanel");
 const headers = document.querySelectorAll("th.sortable");
 
-// Ordine delle fasce di frequenza (dalla più alta alla più bassa)
 const FREQ_ORDER = ["alta", "medio-alta", "medio-bassa", "bassa"];
 const collator = new Intl.Collator("it", { sensitivity: "base" });
 
-let sortKey = null;   // "lemma" | "frequenza" | null (ordine originale)
-let sortDir = "asc";  // "asc" | "desc"
+let sortKey = null;
+let sortDir = "asc";
 
-// minuscolo + senza accenti, per una ricerca più tollerante
 function norm(s) {
     return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
@@ -693,14 +763,14 @@ function esc(s) {
 
 function freqRank(f) {
     const i = FREQ_ORDER.indexOf(String(f || "").trim().toLowerCase());
-    return i === -1 ? FREQ_ORDER.length : i; // valori sconosciuti in fondo
+    return i === -1 ? FREQ_ORDER.length : i;
 }
 
 function compare(a, b) {
     let r;
     if (sortKey === "frequenza") {
         r = freqRank(a.frequenza) - freqRank(b.frequenza);
-        if (r === 0) r = collator.compare(a.lemma, b.lemma); // a parità, A-Z
+        if (r === 0) r = collator.compare(a.lemma, b.lemma);
     } else {
         r = collator.compare(a.lemma, b.lemma);
     }
@@ -719,7 +789,6 @@ function render() {
     const qLemma = norm(input.value);
     const qMicro = norm(microInput.value);
 
-    // il segnale si cerca sempre; la microfunzione solo se compilata (AND)
     let rows = DATA.filter(x =>
         norm(x.lemma).includes(qLemma) &&
         (!qMicro || norm(x.micro).includes(qMicro))
@@ -754,7 +823,7 @@ advToggle.addEventListener("click", () => {
     advPanel.style.display = open ? "block" : "none";
     advToggle.textContent = open ? "− Ricerca avanzata" : "+ Ricerca avanzata";
     advToggle.setAttribute("aria-expanded", open);
-    if (!open) {          // richiudendo, il filtro microfunzione si azzera
+    if (!open) {
         microInput.value = "";
         render();
     }
@@ -765,6 +834,7 @@ microInput.addEventListener("input", render);
 render();
 </script>
 """
+
 home_body = """
 <div class="card">
   <h2>Benvenuto in COSÌ</h2>
