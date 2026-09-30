@@ -4,6 +4,7 @@ import csv
 from pathlib import Path
 from example_builder import build_example
 import shutil
+from urllib.parse import quote
 
 # =========================
 # PATH
@@ -34,6 +35,10 @@ COLOR_MAP = {
 
 # Versione di Plotly.js caricata da CDN, una sola volta per pagina
 PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
+
+# Dataset annotati su GitHub (pagina di visualizzazione e file grezzo)
+GITHUB_TSV_VIEW = "https://github.com/LaboratorioPAROLE/cosi/blob/main/data/tsv/"
+GITHUB_TSV_RAW = "https://raw.githubusercontent.com/LaboratorioPAROLE/cosi/main/data/tsv/"
 
 # =========================
 # HTML BASE
@@ -86,6 +91,39 @@ body {{
     color: #1e3c72;
     border-bottom: 2px solid #eef1f6;
     padding-bottom: 0.6rem;
+}}
+
+/* Link al dataset annotato */
+.dataset-link {{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 8px 14px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+}}
+
+.dataset-link:hover {{
+    border-color: #b51700;
+    color: #b51700;
+}}
+
+.dataset-link svg {{
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}}
+
+.dataset-raw {{
+    margin-left: 12px;
+    font-size: 0.85rem;
+    color: #888;
 }}
 
 table {{
@@ -509,6 +547,10 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
     micro_html += "</table>"
 
+    tsv_name = quote(str(signal["file"]))
+    tsv_view_url = GITHUB_TSV_VIEW + tsv_name
+    tsv_raw_url = GITHUB_TSV_RAW + tsv_name
+
     type_json = f"../imgs/{name}/type.json"
     age_json = f"../imgs/{name}/age.json"
     region_json = f"../imgs/{name}/region_map.json"
@@ -533,6 +575,17 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     <div style="font-size: 0.95rem; color: #666;">
         <b>Varianti incluse:</b> <i>{varianti}</i>
     </div>
+
+    <a class="dataset-link" href="{tsv_view_url}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <line x1="3" y1="15" x2="21" y2="15"/>
+            <line x1="9" y1="4" x2="9" y2="20"/>
+        </svg>
+        Dataset annotato (.tsv)
+    </a>
+    <a class="dataset-raw" href="{tsv_raw_url}" download>scarica .tsv</a>
 
 </div>
 
