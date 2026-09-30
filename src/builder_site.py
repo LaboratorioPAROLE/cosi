@@ -236,7 +236,6 @@ input {{
     font-size: 0.88rem;
     vertical-align: top;
     padding: 6px 10px 6px 8px;
-    font-family: SFMono-Regular, Consolas, monospace;
 }}
 
 .text-col {{

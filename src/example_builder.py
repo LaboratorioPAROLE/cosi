@@ -98,7 +98,7 @@ def build_example(sd_row, corpus_root):
 
         table_rows.append(f"""
         <tr{row_class}>
-            <td class="speaker-col" style="color: {spk_color};">{speaker}:</td>
+            <td class="speaker-col" style="color: {spk_color};">{speaker}</td>
             <td class="text-col">{text}</td>
         </tr>""")
 
