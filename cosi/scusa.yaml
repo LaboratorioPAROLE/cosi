@@ -9,8 +9,8 @@ source:
   pos: verbo
   form: PRS.IMP.2SG
 
-descrizione_macro: ~
-descrizione_micro: ~
+descrizione_macro: |
+descrizione_micro: |
 grafici:
   type: ../imgs/scusa/type.html
   age: ../imgs/scusa/age.html
