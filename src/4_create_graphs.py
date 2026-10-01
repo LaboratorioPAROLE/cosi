@@ -2,11 +2,23 @@ import yaml
 import pandas as pd
 from pathlib import Path
 import plotly.express as px
-import plotly.graph_objects as go  # da aggiungere agli import in cima
+import plotly.graph_objects as go
 
-GRIGIO = "#e5e7eb"
+# =========================
+# COSTANTI MAPPA
+# =========================
+GRIGIO = "#e5e7eb"   # regioni senza dati
+BORDO = "#b9b4c7"    # contorno uniforme per tutte le regioni
+
+# Scala viola: lavanda chiarissimo -> viola scuro, con #823cf4 come tono alto
+PURPLE_SCALE = [
+    [0.0, "#f3ecfe"],
+    [0.5, "#b794f8"],
+    [0.75, "#823cf4"],
+    [1.0, "#4a1a9e"],
+]
+
 GEOJSON_URL = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson"
-
 
 # =========================
 # PATH
@@ -178,7 +190,6 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
 
             save_fig_json(fig, out_folder / "age.json")
 
-    
     # =========================
     # 3. REGION MAP
     # =========================
@@ -213,7 +224,7 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             valid_names = set(df_valid["Regione"])
             missing = [r for r in REGION_LABEL.values() if r not in valid_names]
 
-            # --- regioni con dati: scala colore normale ---
+            # --- regioni con dati: scala viola ---
             df_valid["Freq_norm_display"] = df_valid["Freq_norm"].round(2)
 
             fig = px.choropleth(
@@ -222,13 +233,14 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                 featureidkey="properties.reg_name",
                 locations="Regione",
                 color="Freq_norm",
-                color_continuous_scale="Reds"
+                color_continuous_scale=PURPLE_SCALE
             )
 
+            # customdata/hover: va fatto PRIMA di aggiungere le tracce grigie
             fig.update_traces(
                 hovertemplate="<b>%{location}</b><br>" +
-                            "Freq: %{customdata[0]}<br>" +
-                            "Freq (norm.): %{customdata[1]}<extra></extra>",
+                              "Freq: %{customdata[0]}<br>" +
+                              "Freq (norm.): %{customdata[1]}<extra></extra>",
                 customdata=df_valid[["Freq", "Freq_norm_display"]].values
             )
 
@@ -242,7 +254,6 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                     colorscale=[[0, GRIGIO], [1, GRIGIO]],
                     showscale=False,
                     showlegend=False,
-                    marker_line_color="white",
                     hovertemplate="<b>%{location}</b><br>Dati non disponibili<extra></extra>"
                 ))
 
@@ -251,10 +262,17 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                     lon=[None], lat=[None],
                     mode="markers",
                     marker=dict(size=12, symbol="square", color=GRIGIO,
-                                line=dict(color="#bbbbbb", width=1)),
+                                line=dict(color=BORDO, width=1)),
                     name="Dati non disponibili",
                     showlegend=True
                 ))
+
+            # --- stesso contorno su tutte le regioni (colorate e grigie) ---
+            fig.update_traces(
+                marker_line_color=BORDO,
+                marker_line_width=0.6,
+                selector=dict(type="choropleth")
+            )
 
             fig.update_geos(fitbounds="locations", visible=False)
 
