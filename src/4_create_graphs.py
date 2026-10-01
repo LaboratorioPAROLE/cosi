@@ -2,6 +2,11 @@ import yaml
 import pandas as pd
 from pathlib import Path
 import plotly.express as px
+import plotly.graph_objects as go  # da aggiungere agli import in cima
+
+GRIGIO = "#e5e7eb"
+GEOJSON_URL = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson"
+
 
 # =========================
 # PATH
@@ -173,6 +178,7 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
 
             save_fig_json(fig, out_folder / "age.json")
 
+    
     # =========================
     # 3. REGION MAP
     # =========================
@@ -181,22 +187,18 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
         rows = []
 
         for k, v in metadata["region"].items():
-
             k_clean = clean_value(k)
             if not k_clean:
                 continue
 
             total = REGION_TOTALS.get(k_clean, 0)
+            label = REGION_LABEL.get(k_clean, k_clean)
 
             if total < MIN_REGION_TOKENS:
-                rows.append({
-                    "Regione": REGION_LABEL.get(k_clean, k_clean),
-                    "Freq": None,
-                    "Freq_norm": None
-                })
+                rows.append({"Regione": label, "Freq": None, "Freq_norm": None})
             else:
                 rows.append({
-                    "Regione": REGION_LABEL.get(k_clean, k_clean),
+                    "Regione": label,
                     "Freq": v.get("count", 0),
                     "Freq_norm": v.get("fpmw", 0)
                 })
@@ -204,27 +206,63 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
         df = pd.DataFrame(rows)
 
         if not df.empty:
+
+            # Regioni con dato valido vs. regioni senza dato
+            # (sotto soglia, NaN, oppure assenti del tutto dal YAML)
+            df_valid = df[df["Freq_norm"].notna()].copy()
+            valid_names = set(df_valid["Regione"])
+            missing = [r for r in REGION_LABEL.values() if r not in valid_names]
+
+            # --- regioni con dati: scala colore normale ---
+            df_valid["Freq_norm_display"] = df_valid["Freq_norm"].round(2)
+
             fig = px.choropleth(
-                df,
-                geojson="https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson",
+                df_valid,
+                geojson=GEOJSON_URL,
                 featureidkey="properties.reg_name",
                 locations="Regione",
                 color="Freq_norm",
                 color_continuous_scale="Reds"
             )
 
-            df["Freq_norm_display"] = df["Freq_norm"].round(2)
-            df["Freq_display"] = df["Freq"].fillna("NA")
-            df["Freq_norm_display"] = df["Freq_norm_display"].fillna("NA")
+            fig.update_traces(
+                hovertemplate="<b>%{location}</b><br>" +
+                            "Freq: %{customdata[0]}<br>" +
+                            "Freq (norm.): %{customdata[1]}<extra></extra>",
+                customdata=df_valid[["Freq", "Freq_norm_display"]].values
+            )
 
-            fig.update_traces(hovertemplate="<b>%{location}</b><br>" +
-                  "Freq: %{customdata[0]}<br>" +
-                  "Freq (norm.): %{customdata[1]}",
-                    customdata=df[["Freq_display", "Freq_norm_display"]].values)
+            # --- regioni senza dati: grigio chiaro uniforme ---
+            if missing:
+                fig.add_trace(go.Choropleth(
+                    geojson=GEOJSON_URL,
+                    featureidkey="properties.reg_name",
+                    locations=missing,
+                    z=[1] * len(missing),
+                    colorscale=[[0, GRIGIO], [1, GRIGIO]],
+                    showscale=False,
+                    showlegend=False,
+                    marker_line_color="white",
+                    hovertemplate="<b>%{location}</b><br>Dati non disponibili<extra></extra>"
+                ))
+
+                # --- voce di legenda "fittizia" ---
+                fig.add_trace(go.Scattergeo(
+                    lon=[None], lat=[None],
+                    mode="markers",
+                    marker=dict(size=12, symbol="square", color=GRIGIO,
+                                line=dict(color="#bbbbbb", width=1)),
+                    name="Dati non disponibili",
+                    showlegend=True
+                ))
 
             fig.update_geos(fitbounds="locations", visible=False)
 
-            fig.update_layout(title="Distribuzione geografica", title_x=0.5)
+            fig.update_layout(
+                title="Distribuzione geografica",
+                title_x=0.5,
+                legend=dict(orientation="h", y=0, x=0.5, xanchor="center")
+            )
 
             save_fig_json(fig, out_folder / "region_map.json")
 
