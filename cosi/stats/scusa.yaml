@@ -1,4 +1,9 @@
 file: scusa.tsv
+sampling:
+  nOccTot: 838
+  nRows: 838
+  is_sample: false
+  factor: 1.0
 counts:
   ntokens: 838
   nSD: 469
@@ -186,3 +191,13 @@ metadata_SD:
     41-50:
       count: 11
       fpmw: 73.98091292446549
+  macroarea:
+    Nord:
+      count: 242
+      fpmw: 157.24731428734802
+    Centro:
+      count: 77
+      fpmw: 373.11082360580116
+    Sud e Isole:
+      count: 129
+      fpmw: 255.72152124570084

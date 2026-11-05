@@ -1,4 +1,9 @@
 file: immagino.tsv
+sampling:
+  nOccTot: 353
+  nRows: 353
+  is_sample: false
+  factor: 1.0
 counts:
   ntokens: 353
   nSD: 187
@@ -152,3 +157,13 @@ metadata_SD:
     61-70:
       count: 1
       fpmw: 6.1294039767573
+  macroarea:
+    Nord:
+      count: 163
+      fpmw: 105.91451334230466
+    Centro:
+      count: 4
+      fpmw: 19.382380447054604
+    Sud e Isole:
+      count: 16
+      fpmw: 31.71739798396289

@@ -1,4 +1,9 @@
 file: mi_sa.tsv
+sampling:
+  nOccTot: 314
+  nRows: 314
+  is_sample: false
+  factor: 1.0
 counts:
   ntokens: 314
   nSD: 107
@@ -144,3 +149,13 @@ metadata_SD:
     31-40:
       count: 5
       fpmw: 21.00478488999794
+  macroarea:
+    Nord:
+      count: 48
+      fpmw: 31.189549941292167
+    Centro:
+      count: 28
+      fpmw: 135.67666312938223
+    Sud e Isole:
+      count: 29
+      fpmw: 57.48778384593274

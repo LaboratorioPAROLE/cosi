@@ -1,4 +1,9 @@
 file: dunque.tsv
+sampling:
+  nOccTot: 174
+  nRows: 337
+  is_sample: false
+  factor: 1.0
 counts:
   ntokens: 337
   nSD: 149
@@ -148,3 +153,13 @@ metadata_SD:
     31-40:
       count: 8
       fpmw: 33.6076558239967
+  macroarea:
+    Nord:
+      count: 124
+      fpmw: 80.57300401500477
+    Centro:
+      count: 6
+      fpmw: 29.07357067058191
+    Sud e Isole:
+      count: 17
+      fpmw: 33.69973535796057

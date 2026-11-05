@@ -94,6 +94,23 @@ REGION_LABEL = {
     "molise": "Molise"
 }
 
+MACROAREA = {
+    "emilia-romagna": "Nord", "piemonte": "Nord", "lombardia": "Nord",
+    "veneto": "Nord", "friuli-venezia-giulia": "Nord", "valle-d-aosta": "Nord",
+    "trentino-alto-adige": "Nord", "liguria": "Nord",
+    "lazio": "Centro", "marche": "Centro", "toscana": "Centro", "umbria": "Centro",
+    "puglia": "Sud e Isole", "sicilia": "Sud e Isole", "calabria": "Sud e Isole",
+    "campania": "Sud e Isole", "basilicata": "Sud e Isole", "sardegna": "Sud e Isole",
+    "abruzzo": "Sud e Isole", "molise": "Sud e Isole",
+}
+
+# posizione (lat, lon) delle etichette di macroarea sulla mappa
+AREA_LABEL_POS = {
+    "Nord": (45.4, 10.2),
+    "Centro": (42.9, 12.3),
+    "Sud e Isole": (40.6, 15.9),
+}
+
 def clean_type(x):
     x = clean_value(x)
     if not x:
@@ -109,6 +126,32 @@ def save_fig_json(fig, path):
     """
     path.write_text(fig.to_json(), encoding="utf-8")
 
+# =========================
+# PROIEZIONE: titolo, nota, hover
+# =========================
+def make_title(base, is_proj):
+    return f"{base} (proiezione)" if is_proj else base
+
+def add_proj_note(fig, sampling):
+    if not sampling.get("is_sample"):
+        return
+    fig.add_annotation(
+        text=(f"Valori normalizzati proiettati: campione di {sampling['nRows']} "
+              f"occorrenze su {sampling['nOccTot']} (fattore ×{sampling['factor']:.2f})"),
+        xref="paper", yref="paper", x=0.5, y=-0.2,
+        showarrow=False, font=dict(size=11, color="#6b7280")
+    )
+    fig.update_layout(margin=dict(b=100))
+
+def bar_hover(is_proj):
+    h = "<b>%{x}</b><br>Freq: %{customdata[0]}"
+    if is_proj:
+        h += "<br>Freq proiettata: %{customdata[1]:.0f}"
+    return h + "<br>Freq (norm.): %{y:.2f}<extra></extra>"
+
+def count_proj(v):
+    return v.get("count_proj", v.get("count", 0))
+
 
 # =========================
 # PROCESS FILES
@@ -122,6 +165,8 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
     out_folder.mkdir(parents=True, exist_ok=True)
 
     metadata = data.get("metadata_SD", {})
+    sampling = data.get("sampling", {}) or {}
+    is_proj = bool(sampling.get("is_sample"))
 
     # =========================
     # 1. TYPE BARPLOT
@@ -132,6 +177,7 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             {
                 "Tipo": TYPE_MAP.get(k, k),
                 "Freq": v.get("count", 0),
+                "Freq_proj": count_proj(v),
                 "Freq_norm": v.get("fpmw", 0)
             }
             for k, v in metadata["type"].items()
@@ -147,11 +193,15 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             )
 
             fig.update_traces(
-                hovertemplate="<b>%{x}</b><br>Freq: %{customdata[0]}<br>Freq (norm.): %{y:.2f}",
-                customdata=df[["Freq"]].values
+                hovertemplate=bar_hover(is_proj),
+                customdata=df[["Freq", "Freq_proj"]].values
             )
 
-            fig.update_layout(title="Distribuzione per tipo di interazione", title_x=0.5)
+            fig.update_layout(
+                title=make_title("Distribuzione per tipo di interazione", is_proj),
+                title_x=0.5
+            )
+            add_proj_note(fig, sampling)
 
             save_fig_json(fig, out_folder / "type.json")
 
@@ -164,6 +214,7 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             {
                 "Età": k,
                 "Freq": v.get("count", 0),
+                "Freq_proj": count_proj(v),
                 "Freq_norm": v.get("fpmw", 0)
             }
             for k, v in metadata["age-range"].items()
@@ -182,11 +233,15 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             )
 
             fig.update_traces(
-                hovertemplate="<b>%{x}</b><br>Freq: %{customdata[0]}<br>Freq (norm.): %{y:.2f}",
-                customdata=df[["Freq"]].values
+                hovertemplate=bar_hover(is_proj),
+                customdata=df[["Freq", "Freq_proj"]].values
             )
 
-            fig.update_layout(title="Distribuzione per età", title_x=0.5)
+            fig.update_layout(
+                title=make_title("Distribuzione per età", is_proj),
+                title_x=0.5
+            )
+            add_proj_note(fig, sampling)
 
             save_fig_json(fig, out_folder / "age.json")
 
@@ -206,11 +261,13 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             label = REGION_LABEL.get(k_clean, k_clean)
 
             if total < MIN_REGION_TOKENS:
-                rows.append({"Regione": label, "Freq": None, "Freq_norm": None})
+                rows.append({"Regione": label, "Freq": None,
+                             "Freq_proj": None, "Freq_norm": None})
             else:
                 rows.append({
                     "Regione": label,
                     "Freq": v.get("count", 0),
+                    "Freq_proj": count_proj(v),
                     "Freq_norm": v.get("fpmw", 0)
                 })
 
@@ -218,14 +275,12 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
 
         if not df.empty:
 
-            # Regioni con dato valido vs. regioni senza dato
-            # (sotto soglia, NaN, oppure assenti del tutto dal YAML)
             df_valid = df[df["Freq_norm"].notna()].copy()
             valid_names = set(df_valid["Regione"])
             missing = [r for r in REGION_LABEL.values() if r not in valid_names]
 
-            # --- regioni con dati: scala viola ---
             df_valid["Freq_norm_display"] = df_valid["Freq_norm"].round(2)
+            df_valid["Freq_proj_display"] = df_valid["Freq_proj"].round(0)
 
             fig = px.choropleth(
                 df_valid,
@@ -233,18 +288,20 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                 featureidkey="properties.reg_name",
                 locations="Regione",
                 color="Freq_norm",
-                color_continuous_scale=PURPLE_SCALE
+                color_continuous_scale=PURPLE_SCALE,
+                labels={"Freq_norm": "Freq (per milione)"}
             )
 
-            # customdata/hover: va fatto PRIMA di aggiungere le tracce grigie
+            hover = "<b>%{location}</b><br>Freq: %{customdata[0]}<br>"
+            if is_proj:
+                hover += "Freq proiettata: %{customdata[1]}<br>"
+            hover += "Freq (norm.): %{customdata[2]}<extra></extra>"
+
             fig.update_traces(
-                hovertemplate="<b>%{location}</b><br>" +
-                              "Freq: %{customdata[0]}<br>" +
-                              "Freq (norm.): %{customdata[1]}<extra></extra>",
-                customdata=df_valid[["Freq", "Freq_norm_display"]].values
+                hovertemplate=hover,
+                customdata=df_valid[["Freq", "Freq_proj_display", "Freq_norm_display"]].values
             )
 
-            # --- regioni senza dati: grigio chiaro uniforme ---
             if missing:
                 fig.add_trace(go.Choropleth(
                     geojson=GEOJSON_URL,
@@ -257,7 +314,6 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                     hovertemplate="<b>%{location}</b><br>Dati non disponibili<extra></extra>"
                 ))
 
-                # --- voce di legenda "fittizia" ---
                 fig.add_trace(go.Scattergeo(
                     lon=[None], lat=[None],
                     mode="markers",
@@ -267,7 +323,6 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
                     showlegend=True
                 ))
 
-            # --- stesso contorno su tutte le regioni (colorate e grigie) ---
             fig.update_traces(
                 marker_line_color=BORDO,
                 marker_line_width=0.6,
@@ -277,11 +332,86 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             fig.update_geos(fitbounds="locations", visible=False)
 
             fig.update_layout(
-                title="Distribuzione geografica",
+                title=make_title("Distribuzione geografica", is_proj),
                 title_x=0.5,
                 legend=dict(orientation="h", y=0, x=0.5, xanchor="center")
             )
+            add_proj_note(fig, sampling)
 
             save_fig_json(fig, out_folder / "region_map.json")
 
-    print(f"Creati dati grafici (JSON) per {yaml_file.stem}")
+    # =========================
+    # 4. MACROAREA MAP
+    # =========================
+    if "macroarea" in metadata:
+
+        areas = metadata["macroarea"]
+
+        # ogni regione prende il valore della sua macroarea
+        rows = []
+        for reg_key, label in REGION_LABEL.items():
+            area = MACROAREA[reg_key]
+            v = areas.get(area, {}) or {}
+            rows.append({
+                "Regione": label,
+                "Area": area,
+                "Freq": v.get("count", 0),
+                "Freq_proj": round(count_proj(v)),
+                "Freq_norm": v.get("fpmw", 0)
+            })
+
+        df = pd.DataFrame(rows)
+        df["Freq_norm_display"] = df["Freq_norm"].round(2)
+        vmax = df["Freq_norm"].max() or 1
+
+        fig = px.choropleth(
+            df,
+            geojson=GEOJSON_URL,
+            featureidkey="properties.reg_name",
+            locations="Regione",
+            color="Freq_norm",
+            color_continuous_scale=PURPLE_SCALE,
+            range_color=(0, vmax),
+            labels={"Freq_norm": "Freq (per milione)"}
+        )
+
+        hover = "<b>%{customdata[0]}</b><br>(%{location})<br>Freq: %{customdata[1]}<br>"
+        if is_proj:
+            hover += "Freq proiettata: %{customdata[2]}<br>"
+        hover += "Freq (norm.): %{customdata[3]}<extra></extra>"
+
+        fig.update_traces(
+            hovertemplate=hover,
+            customdata=df[["Area", "Freq", "Freq_proj", "Freq_norm_display"]].values,
+            marker_line_color=BORDO,
+            marker_line_width=0.3
+        )
+
+        # etichette testuali delle tre macroaree
+        lab_names, lab_lat, lab_lon = [], [], []
+        for area, (lat, lon) in AREA_LABEL_POS.items():
+            val = (areas.get(area, {}) or {}).get("fpmw", 0)
+            lab_names.append(f"<b>{area}</b><br>{val:.1f}")
+            lab_lat.append(lat)
+            lab_lon.append(lon)
+
+        fig.add_trace(go.Scattergeo(
+            lat=lab_lat, lon=lab_lon, text=lab_names,
+            mode="text",
+            textfont=dict(size=12, color="#1f1235"),
+            hoverinfo="skip",
+            showlegend=False
+        ))
+
+        fig.update_geos(fitbounds="locations", visible=False)
+
+        fig.update_layout(
+            title=make_title("Distribuzione per macroarea", is_proj),
+            title_x=0.5
+        )
+        add_proj_note(fig, sampling)
+
+        save_fig_json(fig, out_folder / "macroarea_map.json")
+
+    print(f"Creati dati grafici (JSON) per {yaml_file.stem}" +
+          (" [proiezione]" if is_proj else ""))

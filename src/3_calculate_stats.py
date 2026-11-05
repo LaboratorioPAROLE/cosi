@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
 
 INPUT_DIR = PROJECT_ROOT / "data" / "tsv"
+COSI_DIR = PROJECT_ROOT / "cosi"              # qui stanno i nome_sd.yaml con nOccTot
 OUTPUT_DIR = PROJECT_ROOT / "cosi" / "stats"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -27,7 +28,7 @@ def norm(x):
 
 
 AGE_MAP = {
-    "16-20":"16-20",
+    "16-20": "16-20",
     "21-25": "21-30",
     "26-30": "21-30",
 
@@ -50,19 +51,50 @@ AGE_MAP = {
     "over 85": ">71"
 }
 
-from collections import defaultdict
-
 CORPUS_AGE = defaultdict(int)
 
 for k, v in corpus_data["age-range"].items():
-
-    k_norm = norm(k)
-    bucket = AGE_MAP.get(k_norm)
-
+    bucket = AGE_MAP.get(norm(k))
     if bucket is None:
         continue
-
     CORPUS_AGE[bucket] += v
+
+# =========================
+# MACROAREE
+# =========================
+MACROAREA = {
+    # Nord
+    "emilia-romagna": "Nord",
+    "piemonte": "Nord",
+    "lombardia": "Nord",
+    "veneto": "Nord",
+    "friuli-venezia-giulia": "Nord",
+    "valle-d-aosta": "Nord",
+    "trentino-alto-adige": "Nord",
+    "liguria": "Nord",
+    # Centro
+    "lazio": "Centro",
+    "marche": "Centro",
+    "toscana": "Centro",
+    "umbria": "Centro",
+    # Sud e Isole
+    "puglia": "Sud e Isole",
+    "sicilia": "Sud e Isole",
+    "calabria": "Sud e Isole",
+    "campania": "Sud e Isole",
+    "basilicata": "Sud e Isole",
+    "sardegna": "Sud e Isole",
+    "abruzzo": "Sud e Isole",
+    "molise": "Sud e Isole",
+}
+AREA_ORDER = ["Nord", "Centro", "Sud e Isole"]
+
+# Token del corpus per macroarea = somma dei token di TUTTE le regioni dell'area
+CORPUS_AREA = defaultdict(int)
+for k, v in corpus_data["region"].items():
+    area = MACROAREA.get(norm(k))
+    if area:
+        CORPUS_AREA[area] += v
 
 
 def norm_age(x):
@@ -88,12 +120,60 @@ def get_total(field, key):
         return corpus_data["region"].get(key)
 
     elif field == "age-range":
-        return CORPUS_AGE.get(canon(field, key))
+        return CORPUS_AGE.get(key)
+
+    elif field == "macroarea":
+        return CORPUS_AREA.get(key)
 
     return None
 
 def fpmw(count, total):
     return (count / total) * 1_000_000 if total else 0
+
+# =========================
+# CAMPIONAMENTO / PROIEZIONE
+# =========================
+def get_sampling(stem, nrows):
+    """
+    Legge nOccTot da cosi/<stem>.yaml.
+    Se nOccTot > righe del tsv, il tsv è un campione:
+    fattore di proiezione = nOccTot / righe estratte.
+    """
+    n_occ_tot = None
+    sd_yaml = COSI_DIR / f"{stem}.yaml"
+
+    if sd_yaml.exists():
+        with open(sd_yaml, encoding="utf-8") as f:
+            n_occ_tot = (yaml.safe_load(f) or {}).get("nOccTot")
+
+    try:
+        n_occ_tot = int(n_occ_tot)
+    except (TypeError, ValueError):
+        n_occ_tot = None
+
+    is_sample = n_occ_tot is not None and nrows > 0 and n_occ_tot > nrows
+    factor = n_occ_tot / nrows if is_sample else 1.0
+
+    return {
+        "nOccTot": n_occ_tot,
+        "nRows": nrows,
+        "is_sample": is_sample,
+        "factor": factor
+    }
+
+def make_entry(field, key, count, factor):
+    """count = conteggio reale; fpmw calcolata sul conteggio proiettato."""
+    entry = {"count": count}
+    count_proj = count * factor
+
+    if factor != 1.0:
+        entry["count_proj"] = round(count_proj, 2)
+
+    total = get_total(field, key)
+    if total:
+        entry["fpmw"] = fpmw(count_proj, total)
+
+    return entry
 
 # =========================
 # FUNZIONI
@@ -178,35 +258,49 @@ for tsv_file in INPUT_DIR.glob("*.tsv"):
                         micro[macro_name][label] += 1
 
     # =========================
+    # SAMPLING
+    # =========================
+    sampling = get_sampling(tsv_file.stem, ntokens)
+    factor = sampling["factor"]
+
+    # =========================
+    # MACROAREE (dalle regioni)
+    # =========================
+    area_counts = {a: 0 for a in AREA_ORDER}
+    for reg, c in metadata_counts["region"].items():
+        area = MACROAREA.get(norm(reg))
+        if area:
+            area_counts[area] += c
+
+    # =========================
     # OUTPUT METADATA
     # =========================
     metadata_out = {}
 
     for field, values in metadata_counts.items():
+        metadata_out[field] = {
+            k: make_entry(field, k, v, factor)
+            for k, v in values.items()
+        }
 
-        metadata_out[field] = {}
-
-        for k, v in values.items():
-
-            entry = {"count": v}
-
-            total = get_total(field, k)
-            if total:
-                entry["fpmw"] = fpmw(v, total)
-
-            metadata_out[field][k] = entry
+    metadata_out["macroarea"] = {
+        a: make_entry("macroarea", a, c, factor)
+        for a, c in area_counts.items()
+    }
 
     micro = {k: dict(v) for k, v in micro.items()}
 
     # =========================
     # OUTPUT
     # =========================
+    counts = {"ntokens": ntokens, "nSD": nSD}
+    if sampling["is_sample"]:
+        counts["nSD_proj"] = round(nSD * factor, 2)
+
     out = {
         "file": tsv_file.name,
-        "counts": {
-            "ntokens": ntokens,
-            "nSD": nSD
-        },
+        "sampling": sampling,
+        "counts": counts,
         "macrofunctions_SD": macro,
         "microfunctions_SD": micro,
         "metadata_SD": metadata_out
@@ -217,4 +311,5 @@ for tsv_file in INPUT_DIR.glob("*.tsv"):
     with open(out_file, "w", encoding="utf-8") as f:
         yaml.dump(out, f, allow_unicode=True, sort_keys=False)
 
-    print(f"Creato: {out_file}")
+    tag = f" [campione ×{factor:.2f}]" if sampling["is_sample"] else ""
+    print(f"Creato: {out_file}{tag}")

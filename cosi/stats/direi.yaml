@@ -1,4 +1,9 @@
 file: direi.tsv
+sampling:
+  nOccTot: 344
+  nRows: 344
+  is_sample: false
+  factor: 1.0
 counts:
   ntokens: 344
   nSD: 103
@@ -160,3 +165,13 @@ metadata_SD:
     16-20:
       count: 5
       fpmw: 60.10121043837823
+  macroarea:
+    Nord:
+      count: 88
+      fpmw: 57.18084155903564
+    Centro:
+      count: 4
+      fpmw: 19.382380447054604
+    Sud e Isole:
+      count: 10
+      fpmw: 19.823373739976805
