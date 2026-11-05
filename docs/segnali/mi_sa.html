@@ -163,6 +163,34 @@ input {
     background-color: #b51700;
 }
 
+/* Pulsanti accanto all'intestazione dell'esempio */
+.example-actions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.read-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ffffff;
+    color: #095775 !important;
+    border: 1px solid #095775;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 16px;
+    text-decoration: none !important;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.read-btn:hover {
+    color: #b51700 !important;
+    border-color: #b51700;
+}
+
 .transcript-table {
     width: 100%;
     border-collapse: collapse;
@@ -507,7 +535,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, TOA3012</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3012&begin=426284&end=429025" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/TOA3012#:~:text=che%20ne%20so%20io,gioved%C3%AC%20palazzo%20nuovo" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3012&begin=426284&end=429025" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -543,7 +574,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA004</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA004&begin=2132700&end=2140680" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA004#:~:text=non%20lo%20sapevi,danza%20e%20noi" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA004&begin=2132700&end=2140680" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -590,7 +624,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA004</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA004&begin=2307480&end=2313590" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA004#:~:text=perch%C3%A9%20cos%C3%AC%20ci%20conoscevamo,ah%20ah%20ah" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA004&begin=2307480&end=2313590" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -626,7 +663,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBB017</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB017&begin=2568493&end=2569947" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBB017#:~:text=o%20tipo%20i,non%20fa%20parte" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB017&begin=2568493&end=2569947" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -673,7 +713,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOA3003</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3003&begin=1387962&end=1389581" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOA3003#:~:text=eh%20cesto%20%C3%A8%20sbagliato,dico%20sempre%20cesto" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3003&begin=1387962&end=1389581" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -709,7 +752,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA014</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA014&begin=469180&end=470530" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA014#:~:text=so%20che%20c%27%C3%A8%20un,okay" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA014&begin=469180&end=470530" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -756,7 +802,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOA3021</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3021&begin=703852&end=705599" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOA3021#:~:text=gli%20ha%20tirato%20mi" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3021&begin=703852&end=705599" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -792,7 +841,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOA3021</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3021&begin=1666227&end=1673380" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOA3021#:~:text=stava%20ehm,senso%20stava%20usando" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3021&begin=1666227&end=1673380" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -839,7 +891,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBB017</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB017&begin=697335&end=699541" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBB017#:~:text=e%20poi%20mi%20si,settore%20in%20crisi" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB017&begin=697335&end=699541" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -875,7 +930,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA028</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA028&begin=2578460&end=2579674" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA028#:~:text=il%20era%20quello%20il,sinceramente%20non%20lo%20so" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA028&begin=2578460&end=2579674" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -922,7 +980,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOD2005</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOD2005&begin=1333540&end=1334780" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOD2005#:~:text=ma%20quello%20l%C3%A0%20cio%C3%A8,trattamenti%20particolari%20c%27%C3%A8" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOD2005&begin=1333540&end=1334780" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -958,7 +1019,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOA3017</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3017&begin=578937&end=580397" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOA3017#:~:text=l%27ho%20mangiata%20tutta%20io,x%20ha%20ha" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3017&begin=578937&end=580397" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1005,7 +1069,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, TOA3011</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3011&begin=847176&end=850206" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/TOA3011#:~:text=secondo%20me%20costa%20meno,ci%20arrangiamo%20ma" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3011&begin=847176&end=850206" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1041,7 +1108,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOD2014</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOD2014&begin=450060&end=455933" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOD2014#:~:text=eh%20anche%20a%20me,aver%20capito%20cio%C3%A8" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOD2014&begin=450060&end=455933" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1088,7 +1158,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIPasti, KPS010</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPS010&begin=461460&end=462610" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIPasti/html/KPS010#:~:text=allora%20c%27%C3%A8%20kanye%20west,non%20%C3%A8%20grave" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPS010&begin=461460&end=462610" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1124,7 +1197,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIPasti, KPC004</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPC004&begin=1125695&end=1128649" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIPasti/html/KPC004#:~:text=credo%20che%20%C3%A8%20l%27unica,s%C3%AC" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPC004&begin=1125695&end=1128649" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1171,7 +1247,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIPasti, KPN030</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN030&begin=872706&end=873660" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIPasti/html/KPN030#:~:text=stefano%20lino%20rossi,io%20sono%20allergica" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN030&begin=872706&end=873660" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1207,7 +1286,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA030</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA030&begin=1739250&end=1741184" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA030#:~:text=penso%20ehm,mi%20sa%20vabb%C3%A8" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA030&begin=1739250&end=1741184" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>
@@ -1254,7 +1336,10 @@ function loadPlot(divId, jsonPath) {
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA019</span>
-            <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA019&begin=1694391&end=1697241" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA019#:~:text=no%20ma%20quello%20%C3%A8,a%20san%20luca" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA019&begin=1694391&end=1697241" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
         </div>
         <table class="transcript-table">
             <tbody>

@@ -74,10 +74,11 @@ for sd in df["SD_name"].unique():
 
     n = len(X_sd)
 
-    if n < 20:
+    if n < 50:
         continue
 
-    n_clusters = min(5, max(2, n // 50))
+    #n_clusters = min(5, max(2, n // 50))
+    n_clusters = max(2, n // 50) 
 
     cl = AgglomerativeClustering(
         n_clusters=n_clusters
@@ -115,7 +116,7 @@ cluster_profiles = pd.DataFrame(cluster_profiles)
 
 cluster_profiles = (
     cluster_profiles
-    [cluster_profiles["size"] >= 20]
+    [cluster_profiles["size"] >= 50]
 )
 
 feature_cols = [
@@ -128,6 +129,7 @@ M = cluster_profiles[feature_cols]
 sim = cosine_similarity(M)
 
 
+
 rows = []
 
 for i in range(len(cluster_profiles)):
@@ -137,21 +139,68 @@ for i in range(len(cluster_profiles)):
         sd1 = cluster_profiles.iloc[i]["SD"]
         sd2 = cluster_profiles.iloc[j]["SD"]
 
+        # confronta solo cluster appartenenti a SD diversi
         if sd1 == sd2:
             continue
 
+        # -------------------------
+        # informazioni cluster 1
+        # -------------------------
+
+        cluster1 = cluster_profiles.iloc[i]
+
+        size1 = int(cluster1["size"])
+
+        top_idx1 = cluster1[feature_cols].idxmax()
+        top_weight1 = cluster1[top_idx1]
+
+        # -------------------------
+        # informazioni cluster 2
+        # -------------------------
+
+        cluster2 = cluster_profiles.iloc[j]
+
+        size2 = int(cluster2["size"])
+
+        top_idx2 = cluster2[feature_cols].idxmax()
+        top_weight2 = cluster2[top_idx2]
+
+        # -------------------------
+        # salva confronto
+        # -------------------------
+
         rows.append([
-            cluster_profiles.iloc[i]["cluster_id"],
-            cluster_profiles.iloc[j]["cluster_id"],
-            sim[i, j]
+            cluster1["cluster_id"],
+            cluster2["cluster_id"],
+
+            sim[i, j],
+
+            size1,
+            size2,
+
+            top_idx1,
+            top_weight1,
+
+            top_idx2,
+            top_weight2
         ])
+
 
 pairs = pd.DataFrame(
     rows,
     columns=[
         "cluster1",
         "cluster2",
-        "similarity"
+        "similarity",
+
+        "n_occ_cluster1",
+        "n_occ_cluster2",
+
+        "top_feature_cluster1",
+        "top_weight_cluster1",
+
+        "top_feature_cluster2",
+        "top_weight_cluster2"
     ]
 )
 
@@ -161,9 +210,11 @@ pairs = pairs.sort_values(
     ascending=False
 )
 
+
 print(
-    pairs.head(50)
+    pairs.head(50).to_string(index=False)
 )
+
 
 def show_cluster(name):
 
