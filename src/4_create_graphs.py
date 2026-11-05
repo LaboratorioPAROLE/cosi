@@ -1,3 +1,4 @@
+import json
 import yaml
 import pandas as pd
 from pathlib import Path
@@ -17,6 +18,12 @@ PURPLE_SCALE = [
     [0.75, "#823cf4"],
     [1.0, "#4a1a9e"],
 ]
+
+# contorno nero (1px su 8 direzioni) per le etichette bianche
+TEXT_OUTLINE = ", ".join(
+    f"{x}px {y}px 0 #000000"
+    for x, y in [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
+)
 
 GEOJSON_URL = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson"
 
@@ -124,7 +131,15 @@ def save_fig_json(fig, path):
     (fig.to_json() usa il PlotlyJSONEncoder, gestisce numpy/pandas correttamente).
     Niente libreria Plotly duplicata: il file pesa KB, non MB.
     """
-    path.write_text(fig.to_json(), encoding="utf-8")
+    d = json.loads(fig.to_json())
+
+    # contorno nero alle etichette delle macroaree (textfont.shadow di Plotly.js;
+    # aggiunto qui per non dipendere dalla versione di plotly in Python)
+    for tr in d.get("data", []):
+        if tr.get("meta") == "area_label":
+            tr.setdefault("textfont", {})["shadow"] = TEXT_OUTLINE
+
+    path.write_text(json.dumps(d), encoding="utf-8")
 
 # =========================
 # PROIEZIONE: titolo, nota, hover
@@ -400,27 +415,23 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             marker_line_width=0.3
         )
 
-        # etichette delle tre macroaree: testo bianco sui viola scuri,
-        # testo scuro sui viola chiari (una traccia per colore)
-        light = {"lat": [], "lon": [], "text": []}
-        dark = {"lat": [], "lon": [], "text": []}
-
+        # etichette delle tre macroaree: testo bianco con contorno nero
+        # (il contorno viene aggiunto in save_fig_json tramite meta="area_label")
+        lab_lat, lab_lon, lab_text = [], [], []
         for area, (lat, lon) in AREA_LABEL_POS.items():
             val = (areas.get(area, {}) or {}).get("fpmw", 0)
-            target = light if val / vmax > 0.55 else dark
-            target["lat"].append(lat)
-            target["lon"].append(lon)
-            target["text"].append(f"<b>{area}</b><br>{val:.1f}")
+            lab_lat.append(lat)
+            lab_lon.append(lon)
+            lab_text.append(f"<b>{area}</b><br>{val:.1f}")
 
-        for group, color in [(light, "#ffffff"), (dark, "#1f1235")]:
-            if group["text"]:
-                fig.add_trace(go.Scattergeo(
-                    lat=group["lat"], lon=group["lon"], text=group["text"],
-                    mode="text",
-                    textfont=dict(size=13, color=color),
-                    hoverinfo="skip",
-                    showlegend=False
-                ))
+        fig.add_trace(go.Scattergeo(
+            lat=lab_lat, lon=lab_lon, text=lab_text,
+            mode="text",
+            textfont=dict(size=11, color="#ffffff"),
+            hoverinfo="skip",
+            showlegend=False,
+            meta="area_label"
+        ))
 
         fig.update_geos(fitbounds="locations", visible=False)
 
