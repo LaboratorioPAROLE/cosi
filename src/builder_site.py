@@ -127,10 +127,15 @@ body {{
     flex-shrink: 0;
 }}
 
-.dataset-raw {{
-    margin-left: 12px;
-    font-size: 0.85rem;
-    color: #888;
+.dataset-links {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1rem;
+}}
+
+.dataset-links .dataset-link {{
+    margin-top: 0;
 }}
 
 table {{
@@ -615,7 +620,6 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
         freq_line = (
             f"Occorrenze analizzate: {ntokens} (campione casuale su "
             f"{sampling['nOccTot']} totali) | Segnali Discorsivi: {nSD}"
-            f" | <i>grafici normalizzati in proiezione</i>"
         )
     else:
         freq_line = f"Occorrenze analizzate: {ntokens} | Segnali Discorsivi: {nSD}"
@@ -699,16 +703,25 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
         <b>Varianti incluse:</b> <i>{varianti}</i>
     </div>
 
-    <a class="dataset-link" href="{tsv_view_url}" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="16" rx="2"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-            <line x1="3" y1="15" x2="21" y2="15"/>
-            <line x1="9" y1="4" x2="9" y2="20"/>
-        </svg>
-        Dataset annotato (.tsv)
-    </a>
-    <a class="dataset-raw" href="{tsv_raw_url}" download>scarica .tsv</a>
+    <div class="dataset-links">
+        <a class="dataset-link" href="{tsv_view_url}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+                <line x1="3" y1="15" x2="21" y2="15"/>
+                <line x1="9" y1="4" x2="9" y2="20"/>
+            </svg>
+            Dataset annotato (.tsv)
+        </a>
+        <a class="dataset-link" href="{tsv_raw_url}" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 4v11"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="4" y1="20" x2="20" y2="20"/>
+            </svg>
+            Scarica .tsv
+        </a>
+    </div>
 
 </div>
 

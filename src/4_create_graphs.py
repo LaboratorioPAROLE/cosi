@@ -138,10 +138,10 @@ def add_proj_note(fig, sampling):
     fig.add_annotation(
         text=(f"Valori normalizzati proiettati: campione di {sampling['nRows']} "
               f"occorrenze su {sampling['nOccTot']} (fattore ×{sampling['factor']:.2f})"),
-        xref="paper", yref="paper", x=0.5, y=-0.2,
+        xref="paper", yref="paper", x=0.5, y=-0.32, yanchor="top",
         showarrow=False, font=dict(size=11, color="#6b7280")
     )
-    fig.update_layout(margin=dict(b=100))
+    fig.update_layout(margin=dict(b=140))
 
 def bar_hover(is_proj):
     h = "<b>%{x}</b><br>Freq: %{customdata[0]}"
@@ -347,21 +347,39 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
 
         areas = metadata["macroarea"]
 
-        # ogni regione prende il valore della sua macroarea
+        # dati delle singole regioni, per l'hover
+        reg_stats = {
+            clean_value(k): v for k, v in metadata.get("region", {}).items()
+            if clean_value(k)
+        }
+
+        def region_hover(reg_key, label, area):
+            head = f"<b>{label}</b><br><span style='color:#888'>{area}</span><br>"
+            total = REGION_TOTALS.get(reg_key, 0)
+            if not total:
+                return head + "Dati non disponibili"
+
+            v = reg_stats.get(reg_key, {}) or {}
+            txt = head + f"Freq: {v.get('count', 0)}"
+            if is_proj:
+                txt += f"<br>Freq proiettata: {count_proj(v):.0f}"
+            txt += f"<br>Freq (norm.): {v.get('fpmw', 0):.2f}"
+            if total < MIN_REGION_TOKENS:
+                txt += "<br><i>Pochi dati nel corpus: valore poco affidabile</i>"
+            return txt
+
+        # colore = valore della macroarea; hover = valori della regione
         rows = []
         for reg_key, label in REGION_LABEL.items():
             area = MACROAREA[reg_key]
             v = areas.get(area, {}) or {}
             rows.append({
                 "Regione": label,
-                "Area": area,
-                "Freq": v.get("count", 0),
-                "Freq_proj": round(count_proj(v)),
-                "Freq_norm": v.get("fpmw", 0)
+                "Freq_norm": v.get("fpmw", 0),
+                "Hover": region_hover(reg_key, label, area)
             })
 
         df = pd.DataFrame(rows)
-        df["Freq_norm_display"] = df["Freq_norm"].round(2)
         vmax = df["Freq_norm"].max() or 1
 
         fig = px.choropleth(
@@ -375,33 +393,34 @@ for yaml_file in YAML_DIR.glob("*.yaml"):
             labels={"Freq_norm": "Freq (per milione)"}
         )
 
-        hover = "<b>%{customdata[0]}</b><br>(%{location})<br>Freq: %{customdata[1]}<br>"
-        if is_proj:
-            hover += "Freq proiettata: %{customdata[2]}<br>"
-        hover += "Freq (norm.): %{customdata[3]}<extra></extra>"
-
         fig.update_traces(
-            hovertemplate=hover,
-            customdata=df[["Area", "Freq", "Freq_proj", "Freq_norm_display"]].values,
+            hovertemplate="%{customdata[0]}<extra></extra>",
+            customdata=df[["Hover"]].values,
             marker_line_color=BORDO,
             marker_line_width=0.3
         )
 
-        # etichette testuali delle tre macroaree
-        lab_names, lab_lat, lab_lon = [], [], []
+        # etichette delle tre macroaree: testo bianco sui viola scuri,
+        # testo scuro sui viola chiari (una traccia per colore)
+        light = {"lat": [], "lon": [], "text": []}
+        dark = {"lat": [], "lon": [], "text": []}
+
         for area, (lat, lon) in AREA_LABEL_POS.items():
             val = (areas.get(area, {}) or {}).get("fpmw", 0)
-            lab_names.append(f"<b>{area}</b><br>{val:.1f}")
-            lab_lat.append(lat)
-            lab_lon.append(lon)
+            target = light if val / vmax > 0.55 else dark
+            target["lat"].append(lat)
+            target["lon"].append(lon)
+            target["text"].append(f"<b>{area}</b><br>{val:.1f}")
 
-        fig.add_trace(go.Scattergeo(
-            lat=lab_lat, lon=lab_lon, text=lab_names,
-            mode="text",
-            textfont=dict(size=12, color="#1f1235"),
-            hoverinfo="skip",
-            showlegend=False
-        ))
+        for group, color in [(light, "#ffffff"), (dark, "#1f1235")]:
+            if group["text"]:
+                fig.add_trace(go.Scattergeo(
+                    lat=group["lat"], lon=group["lon"], text=group["text"],
+                    mode="text",
+                    textfont=dict(size=13, color=color),
+                    hoverinfo="skip",
+                    showlegend=False
+                ))
 
         fig.update_geos(fitbounds="locations", visible=False)
 
