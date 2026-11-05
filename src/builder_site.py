@@ -653,7 +653,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
     type_json = f"../imgs/{name}/type.json"
     age_json = f"../imgs/{name}/age.json"
-    region_json = f"../imgs/{name}/region_map.json"
+    region_json = f"../imgs/{name}/macroarea_map.json"
 
     body = f"""
 <div class="card">
