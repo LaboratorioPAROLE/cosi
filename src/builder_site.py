@@ -23,6 +23,13 @@ DOCS_DIR.mkdir(parents=True, exist_ok=True)
 SIGNAL_PAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 DOCS_IMGS_DIR = DOCS_DIR / "imgs"
+COSI_IMGS_DIR = PROJECT_ROOT / "cosi" / "imgs"
+
+# I grafici vivono in cosi/imgs; il sito pubblica solo docs/, quindi li copiamo
+if COSI_IMGS_DIR.exists():
+    shutil.copytree(COSI_IMGS_DIR, DOCS_IMGS_DIR, dirs_exist_ok=True)
+else:
+    print("ATTENZIONE: cosi/imgs non trovata, lancia prima 4_create_graphs.py")
 
 # =========================
 # COLORI
@@ -473,7 +480,7 @@ function toggle(id) {{
 }}
 
 function loadPlot(divId, jsonPath) {{
-    fetch(jsonPath)
+    fetch(jsonPath, {{cache: "no-cache"}})
         .then(r => {{
             if (!r.ok) throw new Error("Impossibile caricare " + jsonPath);
             return r.json();
@@ -602,6 +609,17 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     if varianti is None:
         varianti = "-"
 
+    # Campione o estrazione completa?
+    sampling = stats.get("sampling", {}) or {}
+    if sampling.get("is_sample"):
+        freq_line = (
+            f"Occorrenze analizzate: {ntokens} (campione casuale su "
+            f"{sampling['nOccTot']} totali) | Segnali Discorsivi: {nSD}"
+            f" | <i>grafici normalizzati in proiezione</i>"
+        )
+    else:
+        freq_line = f"Occorrenze analizzate: {ntokens} | Segnali Discorsivi: {nSD}"
+
     macro = stats["macrofunctions_SD"]
     micro = stats["microfunctions_SD"]
 
@@ -655,6 +673,11 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     age_json = f"../imgs/{name}/age.json"
     region_json = f"../imgs/{name}/macroarea_map.json"
 
+    # controllo: avvisa se i JSON dei grafici mancano in docs/imgs
+    for p in ["type.json", "age.json", "macroarea_map.json"]:
+        if not (DOCS_IMGS_DIR / name / p).exists():
+            print(f"  manca imgs/{name}/{p}")
+
     body = f"""
 <div class="card">
 
@@ -669,7 +692,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
     <div style="font-size: 0.95rem; color: #666;">
         <b>Frequenza:</b>
-        Occorrenze analizzate: {ntokens} | Segnali Discorsivi: {nSD}
+        {freq_line}
     </div>
     <br>
     <div style="font-size: 0.95rem; color: #666;">

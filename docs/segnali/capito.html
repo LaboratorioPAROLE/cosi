@@ -426,7 +426,7 @@ function toggle(id) {
 }
 
 function loadPlot(divId, jsonPath) {
-    fetch(jsonPath)
+    fetch(jsonPath, {cache: "no-cache"})
         .then(r => {
             if (!r.ok) throw new Error("Impossibile caricare " + jsonPath);
             return r.json();
@@ -494,7 +494,7 @@ function loadPlot(divId, jsonPath) {
 
     <div style="font-size: 0.95rem; color: #666;">
         <b>Frequenza:</b>
-        Occorrenze analizzate: 800 | Segnali Discorsivi: 201
+        Occorrenze analizzate: 800 (campione casuale su 2067 totali) | Segnali Discorsivi: 201 | <i>grafici normalizzati in proiezione</i>
     </div>
     <br>
     <div style="font-size: 0.95rem; color: #666;">

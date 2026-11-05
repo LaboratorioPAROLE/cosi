@@ -133,18 +133,27 @@ def fpmw(count, total):
 # =========================
 # CAMPIONAMENTO / PROIEZIONE
 # =========================
-def get_sampling(stem, nrows):
+# nOccTot letto da tutti i yaml dei segnali in cosi/,
+# indicizzato sia per nome del tsv (campo "file") sia per nome del yaml
+N_OCC_BY_FILE = {}
+N_OCC_BY_STEM = {}
+
+for p in COSI_DIR.glob("*.yaml"):
+    with open(p, encoding="utf-8") as f:
+        d = yaml.safe_load(f) or {}
+    if not isinstance(d, dict) or d.get("nOccTot") is None:
+        continue
+    N_OCC_BY_STEM[p.stem] = d["nOccTot"]
+    if d.get("file"):
+        N_OCC_BY_FILE[Path(str(d["file"])).name] = d["nOccTot"]
+
+
+def get_sampling(tsv_file, nrows):
     """
-    Legge nOccTot da cosi/<stem>.yaml.
     Se nOccTot > righe del tsv, il tsv è un campione:
     fattore di proiezione = nOccTot / righe estratte.
     """
-    n_occ_tot = None
-    sd_yaml = COSI_DIR / f"{stem}.yaml"
-
-    if sd_yaml.exists():
-        with open(sd_yaml, encoding="utf-8") as f:
-            n_occ_tot = (yaml.safe_load(f) or {}).get("nOccTot")
+    n_occ_tot = N_OCC_BY_FILE.get(tsv_file.name, N_OCC_BY_STEM.get(tsv_file.stem))
 
     try:
         n_occ_tot = int(n_occ_tot)
@@ -260,7 +269,7 @@ for tsv_file in INPUT_DIR.glob("*.tsv"):
     # =========================
     # SAMPLING
     # =========================
-    sampling = get_sampling(tsv_file.stem, ntokens)
+    sampling = get_sampling(tsv_file, ntokens)
     factor = sampling["factor"]
 
     # =========================
@@ -311,5 +320,11 @@ for tsv_file in INPUT_DIR.glob("*.tsv"):
     with open(out_file, "w", encoding="utf-8") as f:
         yaml.dump(out, f, allow_unicode=True, sort_keys=False)
 
-    tag = f" [campione ×{factor:.2f}]" if sampling["is_sample"] else ""
-    print(f"Creato: {out_file}{tag}")
+    # diagnostica: così vedi subito se nOccTot è stato trovato
+    if sampling["nOccTot"] is None:
+        tag = "  [nOccTot NON trovato]"
+    elif sampling["is_sample"]:
+        tag = f"  [campione: {ntokens} su {sampling['nOccTot']}, ×{factor:.2f}]"
+    else:
+        tag = f"  [completo: {ntokens} righe, nOccTot {sampling['nOccTot']}]"
+    print(f"Creato: {out_file.name}{tag}")
