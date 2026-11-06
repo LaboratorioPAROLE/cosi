@@ -141,7 +141,7 @@ conteggio proiettato = conteggio × fattore
 Le frequenze normalizzate si calcolano sul conteggio proiettato. Nei grafici questi segnali sono indicati come *proiezione*, e i tooltip riportano sia il conteggio reale sia quello proiettato. La proiezione assume che il campione rifletta la distribuzione dell'intera popolazione: sulle categorie con pochi casi l'incertezza è alta.
 
 ### Macroaree
-Le regioni sono raggruppate in tre macroaree:
+Le regioni sono raggruppate in tre macroaree, seguendo la suddivisione utilizzata nel KIParla (si veda il modulo [KIPasti](https://github.com/KIParla/KIPasti)):
 
 | Macroarea | Regioni |
 |---|---|
@@ -149,7 +149,7 @@ Le regioni sono raggruppate in tre macroaree:
 | Centro | Lazio, Marche, Toscana, Umbria |
 | Sud e Isole | Abruzzo, Basilicata, Calabria, Campania, Molise, Puglia, Sardegna, Sicilia |
 
-La frequenza di un'area **non** è la somma delle frequenze normalizzate regionali, ma:
+La frequenza corrisponde a:
 
 ```
 somma occorrenze SD delle regioni dell'area / somma token del corpus delle regioni dell'area × 1.000.000
@@ -166,17 +166,6 @@ Tutte le regioni concorrono al calcolo, anche quelle con pochi dati. Nella mappa
 
 ```bash
 pip install pandas openpyxl pyyaml plotly
-```
-
-Gli script 2 e `example_builder.py` richiedono i **corpora KIParla** clonati nella stessa cartella che contiene questa repository, ciascuno con le sottocartelle `tsv/` e `metadata/`:
-
-```
-<cartella>/
-├── cosi/
-├── KIP/
-├── KIPasti/
-├── ParlaBO/
-└── ParlaTO/
 ```
 
 Il sito carica Plotly.js da CDN e la geometria delle regioni da [openpolis/geojson-italy](https://github.com/openpolis/geojson-italy).
@@ -208,14 +197,10 @@ Il sito carica Plotly.js da CDN e la geometria delle regioni da [openpolis/geojs
 ---
 ## Prodotti della ricerca
 ### Presentazioni
-* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. Talking Data - Methodological and theoretical challenges raised by spoken interaction data. Università di Bologna.
-* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone. 2026. Segnali discorsivi e tipi di interazione: uno studio corpus-based a partire da COSÌ (Catalogo Online dei Segnali discorsivi dell’Italiano). XXVI AItLA - L’interazione comunicativa: relazioni, pratiche, prospettive. Università di Bologna.
-* Pisciotta, Flavio, Luisa Troncone, Giovanni Di Paola, Miriam Voghera, Andrea Sansò, Alfonsina Buoniconto, Carmela Sammarco, Pasquale Esposito, Iolanda Alfano. 2026, da presentare. Coppie funzionalmente simili di segnali discorsivi italiani e distribuzione sociolinguistica: uno studio quantitativo corpus-based. DISROM9 - Congresso Internazionale sui Marcatori Discorsivi nelle Lingue Romanze. Università di Oviedo.
+* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. _Talking Data - Methodological and theoretical challenges raised by spoken interaction data_. Università di Bologna.
+* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone. 2026. Segnali discorsivi e tipi di interazione: uno studio corpus-based a partire da COSÌ (Catalogo Online dei Segnali discorsivi dell’Italiano). _XXVI AItLA - L’interazione comunicativa: relazioni, pratiche, prospettive_. Università di Bologna.
+* Pisciotta, Flavio, Luisa Troncone, Giovanni Di Paola, Miriam Voghera, Andrea Sansò, Alfonsina Buoniconto, Carmela Sammarco, Pasquale Esposito, Iolanda Alfano. 2026, da presentare. Coppie funzionalmente simili di segnali discorsivi italiani e distribuzione sociolinguistica: uno studio quantitativo corpus-based. _DISROM9 - Congresso Internazionale sui Marcatori Discorsivi nelle Lingue Romanze_. Università di Oviedo.
 
 ### Articoli
-* Pisciotta, Flavio, Luisa Troncone, Giovanni Di Paola, Alfonsina Buoniconto, Carmela Sammarco, Pasquale Esposito, Iolanda Alfano, Andrea Sansò, Miriam Voghera. Submitted. Towards COSÌ: designing the First Database of Italian Discourse Markers.
-
----
-# Licenza
-
+Coming soon!
 COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano  © 2025 by Laboratorio PAROLE Unisa is licensed under Creative Commons Attribution 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/
