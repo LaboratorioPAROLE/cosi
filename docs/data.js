@@ -1,9 +1,27 @@
 const DATA = [
   {
+    "lemma": "allora",
+    "frequenza": "alta",
+    "micro": "Presa di turno, Filler, Marcatura dell'inferenza, Cessione del turno",
+    "link": "segnali/allora.html"
+  },
+  {
+    "lemma": "bene",
+    "frequenza": "medio-alta",
+    "micro": "Chiusura del topic, Conferma dell'attenzione, Introduzione o ripresa del topic, Accordo, Presa di turno",
+    "link": "segnali/bene.html"
+  },
+  {
     "lemma": "capito",
     "frequenza": "medio-bassa",
     "micro": "Richiesta di accordo/conferma, Marcatura della conoscenza condivisa, Filler",
     "link": "segnali/capito.html"
+  },
+  {
+    "lemma": "cioè",
+    "frequenza": "alta",
+    "micro": "Riformulazione, Filler, Presa di turno, Prolettico, Marcatura della conoscenza condivisa",
+    "link": "segnali/cioe.html"
   },
   {
     "lemma": "comunque",
@@ -34,6 +52,12 @@ const DATA = [
     "frequenza": "bassa",
     "micro": "Marcatura dell'inferenza, Conferma dell'attenzione, Richiesta di accordo/conferma, Modulazione del grado di confidenza, Accordo",
     "link": "segnali/immagino.html"
+  },
+  {
+    "lemma": "ma",
+    "frequenza": "alta",
+    "micro": "Introduzione o ripresa del topic, Presa di turno, Interruzione, Specificazione, Intensificazione",
+    "link": "segnali/ma.html"
   },
   {
     "lemma": "mi sa",

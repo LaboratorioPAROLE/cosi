@@ -1,0 +1,21 @@
+nomeSD: bene
+file: bene.tsv
+nOccTot: 2465
+fascia_frequenza: medio-alta
+varianti: ~
+
+source:
+  lemma: bene
+  pos: avverbio
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/bene/type.html
+  age: ../imgs/bene/age.html
+  region: ../imgs/bene/region_map.html

@@ -1,13 +1,13 @@
 file: quindi.tsv
 sampling:
   nOccTot: 12146
-  nRows: 806
+  nRows: 800
   is_sample: true
-  factor: 15.069478908188586
+  factor: 15.1825
 counts:
-  ntokens: 806
+  ntokens: 800
   nSD: 549
-  nSD_proj: 8273.14
+  nSD_proj: 8335.19
 macrofunctions_SD:
   Interazionale: 43
   Metatestuale: 297
@@ -33,230 +33,230 @@ metadata_SD:
   type:
     free-conversation:
       count: 74
-      count_proj: 1115.14
-      fpmw: 1708.2488598401883
+      count_proj: 1123.5
+      fpmw: 1721.0607262889896
     semistructured-interview:
       count: 404
-      count_proj: 6088.07
-      fpmw: 4563.61627899223
+      count_proj: 6133.73
+      fpmw: 4597.84340108467
     office-hours:
       count: 16
-      count_proj: 241.11
-      fpmw: 3469.532082352683
+      count_proj: 242.92
+      fpmw: 3495.553572970328
     exam:
       count: 13
-      count_proj: 195.9
-      fpmw: 3155.2002094807713
+      count_proj: 197.37
+      fpmw: 3178.864211051877
     lecture:
       count: 42
-      count_proj: 632.92
-      fpmw: 3021.1465333176793
+      count_proj: 637.66
+      fpmw: 3043.805132317562
   participants-relationship:
     symmetric:
       count: 153
-      count_proj: 2305.63
+      count_proj: 2322.92
     asymmetric:
       count: 396
-      count_proj: 5967.51
+      count_proj: 6012.27
   topic:
     free:
       count: 90
-      count_proj: 1356.25
+      count_proj: 1366.42
     fixed:
       count: 459
-      count_proj: 6916.89
+      count_proj: 6968.77
   year:
     '2022':
       count: 115
-      count_proj: 1732.99
+      count_proj: 1745.99
     '2023':
       count: 30
-      count_proj: 452.08
+      count_proj: 455.47
     '2019':
       count: 156
-      count_proj: 2350.84
+      count_proj: 2368.47
     '2018':
       count: 126
-      count_proj: 1898.75
+      count_proj: 1912.99
     '2020':
       count: 30
-      count_proj: 452.08
+      count_proj: 455.47
     '2021':
       count: 36
-      count_proj: 542.5
+      count_proj: 546.57
     '2024':
       count: 56
-      count_proj: 843.89
+      count_proj: 850.22
   occupation:
     0-Retired:
       count: 44
-      count_proj: 663.06
+      count_proj: 668.03
     0-Students:
       count: 252
-      count_proj: 3797.51
+      count_proj: 3825.99
     4-Clerical-Workers:
       count: 20
-      count_proj: 301.39
+      count_proj: 303.65
     7-Plant-Operators:
       count: 25
-      count_proj: 376.74
+      count_proj: 379.56
     5-Service-Workers:
       count: 23
-      count_proj: 346.6
+      count_proj: 349.2
     2-Professionals:
       count: 126
-      count_proj: 1898.75
+      count_proj: 1912.99
     6-Craft-Workers:
       count: 14
-      count_proj: 210.97
+      count_proj: 212.55
     0-Unemployed:
       count: 8
-      count_proj: 120.56
+      count_proj: 121.46
     8-Elementary:
       count: 1
-      count_proj: 15.07
+      count_proj: 15.18
     3-Technicians:
       count: 25
-      count_proj: 376.74
+      count_proj: 379.56
     N/A:
       count: 3
-      count_proj: 45.21
+      count_proj: 45.55
     1-Managers:
       count: 6
-      count_proj: 90.42
+      count_proj: 91.09
   gender:
     F:
       count: 351
-      count_proj: 5289.39
+      count_proj: 5329.06
     M:
       count: 196
-      count_proj: 2953.62
+      count_proj: 2975.77
   region:
     puglia:
       count: 3
-      count_proj: 45.21
-      fpmw: 413.0699138797182
+      count_proj: 45.55
+      fpmw: 416.1679382338161
     emilia-romagna:
       count: 215
-      count_proj: 3239.94
-      fpmw: 3944.942602738556
+      count_proj: 3264.24
+      fpmw: 3974.5296722590947
     estero:
       count: 7
-      count_proj: 105.49
-      fpmw: 2529.163526357536
+      count_proj: 106.28
+      fpmw: 2548.132252805217
     marche:
       count: 21
-      count_proj: 316.46
-      fpmw: 5447.1746259976635
+      count_proj: 318.83
+      fpmw: 5488.028435692647
     piemonte:
       count: 133
-      count_proj: 2004.24
-      fpmw: 4036.080105338468
+      count_proj: 2019.27
+      fpmw: 4066.3507061285063
     toscana:
       count: 9
-      count_proj: 135.63
-      fpmw: 2441.1042346640015
+      count_proj: 136.64
+      fpmw: 2459.4125164239813
     basilicata:
       count: 12
-      count_proj: 180.83
-      fpmw: 2826.9407656681938
+      count_proj: 182.19
+      fpmw: 2848.142821410705
     campania:
       count: 14
-      count_proj: 210.97
-      fpmw: 2838.974401714911
+      count_proj: 212.55
+      fpmw: 2860.2667097277726
     sardegna:
       count: 7
-      count_proj: 105.49
-      fpmw: 2364.2636743241387
+      count_proj: 106.28
+      fpmw: 2381.9956518815698
     lazio:
       count: 11
-      count_proj: 165.76
-      fpmw: 2783.661656620169
+      count_proj: 167.01
+      fpmw: 2804.53911904482
     umbria:
       count: 15
-      count_proj: 226.04
-      fpmw: 6814.862782201115
+      count_proj: 227.74
+      fpmw: 6865.974253067623
     sicilia:
       count: 29
-      count_proj: 437.01
-      fpmw: 4815.2726909236735
+      count_proj: 440.29
+      fpmw: 4851.387236105602
     friuli-venezia-giulia:
       count: 2
-      count_proj: 30.14
-      fpmw: 1688.1732939213114
+      count_proj: 30.36
+      fpmw: 1700.834593625721
     lombardia:
       count: 26
-      count_proj: 391.81
-      fpmw: 4241.523065071375
+      count_proj: 394.75
+      fpmw: 4273.33448805941
     calabria:
       count: 8
-      count_proj: 120.56
-      fpmw: 1567.838831434704
+      count_proj: 121.46
+      fpmw: 1579.597622670464
     abruzzo:
       count: 13
-      count_proj: 195.9
-      fpmw: 5042.034946374933
+      count_proj: 197.37
+      fpmw: 5079.850208472743
     trentino-alto-adige:
       count: 3
-      count_proj: 45.21
-      fpmw: 3678.174007368461
+      count_proj: 45.55
+      fpmw: 3705.760312423725
     veneto:
       count: 7
-      count_proj: 105.49
-      fpmw: 1407.9865504180473
+      count_proj: 106.28
+      fpmw: 1418.5464495461824
     N/A:
       count: 6
-      count_proj: 90.42
+      count_proj: 91.09
     liguria:
       count: 3
-      count_proj: 45.21
-      fpmw: 6415.274120131368
+      count_proj: 45.55
+      fpmw: 6463.388676032354
     valle-d-aosta:
       count: 3
-      count_proj: 45.21
-      fpmw: 2719.7952547566933
+      count_proj: 45.55
+      fpmw: 2740.1937191673687
   age-range:
     '>71':
       count: 33
-      count_proj: 497.29
-      fpmw: 1746.9465895590004
+      count_proj: 501.02
+      fpmw: 1760.048688980693
     21-30:
       count: 308
-      count_proj: 4641.4
-      fpmw: 4270.934384294035
+      count_proj: 4676.21
+      fpmw: 4302.96639217624
     41-50:
       count: 25
-      count_proj: 376.74
-      fpmw: 2533.7586520994746
+      count_proj: 379.56
+      fpmw: 2552.761841990221
     51-60:
       count: 54
-      count_proj: 813.75
-      fpmw: 2840.9354242180984
+      count_proj: 819.85
+      fpmw: 2862.2424398997337
     31-40:
       count: 86
-      count_proj: 1295.98
-      fpmw: 5444.3360013788315
+      count_proj: 1305.69
+      fpmw: 5485.1685213891715
     61-70:
       count: 23
-      count_proj: 346.6
-      fpmw: 2124.439250792762
+      count_proj: 349.2
+      fpmw: 2140.3725451737073
     n/a:
       count: 7
-      count_proj: 105.49
+      count_proj: 106.28
     16-20:
       count: 11
-      count_proj: 165.76
-      fpmw: 1992.5266307270376
+      count_proj: 167.01
+      fpmw: 2007.47058045749
   macroarea:
     Nord:
       count: 392
-      count_proj: 5907.24
-      fpmw: 3838.417164135608
+      count_proj: 5951.54
+      fpmw: 3867.205292866625
     Centro:
       count: 56
-      count_proj: 843.89
-      fpmw: 4089.153226723267
+      count_proj: 850.22
+      fpmw: 4119.821875923692
     Sud e Isole:
       count: 86
-      count_proj: 1295.98
-      fpmw: 2569.060047187992
+      count_proj: 1305.69
+      fpmw: 2588.3279975419014

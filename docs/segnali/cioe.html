@@ -1,0 +1,1578 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cioe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Plotly.js caricato una sola volta da CDN -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* Titoli nelle card */
+.card h2 {
+    margin-top: 0;
+    color: #1e3c72;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #1e3c72;
+    border-bottom: 2px solid #eef1f6;
+    padding-bottom: 0.6rem;
+}
+
+/* Link al dataset annotato */
+.dataset-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 8px 14px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.dataset-link:hover {
+    border-color: #b51700;
+    color: #b51700;
+}
+
+.dataset-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.dataset-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.dataset-links .dataset-link {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+tr:hover {
+    background: #f9fbff;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.9rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.badge {
+    background: #2a5298;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.plot-container {
+    width: 100%;
+    height: 400px;
+}
+
+/* =========================================
+   STILE ESEMPI (SCHEDA / KIPARLA)
+   ========================================= */
+.example-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    margin: 10px 0 14px 0;
+    padding: 12px 16px;
+}
+
+.example-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* Nome corpus + Conv_ID in testo normale con virgola */
+.conv-id {
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.92rem;
+}
+
+.audio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #095775;
+    color: #ffffff !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 16px;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease;
+}
+
+.audio-btn:hover {
+    background-color: #b51700;
+}
+
+/* Pulsanti accanto all'intestazione dell'esempio */
+.example-actions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.read-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ffffff;
+    color: #095775 !important;
+    border: 1px solid #095775;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 16px;
+    text-decoration: none !important;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.read-btn:hover {
+    color: #b51700 !important;
+    border-color: #b51700;
+}
+
+.transcript-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transcript-table tr {
+    border-bottom: 1px solid #f8fafc;
+}
+
+.transcript-table tr:last-child {
+    border-bottom: none;
+}
+
+/* Evidenziazione del turno target: azzurrino leggero e sobrio */
+.transcript-table tr.focus {
+    background-color: #f0f7ff !important;
+    border-left: 3px solid #3182ce;
+}
+
+.speaker-col {
+    width: 80px;
+    min-width: 70px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    vertical-align: top;
+    padding: 6px 10px 6px 8px;
+}
+
+.text-col {
+    color: #2d3748;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    vertical-align: top;
+    padding: 6px 8px;
+}
+
+/* Parola target in rosso pulito: NO box, NO sfondi, NO bordi */
+.text-col b {
+    font-weight: 700;
+    color: #c53030;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.example-card.error {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    border-color: #fed7d7;
+}
+
+/* =========================================
+   HEADER E NAVBAR
+   ========================================= */
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.brand {
+    --unisa-h: 100px;
+    --dipsum-w: 130px;
+    --stack-gap: 5px;
+    --side-gap: clamp(16px, 6vw, 100px);
+    --side-lift: 30px;
+    --parole-scale: 1.08;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    padding: 0.6rem 1.5rem 0 1.5rem;
+}
+
+.brand img { display: block; }
+
+.brand .logo-main {
+    height: 250px;
+    width: auto;
+    margin-bottom: 8px;
+    grid-column: 2;
+}
+
+.brand .side { margin-bottom: var(--side-lift); }
+
+.brand .side-left {
+    grid-column: 1;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--stack-gap);
+}
+
+.brand .side-right {
+    grid-column: 3;
+    justify-self: center;
+}
+
+.brand .logo-unisa  { height: var(--unisa-h); width: auto; }
+.brand .logo-dipsum { width: var(--dipsum-w); height: auto; }
+
+.brand .logo-parole {
+    height: calc((var(--unisa-h) + var(--stack-gap) + var(--dipsum-w) / 3.556) * var(--parole-scale));
+    width: auto;
+}
+
+@media (max-width: 700px) {
+    .brand {
+        --unisa-h: 55px;
+        --dipsum-w: 72px;
+        --stack-gap: 4px;
+        --side-lift: 12px;
+        padding: 0.6rem 0.8rem 0 0.8rem;
+    }
+    .brand .logo-main { height: 140px; }
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 6px 0 10px 0;
+    background: white;
+    margin-top: 6px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #095775;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.navbar a:hover {
+    color: #b51700;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 22px;
+    background: white;
+    min-width: 160px;
+    border: 1px solid #eee;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background: #f5f7fa;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Ricerca avanzata */
+.adv-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #095775;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.adv-toggle:hover {
+    color: #b51700;
+}
+
+.adv-panel {
+    display: none;
+    margin-top: 1rem;
+}
+
+.adv-panel label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.adv-panel input {
+    margin-bottom: 0;
+}
+
+/* Intestazioni ordinabili */
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+th.sortable:hover {
+    color: #b51700;
+}
+
+th.sortable .sort-icon {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* Come citare questa voce */
+.cite-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    background: #f9fbff;
+    border-left: 3px solid #095775;
+    padding: 0.8rem 1rem;
+    margin: 0 0 1rem 0;
+    word-break: break-word;
+}
+
+.cite-text a {
+    color: #095775;
+}
+
+.cite-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cite-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cite-btn:hover {
+    border-color: #b51700;
+    color: #b51700;
+}
+
+.cite-btn.copied {
+    border-color: #2f855a;
+    color: #2f855a;
+}
+
+.cite-btn-ghost {
+    background: none;
+    border-color: transparent;
+}
+
+.cite-bib {
+    margin: 1rem 0 0 0;
+    padding: 0.9rem 1rem;
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+th.sortable[aria-sort="ascending"] .sort-icon,
+th.sortable[aria-sort="descending"] .sort-icon {
+    color: #2a5298;
+}
+</style>
+
+<script>
+function toggle(id) {
+    const el = document.getElementById(id);
+    const arrow = document.getElementById('arrow-' + id);
+    const isHidden = el.style.display === "none";
+
+    el.style.display = isHidden ? "table-row" : "none";
+    if (arrow) {
+        arrow.textContent = isHidden ? "▲" : "↕";
+    }
+}
+
+// Data di consultazione nella citazione (oggi, in italiano e ISO)
+document.addEventListener("DOMContentLoaded", () => {
+    const d = new Date();
+    const it = d.toLocaleDateString("it-IT", {day: "numeric", month: "long", year: "numeric"});
+    const iso = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    document.querySelectorAll(".cite-date").forEach(el => el.textContent = it);
+    document.querySelectorAll(".cite-date-iso").forEach(el => el.textContent = iso);
+});
+
+function copyCite(id, btn) {
+    const text = document.getElementById(id).textContent.trim();
+    const label = btn.textContent;
+    const done = () => {
+        btn.textContent = "Copiato ✓";
+        btn.classList.add("copied");
+        setTimeout(() => { btn.textContent = label; btn.classList.remove("copied"); }, 1800);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done);
+    } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        done();
+    }
+}
+
+function toggleBib(btn) {
+    const pre = document.getElementById("cite-bib");
+    pre.hidden = !pre.hidden;
+    btn.textContent = pre.hidden ? "Mostra BibTeX" : "Nascondi BibTeX";
+}
+
+function loadPlot(divId, jsonPath) {
+    fetch(jsonPath, {cache: "no-cache"})
+        .then(r => {
+            if (!r.ok) throw new Error("Impossibile caricare " + jsonPath);
+            return r.json();
+        })
+        .then(fig => {
+            Plotly.newPlot(divId, fig.data, fig.layout, {responsive: true});
+        })
+        .catch(err => {
+            document.getElementById(divId).innerText = "Grafico non disponibile";
+            console.error(err);
+        });
+}
+</script>
+</head>
+<body>
+
+<header class="header">
+
+    <div class="brand">
+        <div class="side side-left">
+            <a href="https://www.unisa.it" target="_blank" rel="noopener">
+                <img class="logo-unisa" src="../logo_unisa.png" alt="Università di Salerno">
+            </a>
+            <a href="https://www.dipsum.unisa.it" target="_blank" rel="noopener">
+                <img class="logo-dipsum" src="../logo_dipsum.png" alt="DipSUM - Dipartimento di Studi Umanistici">
+            </a>
+        </div>
+
+        <img class="logo-main" src="../logo_cosi.png" alt="COSÌ logo">
+
+        <a class="side side-right" href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
+            <img class="logo-parole" src="../logo_parole.png" alt="P.A.R.O.L.E.">
+        </a>
+    </div>
+
+    <nav class="navbar">
+        <a href="../index.html">Home</a>
+        <a href="../chi_siamo.html">Chi siamo</a>
+        <div class="dropdown">
+            <a href="../progetto.html">Progetto ▾</a>
+            <div class="dropdown-content">
+                <a href="../architettura.html">Architettura del database</a>
+                <a href="../schema_annotazione.html">Schema di annotazione</a>
+            </div>
+        </div>
+        <a href="../search.html">Cerca nel database</a>
+        <a href="../prodotti.html">Prodotti della ricerca</a>
+        <a href="../contatti.html">Contatti</a>
+    </nav>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+    <h2 style="font-size: 1.6rem; margin-bottom: 0.4rem;">
+        cioè
+    </h2>
+
+    <div style="font-size: 1rem; color: #555; margin-bottom: 1rem;">
+        da <b>cioè</b>
+        <span style="color:#888;">(congiunzione)</span>
+    </div>
+
+    <div style="font-size: 0.95rem; color: #666;">
+        <b>Frequenza:</b>
+        Occorrenze analizzate: 800 (campione casuale su 14742 totali) | Segnali Discorsivi: 797
+    </div>
+    <br>
+    <div style="font-size: 0.95rem; color: #666;">
+        <b>Varianti incluse:</b> <i>(ortografiche) cioé, cioe, cè, cé, ceh</i>
+    </div>
+
+    <div class="dataset-links">
+        <a class="dataset-link" href="https://github.com/LaboratorioPAROLE/cosi/blob/main/data/tsv/cioe.tsv" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+                <line x1="3" y1="15" x2="21" y2="15"/>
+                <line x1="9" y1="4" x2="9" y2="20"/>
+            </svg>
+            Dataset annotato (.tsv)
+        </a>
+        <a class="dataset-link" href="https://raw.githubusercontent.com/LaboratorioPAROLE/cosi/main/data/tsv/cioe.tsv" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 4v11"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="4" y1="20" x2="20" y2="20"/>
+            </svg>
+            Scarica .tsv
+        </a>
+    </div>
+
+</div>
+
+<div class="card">
+    <h3>Macrofunzioni</h3>
+    <table><tr><th>Macrofunzione</th><th>Frequenza</th></tr><tr style="background:#d4f5d4"><td>Metatestuale</td><td>697</td></tr><tr style="background:#ffe0cc"><td>Interazionale</td><td>124</td></tr><tr style="background:#d6eaff"><td>Cognitiva</td><td>57</td></tr></table>
+    <p></p>
+</div>
+
+<div class="card">
+    <h3>Microfunzioni</h3>
+    <table><tr><th style='width:30px;'></th><th>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>
+<tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex0')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex0">↕</span></td>
+    <td>Metatestuale</td>
+    <td>Riformulazione</td>
+    <td>474</td>
+</tr>
+
+<tr id="ex0" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB024</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBB024#:~:text=quindi%20partivamo%20a%20degli,va%20bene" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB024&begin=2167226&end=2174309" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI091</td>
+            <td class="text-col">quindi partivamo a degli orari osc~ tipo c' era la partita alle otto e mezza di sera tu partivi alle dieci della mattina</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI091</td>
+            <td class="text-col">entrare allo stadio alle tre del pomeriggio quindi del col freddo l' era</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI091</td>
+            <td class="text-col">però allora non c' era ancora la tivù quindi <b>cioè</b> c' era la tivù ma non era come adesso che la vedi tutte dove vuoi e quindi andavi</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI091</td>
+            <td class="text-col">adesso stai comodo sul divano col tuo plaid te la guardi quindi direi adesso come adesso a casa</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR030</td>
+            <td class="text-col">va bene</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIP, TOA3011</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/TOA3011#:~:text=vabb%C3%A8%20gianna%20ma%20perch%C3%A9,nella%20mia%20variet%C3%A0" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3011&begin=615925&end=617790" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO088</td>
+            <td class="text-col">vabbè gianna ma perché tu hai</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO088</td>
+            <td class="text-col">eh effettivi problemi di pronuncia anche nella lingua italiana</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">TO087</td>
+            <td class="text-col">sì <b>cioè</b> per esempio tipo</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">TO085</td>
+            <td class="text-col">nella lingua italiana [PAUSE] nella sua varietà d' italiano</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TO087</td>
+            <td class="text-col">nella mia varietà</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex1')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex1">↕</span></td>
+    <td>Metatestuale</td>
+    <td>Filler</td>
+    <td>150</td>
+</tr>
+
+<tr id="ex1" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTA015</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaTO/html/PTA015#:~:text=e%20bon,birra%20ci%20sta" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTA015&begin=1999476&end=1999991" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI032</td>
+            <td class="text-col">e</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI032</td>
+            <td class="text-col">e bon</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TOI032</td>
+            <td class="text-col"><b>cioè</b> però</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI032</td>
+            <td class="text-col">una birra ci sta</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI032</td>
+            <td class="text-col">cioè ((ride))</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIP, TOA1002</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/TOA1002#:~:text=mah,mh" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA1002&begin=592673&end=595334" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO026</td>
+            <td class="text-col">eh s~ mah</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TO028</td>
+            <td class="text-col">cioè l' idea è quella</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TO026</td>
+            <td class="text-col"><b>cioè</b> [PAUSE] diciamo nell' accordo bilaterale</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO026</td>
+            <td class="text-col">eh sia l' università di partenza che o comunque diciamo le due università</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TO028</td>
+            <td class="text-col">mh</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex2')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex2">↕</span></td>
+    <td>Interazionale</td>
+    <td>Presa di turno</td>
+    <td>42</td>
+</tr>
+
+<tr id="ex2" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBB027</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBB027#:~:text=se%20tu%20vai%20su,no%20no" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBB027&begin=2335051&end=2338698" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI098</td>
+            <td class="text-col">se tu vai su in montagna [PAUSE] hanno un altro tipo di dialettica</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI098</td>
+            <td class="text-col">a livello bolognese cioè un' altro</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOR036</td>
+            <td class="text-col"><b>cioè</b> parole diverse oppure accenti diversi</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI098</td>
+            <td class="text-col">insomma</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI098</td>
+            <td class="text-col">parole dive~ no no paro~</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTD008</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaTO/html/PTD008#:~:text=e%20non%20pi%C3%B9%20la,bon" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD008&begin=963922&end=966402" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI059</td>
+            <td class="text-col">e non più la via</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOR001</td>
+            <td class="text-col">mh mh</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #c53030;">TOI058</td>
+            <td class="text-col"><b>cioè</b> son cose che [PAUSE] che cambiano in tutto non è</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOR001</td>
+            <td class="text-col">sì sì</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">TOI058</td>
+            <td class="text-col">come i supermercati [PAUSE] bon</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex3')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex3">↕</span></td>
+    <td>Metatestuale</td>
+    <td>Prolettico</td>
+    <td>40</td>
+</tr>
+
+<tr id="ex3" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIP, TOA3011</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/TOA3011#:~:text=ma%20i%20pinscher%20in,s%C3%AC%20%C3%A8" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3011&begin=1279808&end=1284661" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO087</td>
+            <td class="text-col">ma i pinscher in gene~ anche i pinscher ti piacciono</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TO086</td>
+            <td class="text-col">ma la una mia amica ha un cagnolino</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">TO086</td>
+            <td class="text-col">che mi sembra sia metà pinscher metà qualcos' altro <b>cioè</b> come cane di per sé non è che mi piaccia</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TO086</td>
+            <td class="text-col">però in realtà è molto affettuoso molto</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">TO088</td>
+            <td class="text-col">sì è sim~</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBC010</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBC010#:~:text=no%20quello%20no,mhmh" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC010&begin=1879280&end=1883590" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR001</td>
+            <td class="text-col">no quello no</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR001</td>
+            <td class="text-col">infatti e poi a parte quello penso che sia anche molto utile</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOR001</td>
+            <td class="text-col"><b>cioè</b> per [PAUSE] i ragazzi o comunque per ciascuno di noi cioè ci stiamo formando</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOR001</td>
+            <td class="text-col">anche com~ cioè come persone nella scuola e quest~ questi eventi cioè ci riguardano [PAUSE] anche molto da vicino</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOI029</td>
+            <td class="text-col">mhmh</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex4')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex4">↕</span></td>
+    <td>Interazionale</td>
+    <td>Marcatura della conoscenza condivisa</td>
+    <td>39</td>
+</tr>
+
+<tr id="ex4" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBC013</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBC013#:~:text=perch%C3%A9%20in%20campagna%20posso,certo" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC013&begin=392491&end=395282" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI035</td>
+            <td class="text-col">perché in campagna posso dirla chiaramente</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI035</td>
+            <td class="text-col">d' estate [PAUSE] il eh letamaio d' inverno la stalla</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI035</td>
+            <td class="text-col">quello era il nostro bagno eh <b>cioè</b> non</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI035</td>
+            <td class="text-col">ma ma ripeto la cosa era considerata normale perché il contadino di fianco era esattamente nelle stesse condizioni mie</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR009</td>
+            <td class="text-col">certo</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIPasti, KPN015</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIPasti/html/KPN015#:~:text=poi%20te,serve%20a%20niente" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN015&begin=1141280&end=1145201" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP062</td>
+            <td class="text-col">poi te [PAUSE] ti aiuto a interpretarli e</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP057</td>
+            <td class="text-col">ce li hai tu i libri</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">PKP062</td>
+            <td class="text-col"><b>cioè</b> dipende se a te ti interessa conseguire il co~ il</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP057</td>
+            <td class="text-col">sì a me piacerebbe</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP062</td>
+            <td class="text-col">eh però fi~ se non f~ se non arrivi al terzo non serve a niente</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex5')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex5">↕</span></td>
+    <td>Metatestuale</td>
+    <td>Introduzione o ripresa del topic</td>
+    <td>39</td>
+</tr>
+
+<tr id="ex5" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBA004</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA004#:~:text=no%20io%20no,puzza%20tantissimo" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA004&begin=2848730&end=2850500" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI060</td>
+            <td class="text-col">no</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR018</td>
+            <td class="text-col">ah beh</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #c53030;">BOI061</td>
+            <td class="text-col">bene [PAUSE] <b>cioè</b> nel senso</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI060</td>
+            <td class="text-col">no io no</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR018</td>
+            <td class="text-col">io sapevo che calcutta frequentava mascarella e tutti dicono che [PAUSE] puzza tantissimo ((ride))</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIP, BOA3003</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOA3003#:~:text=dovevo%20guardare%20allora,no" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOA3003&begin=3044008&end=3052296" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BO017</td>
+            <td class="text-col">allora</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BO017</td>
+            <td class="text-col">dovevo guardare allora [PAUSE] cla unibo</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BO017</td>
+            <td class="text-col"><b>cioè</b> [PAUSE] ma poi stamattina che ho chiamato entrambi i numeri della segreteria del cla che è aperta solo fi~ dalle nove alle undici e un quarto di mattina mi hanno buttato giù il telefono ad entrambi i numeri</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BO016</td>
+            <td class="text-col">mh molto utile</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BO016</td>
+            <td class="text-col">no</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex6')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex6">↕</span></td>
+    <td>Cognitiva</td>
+    <td>Specificazione</td>
+    <td>27</td>
+</tr>
+
+<tr id="ex6" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIP, BOD2008</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/BOD2008#:~:text=come%20mai%20non%20ti,non%20sono%20troppo" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=BOD2008&begin=1353784&end=1360413" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BO049</td>
+            <td class="text-col">come mai non ti piacerebbe non</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BO053</td>
+            <td class="text-col">mh no no diciamo che mh</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BO053</td>
+            <td class="text-col">non essendo <b>cioè</b> non essendo mai stato in pari con gli studi no~ diciamo che non mi è mai venuto neanche in mente l' idea di</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BO053</td>
+            <td class="text-col">mh perdo mezzo anno e vado via cioè che in verità col senno di poi avrei potuto farlo ma</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BO053</td>
+            <td class="text-col">no non so non sono troppo</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTD006</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaTO/html/PTD006#:~:text=poi%20il%20negozio,aprile%20tutto%20maggio" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD006&begin=3072498&end=3073490" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI055</td>
+            <td class="text-col">poi il negozio</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI055</td>
+            <td class="text-col">ha chiuso</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">TOR004</td>
+            <td class="text-col">ah <b>cioè</b> non ha</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI055</td>
+            <td class="text-col">proprio ha f~ eh io son durato</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOI055</td>
+            <td class="text-col">tutto aprile tutto maggio</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex7')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex7">↕</span></td>
+    <td>Interazionale</td>
+    <td>Richiesta di accordo/conferma</td>
+    <td>25</td>
+</tr>
+
+<tr id="ex7" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIPasti, KPN011</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIPasti/html/KPN011#:~:text=il%20risultato%20di%20mio,anche%20di%20pi%C3%B9" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN011&begin=786403&end=788853" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP120</td>
+            <td class="text-col">il risultato di mio nonno non arrivava mia mamma</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP123</td>
+            <td class="text-col">beh</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">PKP120</td>
+            <td class="text-col"><b>cioè</b> sapeva che poteva già esserci dal dottore no</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">PKP122</td>
+            <td class="text-col">mh</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP120</td>
+            <td class="text-col">ha chiamato un paio di volte cos~ così anche di più</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIPasti, KPN026</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIPasti/html/KPN026#:~:text=oppure%20fare%20delle%20cose,terra%20cos%C3%AC%20no" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=KPN026&begin=1279633&end=1280023" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP114</td>
+            <td class="text-col">oppure fare delle cose</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">PKP107</td>
+            <td class="text-col">x</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">PKP114</td>
+            <td class="text-col"><b>cioè</b></td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP114</td>
+            <td class="text-col">come si dice</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">PKP114</td>
+            <td class="text-col">che ti devi devi strisciare per terra così no</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex8')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex8">↕</span></td>
+    <td>Interazionale</td>
+    <td>Accordo</td>
+    <td>21</td>
+</tr>
+
+<tr id="ex8" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">KIP, TOA3011</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/KIP/html/TOA3011#:~:text=e%20fai%20prima%20a,faccio%20la%20dimostrazione" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=TOA3011&begin=392518&end=392974" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO088</td>
+            <td class="text-col">esat~</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TO085</td>
+            <td class="text-col">e fai prima a dire si fa così punto</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">TO088</td>
+            <td class="text-col"><b>cioè</b></td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #c53030;">TO087</td>
+            <td class="text-col">vabbè secondo me è bello sapere il motivo misterio~ cioè</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TO088</td>
+            <td class="text-col">eh ma io gliel' ho detto ti faccio la dimostrazione</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBA013</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBA013#:~:text=venendo%20da%20via%20san,verso%20le%20due" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBA013&begin=369091&end=369885" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI074</td>
+            <td class="text-col">per [PAUSE] piazza s~ [PAUSE] piazza aldrovandi d~ venendo da via san vitale</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI074</td>
+            <td class="text-col">c' è il rischio addirittura che ti buchi le ruote della~ le gomme del [PAUSE] perché [PAUSE] pieno di bottiglie</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">BOR018</td>
+            <td class="text-col">ma infatti [PAUSE] <b>cioè</b></td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">BOR018</td>
+            <td class="text-col">sì</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI074</td>
+            <td class="text-col">cioè terribile ma [PAUSE] tipo verso le due</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+
+<tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex9')">
+    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex9">↕</span></td>
+    <td>Metatestuale</td>
+    <td>Esemplificazione</td>
+    <td>21</td>
+</tr>
+
+<tr id="ex9" style="display:none; background:#fafafa">
+    <td colspan="4" style="padding: 10px 15px;">
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaBO, PBC001</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaBO/html/PBC001#:~:text=soprattutto%20appunto,chiaramente%20e%20giustamente" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PBC001&begin=2485743&end=2490184" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI001</td>
+            <td class="text-col">soprattutto appunto p~</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI001</td>
+            <td class="text-col">per il tragitto che faccio io ecco</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2b6cb0;">BOI001</td>
+            <td class="text-col">perché io poi io chiaramente la vedo da questo punto di vista <b>cioè</b> dal mio punto di vista io devo</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI001</td>
+            <td class="text-col">purtroppo devo attraversare la città non posso attraversarla</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">BOI001</td>
+            <td class="text-col">per il centro perché non ci si può passare che è gius~ chiaramente e giustamente</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="example-card">
+        <div class="example-header">
+            <span class="conv-id">ParlaTO, PTD014</span>
+            <span class="example-actions">
+                <a href="https://kiparla.github.io/KIParla-artifacts/ParlaTO/html/PTD014#:~:text=sono%20cambiate%20le%20persone,in%20casi%20no" class="read-btn" target="_blank" rel="noopener">Leggi la conversazione</a>
+                <a href="https://search.corpuskiparla.it/corpus/player/player.cgi?code=PTD014&begin=72614&end=95915" class="audio-btn" target="_blank" rel="noopener">▶ Ascolta su KIParla</a>
+            </span>
+        </div>
+        <table class="transcript-table">
+            <tbody>
+                
+        <tr>
+            <td class="speaker-col" style="color: #2b6cb0;">TOR010</td>
+            <td class="text-col">sono cambiate le persone che vivono nel paese</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOI112</td>
+            <td class="text-col">persone che vivono nel paese sono molto più sulle sue rispetto a una volta cioè basta fare un esempio</td>
+        </tr>
+
+        <tr class="focus">
+            <td class="speaker-col" style="color: #2f855a;">TOI112</td>
+            <td class="text-col">cioè io vengo dalla campagna ehm lavoro ancora adesso in campagna <b>cioè</b> una volta ehm per esempio quando si aveva bisogno di un' attrezzatura agricola si andava a chieder~ a richiederla a un vicino mh che te la dava in prestito e poi magari il vicino veniva a mh prenderla da te e tu gliela davi in prestito</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOI112</td>
+            <td class="text-col">mh non era raro magari gente che andava a chiedere ehm magari un' attrezzatura in prestito magari a un chilometro due chilomentri di distanza cosa che adesso non succede più perché piuttosto di andare a prendere in prestito un' attrezzatura uno se la compera perché poi ehm</td>
+        </tr>
+
+        <tr>
+            <td class="speaker-col" style="color: #2f855a;">TOI112</td>
+            <td class="text-col">ehm [PAUSE] mh la gente si è chiusa maggiormente quindi ehm è una cosa un po' reciproca io non vado a prendere una cosa in presito da te e però mi dà fastidio se tu vieni a prenderla da me solo proprio in casi no</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </td>
+</tr>
+</table>
+    <p></p>
+</div>
+
+<div class="card">
+    <h3>Tipi di interazione</h3>
+    <div id="plot-type" class="plot-container"></div>
+</div>
+
+<div class="card">
+    <h3>Età</h3>
+    <div id="plot-age" class="plot-container"></div>
+</div>
+
+<div class="card">
+    <h3>Regioni</h3>
+    <div id="plot-region" class="plot-container"></div>
+</div>
+
+
+<div class="card cite-card">
+    <h3>Come citare questa voce</h3>
+    <p class="cite-text" id="cite-text">Laboratorio PAROLE (2026). “cioè”. In <i>COSÌ. Catalogo Online dei Segnali discorsivi dell&#x27;Italiano (v0.1)</i>. Salerno: Università di Salerno. <a href="https://laboratorioparole.github.io/cosi/segnali/cioe.html">https://laboratorioparole.github.io/cosi/segnali/cioe.html</a> (ultima consultazione: <span class="cite-date"></span>).</p>
+    <div class="cite-actions">
+        <button type="button" class="cite-btn" onclick="copyCite('cite-text', this)">Copia citazione</button>
+        <button type="button" class="cite-btn" onclick="copyCite('cite-bib', this)">Copia BibTeX</button>
+        <button type="button" class="cite-btn cite-btn-ghost" onclick="toggleBib(this)">Mostra BibTeX</button>
+    </div>
+    <pre class="cite-bib" id="cite-bib" hidden>@misc{cosi-cioe,
+  author       = {{Laboratorio PAROLE}},
+  title        = {{cioè}},
+  howpublished = {In \emph{COS\`{I}. Catalogo Online dei Segnali discorsivi dell'Italiano}},
+  publisher    = {Università di Salerno},
+  address      = {Salerno},
+  year         = {2026},
+  url          = {https://laboratorioparole.github.io/cosi/segnali/cioe.html},
+  urldate      = {<span class="cite-date-iso"></span>},
+  note         = {Ultima consultazione: <span class="cite-date"></span>}
+}</pre>
+</div>
+
+
+<script>
+    loadPlot('plot-type', '../imgs/cioe/type.json');
+    loadPlot('plot-age', '../imgs/cioe/age.json');
+    loadPlot('plot-region', '../imgs/cioe/macroarea_map.json');
+</script>
+
+</div>
+
+</body>
+</html>

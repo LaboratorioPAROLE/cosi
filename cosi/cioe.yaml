@@ -1,0 +1,21 @@
+nomeSD: cioè
+file: cioe.tsv
+nOccTot: 14742
+fascia_frequenza: alta
+varianti: (ortografiche) cioé, cioe, cè, cé, ceh
+
+source:
+  lemma: cioè
+  pos: congiunzione
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/cioe/type.html
+  age: ../imgs/cioe/age.html
+  region: ../imgs/cioe/region_map.html

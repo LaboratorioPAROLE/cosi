@@ -1,0 +1,21 @@
+nomeSD: allora
+file: allora.tsv
+nOccTot: 5159
+fascia_frequenza: alta
+varianti: ~
+
+source:
+  lemma: allora
+  pos: avverbio
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/allora/type.html
+  age: ../imgs/allora/age.html
+  region: ../imgs/allora/region_map.html

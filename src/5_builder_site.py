@@ -5,6 +5,8 @@ from pathlib import Path
 from example_builder import build_example
 import shutil
 from urllib.parse import quote
+from datetime import date
+from html import escape
 
 # =========================
 # PATH
@@ -46,6 +48,68 @@ PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
 # Dataset annotati su GitHub (pagina di visualizzazione e file grezzo)
 GITHUB_TSV_VIEW = "https://github.com/LaboratorioPAROLE/cosi/blob/main/data/tsv/"
 GITHUB_TSV_RAW = "https://raw.githubusercontent.com/LaboratorioPAROLE/cosi/main/data/tsv/"
+
+# =========================
+# CITAZIONE DELLE VOCI
+# =========================
+# URL pubblico del sito (GitHub Pages): da correggere se diverso
+SITE_URL = "https://laboratorioparole.github.io/cosi/"
+
+CITE_AUTHOR = "Laboratorio PAROLE"
+CITE_WORK = "COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano (v0.1)"
+CITE_PUBLISHER = "Università di Salerno"
+CITE_PLACE = "Salerno"
+CITE_YEAR = date.today().year
+
+# COSÌ in BibTeX con l'accento in forma sicura per LaTeX
+BIB_WORK = "COS\\`{I}. Catalogo Online dei Segnali discorsivi dell'Italiano"
+
+
+def citation_html(nome_sd, name):
+    """Riquadro 'Come citare questa voce': citazione a schermo + BibTeX da copiare.
+    La data di consultazione è inserita dal browser (span .cite-date)."""
+    url = f"{SITE_URL}segnali/{quote(name)}.html"
+    voce = escape(str(nome_sd))
+
+    text = (
+        f'{escape(CITE_AUTHOR)} ({CITE_YEAR}). \u201c{voce}\u201d. In '
+        f'<i>{escape(CITE_WORK)}</i>. {escape(CITE_PLACE)}: {escape(CITE_PUBLISHER)}. '
+        f'<a href="{url}">{url}</a> '
+        f'(ultima consultazione: <span class="cite-date"></span>).'
+    )
+
+    key = "cosi-" + "".join(c if c.isalnum() else "-" for c in name.lower())
+    bibtex = (
+        f"@misc{{{key},\n"
+        f"  author       = {{{{{CITE_AUTHOR}}}}},\n"
+        f"  title        = {{{{{nome_sd}}}}},\n"
+        f"  howpublished = {{In \\emph{{{BIB_WORK}}}}},\n"
+        f"  publisher    = {{{CITE_PUBLISHER}}},\n"
+        f"  address      = {{{CITE_PLACE}}},\n"
+        f"  year         = {{{CITE_YEAR}}},\n"
+        f"  url          = {{{url}}},\n"
+        f'  urldate      = {{<span class="cite-date-iso"></span>}},\n'
+        f'  note         = {{Ultima consultazione: <span class="cite-date"></span>}}\n'
+        f"}}"
+    )
+    # escape per l'HTML, poi ripristino degli span della data
+    bib_html = escape(bibtex, quote=False)
+    bib_html = (bib_html
+        .replace('&lt;span class="cite-date-iso"&gt;&lt;/span&gt;', '<span class="cite-date-iso"></span>')
+        .replace('&lt;span class="cite-date"&gt;&lt;/span&gt;', '<span class="cite-date"></span>'))
+
+    return f"""
+<div class="card cite-card">
+    <h3>Come citare questa voce</h3>
+    <p class="cite-text" id="cite-text">{text}</p>
+    <div class="cite-actions">
+        <button type="button" class="cite-btn" onclick="copyCite('cite-text', this)">Copia citazione</button>
+        <button type="button" class="cite-btn" onclick="copyCite('cite-bib', this)">Copia BibTeX</button>
+        <button type="button" class="cite-btn cite-btn-ghost" onclick="toggleBib(this)">Mostra BibTeX</button>
+    </div>
+    <pre class="cite-bib" id="cite-bib" hidden>{bib_html}</pre>
+</div>
+"""
 
 # =========================
 # HTML BASE
@@ -466,6 +530,68 @@ th.sortable .sort-icon {{
     color: #999;
 }}
 
+/* Come citare questa voce */
+.cite-text {{
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    background: #f9fbff;
+    border-left: 3px solid #095775;
+    padding: 0.8rem 1rem;
+    margin: 0 0 1rem 0;
+    word-break: break-word;
+}}
+
+.cite-text a {{
+    color: #095775;
+}}
+
+.cite-actions {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}}
+
+.cite-btn {{
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+}}
+
+.cite-btn:hover {{
+    border-color: #b51700;
+    color: #b51700;
+}}
+
+.cite-btn.copied {{
+    border-color: #2f855a;
+    color: #2f855a;
+}}
+
+.cite-btn-ghost {{
+    background: none;
+    border-color: transparent;
+}}
+
+.cite-bib {{
+    margin: 1rem 0 0 0;
+    padding: 0.9rem 1rem;
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    overflow-x: auto;
+}}
+
 th.sortable[aria-sort="ascending"] .sort-icon,
 th.sortable[aria-sort="descending"] .sort-icon {{
     color: #2a5298;
@@ -482,6 +608,42 @@ function toggle(id) {{
     if (arrow) {{
         arrow.textContent = isHidden ? "▲" : "↕";
     }}
+}}
+
+// Data di consultazione nella citazione (oggi, in italiano e ISO)
+document.addEventListener("DOMContentLoaded", () => {{
+    const d = new Date();
+    const it = d.toLocaleDateString("it-IT", {{day: "numeric", month: "long", year: "numeric"}});
+    const iso = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    document.querySelectorAll(".cite-date").forEach(el => el.textContent = it);
+    document.querySelectorAll(".cite-date-iso").forEach(el => el.textContent = iso);
+}});
+
+function copyCite(id, btn) {{
+    const text = document.getElementById(id).textContent.trim();
+    const label = btn.textContent;
+    const done = () => {{
+        btn.textContent = "Copiato ✓";
+        btn.classList.add("copied");
+        setTimeout(() => {{ btn.textContent = label; btn.classList.remove("copied"); }}, 1800);
+    }};
+    if (navigator.clipboard && window.isSecureContext) {{
+        navigator.clipboard.writeText(text).then(done);
+    }} else {{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        done();
+    }}
+}}
+
+function toggleBib(btn) {{
+    const pre = document.getElementById("cite-bib");
+    pre.hidden = !pre.hidden;
+    btn.textContent = pre.hidden ? "Mostra BibTeX" : "Nascondi BibTeX";
 }}
 
 function loadPlot(divId, jsonPath) {{
@@ -751,6 +913,8 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     <h3>Regioni</h3>
     <div id="plot-region" class="plot-container"></div>
 </div>
+
+{citation_html(signal["nomeSD"], name)}
 
 <script>
     loadPlot('plot-type', '{type_json}');

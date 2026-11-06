@@ -1,0 +1,21 @@
+nomeSD: ma
+file: ma.tsv
+nOccTot: 18594
+fascia_frequenza: alta
+varianti: ~
+
+source:
+  lemma: ma
+  pos: congiunzione
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/ma/type.html
+  age: ../imgs/ma/age.html
+  region: ../imgs/ma/region_map.html

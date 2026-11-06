@@ -1,0 +1,220 @@
+file: bene.tsv
+sampling:
+  nOccTot: 2465
+  nRows: 800
+  is_sample: true
+  factor: 3.08125
+counts:
+  ntokens: 800
+  nSD: 130
+  nSD_proj: 400.56
+macrofunctions_SD:
+  Interazionale: 64
+  Metatestuale: 79
+  Cognitiva: 5
+microfunctions_SD:
+  Interazionale:
+    Accordo: 17
+    Interruzione: 5
+    Presa di turno: 9
+    Conferma dell'attenzione: 43
+    Strategia di cortesia: 1
+  Metatestuale:
+    Chiusura del topic: 60
+    Introduzione o ripresa del topic: 18
+    Prolettico: 1
+    Filler: 4
+    Riformulazione: 1
+    Citazione/Discorso Riportato: 3
+  Cognitiva:
+    Intensificazione: 4
+    Attenuazione: 1
+metadata_SD:
+  type:
+    semistructured-interview:
+      count: 86
+      count_proj: 264.99
+      fpmw: 198.6346037802323
+    exam:
+      count: 5
+      count_proj: 15.41
+      fpmw: 248.1317141522653
+    free-conversation:
+      count: 22
+      count_proj: 67.79
+      fpmw: 103.84146397507345
+    lecture:
+      count: 12
+      count_proj: 36.97
+      fpmw: 176.49501661129565
+    office-hours:
+      count: 5
+      count_proj: 15.41
+      fpmw: 221.69180073099838
+  participants-relationship:
+    asymmetric:
+      count: 84
+      count_proj: 258.82
+    symmetric:
+      count: 46
+      count_proj: 141.74
+  topic:
+    fixed:
+      count: 103
+      count_proj: 317.37
+    free:
+      count: 27
+      count_proj: 83.19
+  year:
+    '2024':
+      count: 24
+      count_proj: 73.95
+    '2023':
+      count: 17
+      count_proj: 52.38
+    '2022':
+      count: 16
+      count_proj: 49.3
+    '2018':
+      count: 50
+      count_proj: 154.06
+    '2019':
+      count: 14
+      count_proj: 43.14
+    '2021':
+      count: 2
+      count_proj: 6.16
+    '2020':
+      count: 7
+      count_proj: 21.57
+  occupation:
+    0-Students:
+      count: 83
+      count_proj: 255.74
+    2-Professionals:
+      count: 35
+      count_proj: 107.84
+    0-Retired:
+      count: 5
+      count_proj: 15.41
+    4-Clerical-Workers:
+      count: 1
+      count_proj: 3.08
+    7-Plant-Operators:
+      count: 5
+      count_proj: 15.41
+    3-Technicians:
+      count: 1
+      count_proj: 3.08
+  gender:
+    M:
+      count: 47
+      count_proj: 144.82
+    F:
+      count: 83
+      count_proj: 255.74
+  region:
+    emilia-romagna:
+      count: 76
+      count_proj: 234.17
+      fpmw: 285.13105618119806
+    sicilia:
+      count: 3
+      count_proj: 9.24
+      fpmw: 101.85277006478908
+    piemonte:
+      count: 26
+      count_proj: 80.11
+      fpmw: 161.32816197156154
+    toscana:
+      count: 5
+      count_proj: 15.41
+      fpmw: 277.2953076909232
+    puglia:
+      count: 1
+      count_proj: 3.08
+      fpmw: 28.15341038877975
+    sardegna:
+      count: 2
+      count_proj: 6.16
+      fpmw: 138.11999910348072
+    basilicata:
+      count: 1
+      count_proj: 3.08
+      fpmw: 48.168615557778885
+    N/A:
+      count: 1
+      count_proj: 3.08
+    lombardia:
+      count: 5
+      count_proj: 15.41
+      fpmw: 166.7812371446511
+    estero:
+      count: 1
+      count_proj: 3.08
+      fpmw: 73.87671429941499
+    lazio:
+      count: 1
+      count_proj: 3.08
+      fpmw: 51.743102319098554
+    veneto:
+      count: 3
+      count_proj: 9.24
+      fpmw: 123.38160704751733
+    campania:
+      count: 3
+      count_proj: 9.24
+      fpmw: 124.38940696782525
+    trentino-alto-adige:
+      count: 1
+      count_proj: 3.08
+      fpmw: 250.69156293222682
+    marche:
+      count: 1
+      count_proj: 3.08
+      fpmw: 53.03721426604241
+  age-range:
+    21-30:
+      count: 93
+      count_proj: 286.56
+      fpmw: 263.6840332701168
+    41-50:
+      count: 7
+      count_proj: 21.57
+      fpmw: 145.06143778541497
+    31-40:
+      count: 9
+      count_proj: 27.73
+      fpmw: 116.49778819615108
+    61-70:
+      count: 11
+      count_proj: 33.89
+      fpmw: 207.74848603721773
+    16-20:
+      count: 3
+      count_proj: 9.24
+      fpmw: 111.11211279795172
+    '>71':
+      count: 3
+      count_proj: 9.24
+      fpmw: 32.47249388753056
+    n/a:
+      count: 1
+      count_proj: 3.08
+    51-60:
+      count: 3
+      count_proj: 9.24
+      fpmw: 32.27138159043143
+  macroarea:
+    Nord:
+      count: 111
+      count_proj: 342.02
+      fpmw: 222.2377267496525
+    Centro:
+      count: 7
+      count_proj: 21.57
+      fpmw: 104.51342956685224
+    Sud e Isole:
+      count: 10
+      count_proj: 30.81
+      fpmw: 61.08077033630354

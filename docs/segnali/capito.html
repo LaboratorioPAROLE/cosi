@@ -412,6 +412,68 @@ th.sortable .sort-icon {
     color: #999;
 }
 
+/* Come citare questa voce */
+.cite-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    background: #f9fbff;
+    border-left: 3px solid #095775;
+    padding: 0.8rem 1rem;
+    margin: 0 0 1rem 0;
+    word-break: break-word;
+}
+
+.cite-text a {
+    color: #095775;
+}
+
+.cite-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cite-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cite-btn:hover {
+    border-color: #b51700;
+    color: #b51700;
+}
+
+.cite-btn.copied {
+    border-color: #2f855a;
+    color: #2f855a;
+}
+
+.cite-btn-ghost {
+    background: none;
+    border-color: transparent;
+}
+
+.cite-bib {
+    margin: 1rem 0 0 0;
+    padding: 0.9rem 1rem;
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
 th.sortable[aria-sort="ascending"] .sort-icon,
 th.sortable[aria-sort="descending"] .sort-icon {
     color: #2a5298;
@@ -428,6 +490,42 @@ function toggle(id) {
     if (arrow) {
         arrow.textContent = isHidden ? "▲" : "↕";
     }
+}
+
+// Data di consultazione nella citazione (oggi, in italiano e ISO)
+document.addEventListener("DOMContentLoaded", () => {
+    const d = new Date();
+    const it = d.toLocaleDateString("it-IT", {day: "numeric", month: "long", year: "numeric"});
+    const iso = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    document.querySelectorAll(".cite-date").forEach(el => el.textContent = it);
+    document.querySelectorAll(".cite-date-iso").forEach(el => el.textContent = iso);
+});
+
+function copyCite(id, btn) {
+    const text = document.getElementById(id).textContent.trim();
+    const label = btn.textContent;
+    const done = () => {
+        btn.textContent = "Copiato ✓";
+        btn.classList.add("copied");
+        setTimeout(() => { btn.textContent = label; btn.classList.remove("copied"); }, 1800);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done);
+    } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        done();
+    }
+}
+
+function toggleBib(btn) {
+    const pre = document.getElementById("cite-bib");
+    pre.hidden = !pre.hidden;
+    btn.textContent = pre.hidden ? "Mostra BibTeX" : "Nascondi BibTeX";
 }
 
 function loadPlot(divId, jsonPath) {
@@ -821,6 +919,29 @@ function loadPlot(divId, jsonPath) {
     <h3>Regioni</h3>
     <div id="plot-region" class="plot-container"></div>
 </div>
+
+
+<div class="card cite-card">
+    <h3>Come citare questa voce</h3>
+    <p class="cite-text" id="cite-text">Laboratorio PAROLE (2026). “capito”. In <i>COSÌ. Catalogo Online dei Segnali discorsivi dell&#x27;Italiano (v0.1)</i>. Salerno: Università di Salerno. <a href="https://laboratorioparole.github.io/cosi/segnali/capito.html">https://laboratorioparole.github.io/cosi/segnali/capito.html</a> (ultima consultazione: <span class="cite-date"></span>).</p>
+    <div class="cite-actions">
+        <button type="button" class="cite-btn" onclick="copyCite('cite-text', this)">Copia citazione</button>
+        <button type="button" class="cite-btn" onclick="copyCite('cite-bib', this)">Copia BibTeX</button>
+        <button type="button" class="cite-btn cite-btn-ghost" onclick="toggleBib(this)">Mostra BibTeX</button>
+    </div>
+    <pre class="cite-bib" id="cite-bib" hidden>@misc{cosi-capito,
+  author       = {{Laboratorio PAROLE}},
+  title        = {{capito}},
+  howpublished = {In \emph{COS\`{I}. Catalogo Online dei Segnali discorsivi dell'Italiano}},
+  publisher    = {Università di Salerno},
+  address      = {Salerno},
+  year         = {2026},
+  url          = {https://laboratorioparole.github.io/cosi/segnali/capito.html},
+  urldate      = {<span class="cite-date-iso"></span>},
+  note         = {Ultima consultazione: <span class="cite-date"></span>}
+}</pre>
+</div>
+
 
 <script>
     loadPlot('plot-type', '../imgs/capito/type.json');
