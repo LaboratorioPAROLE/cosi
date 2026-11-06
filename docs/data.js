@@ -2,12 +2,12 @@ const DATA = [
   {
     "lemma": "allora",
     "frequenza": "alta",
-    "micro": "Presa di turno, Filler, Marcatura dell'inferenza, Cessione del turno",
+    "micro": "Introduzione o ripresa del topic, Marcatura dell'inferenza, Presa di turno, Filler, Riformulazione",
     "link": "segnali/allora.html"
   },
   {
     "lemma": "bene",
-    "frequenza": "medio-alta",
+    "frequenza": "medio-bassa",
     "micro": "Chiusura del topic, Conferma dell'attenzione, Introduzione o ripresa del topic, Accordo, Presa di turno",
     "link": "segnali/bene.html"
   },

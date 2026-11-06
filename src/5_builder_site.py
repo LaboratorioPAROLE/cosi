@@ -55,8 +55,8 @@ GITHUB_TSV_RAW = "https://raw.githubusercontent.com/LaboratorioPAROLE/cosi/main/
 # URL pubblico del sito (GitHub Pages): da correggere se diverso
 SITE_URL = "https://laboratorioparole.github.io/cosi/"
 
-CITE_AUTHOR = "Laboratorio PAROLE"
-CITE_WORK = "COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano (v0.1)"
+CITE_EDITOR = "Laboratorio PAROLE"
+CITE_WORK = "COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano v0.1"
 CITE_PUBLISHER = "Università di Salerno"
 CITE_PLACE = "Salerno"
 CITE_YEAR = date.today().year
@@ -72,7 +72,7 @@ def citation_html(nome_sd, name):
     voce = escape(str(nome_sd))
 
     text = (
-        f'{escape(CITE_AUTHOR)} ({CITE_YEAR}). \u201c{voce}\u201d. In '
+        f'{escape(CITE_EDITOR)} ({CITE_YEAR}). \u201c{voce}\u201d. In '
         f'<i>{escape(CITE_WORK)}</i>. {escape(CITE_PLACE)}: {escape(CITE_PUBLISHER)}. '
         f'<a href="{url}">{url}</a> '
         f'(ultima consultazione: <span class="cite-date"></span>).'
@@ -81,7 +81,7 @@ def citation_html(nome_sd, name):
     key = "cosi-" + "".join(c if c.isalnum() else "-" for c in name.lower())
     bibtex = (
         f"@misc{{{key},\n"
-        f"  author       = {{{{{CITE_AUTHOR}}}}},\n"
+        f"  editor       = {{{{{CITE_EDITOR}}}}},\n"
         f"  title        = {{{{{nome_sd}}}}},\n"
         f"  howpublished = {{In \\emph{{{BIB_WORK}}}}},\n"
         f"  publisher    = {{{CITE_PUBLISHER}}},\n"
