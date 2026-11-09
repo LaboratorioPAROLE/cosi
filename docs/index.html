@@ -506,7 +506,7 @@ th.sortable[aria-sort="descending"] .sort-icon {
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 6px;
     margin: 1.4rem 0;
 }
@@ -546,23 +546,13 @@ body { overflow-x: hidden; }
     clip-path: var(--forma);
 }
 
-/* Desktop: le prime due arrivano da sinistra, le ultime due da destra */
-.stat:nth-child(1) { --forma: var(--da-sinistra); }
-.stat:nth-child(2) { --forma: var(--verso-destra); }
-.stat:nth-child(3) { --forma: var(--verso-sinistra); }
-.stat:nth-child(4) { --forma: var(--da-destra); }
+/* Una freccia arriva da sinistra, l'altra da destra */
+.stat:nth-child(odd)  { --forma: var(--da-sinistra); }
+.stat:nth-child(even) { --forma: var(--da-destra); }
 
 /* Il lato attaccato al bordo della pagina non ha cornice */
-.stat:nth-child(1)::before { left: 0; }
-.stat:nth-child(4)::before { right: 0; }
-
-@media (max-width: 700px) {
-    /* Telefono: due righe, una freccia da ogni lato */
-    .stat:nth-child(odd)  { --forma: var(--da-sinistra); }
-    .stat:nth-child(even) { --forma: var(--da-destra); }
-    .stat:nth-child(odd)::before  { left: 0; right: 3px; }
-    .stat:nth-child(even)::before { left: 3px; right: 0; }
-}
+.stat:nth-child(odd)::before  { left: 0; right: 3px; }
+.stat:nth-child(even)::before { left: 3px; right: 0; }
 
 .stat-number {
     display: block;
@@ -612,6 +602,14 @@ body { overflow-x: hidden; }
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+}
+
+/* Immagine intera, non ritagliata (per loghi o immagini non quadrate) */
+.link-img.intera {
+    object-fit: contain;
+    box-sizing: border-box;
+    padding: 70px 18px 18px 18px; /* spazio in alto per la nuvoletta */
+    background: #ffffff;
 }
 
 .link-bubble {
@@ -881,7 +879,6 @@ function loadPlot(divId, jsonPath) {
       <img class="link-img" src="foto/link_cerca.png" alt="">
       <span class="link-bubble">Cerca nel database</span>
     </a>
-    <!-- TODO: sostituire "#" con l'indirizzo del repository GitHub di COSÌ -->
     <a class="link-tile" href="https://github.com/LaboratorioPAROLE/cosi" target="_blank" rel="noopener">
       <img class="link-img" src="foto/link_github_cosi.png" alt="">
       <span class="link-bubble">COSÌ su GitHub</span>
@@ -902,7 +899,7 @@ function loadPlot(divId, jsonPath) {
   <!-- TODO: sostituire con le notizie reali (titolo, link, data) -->
   <ul class="news-list">
     <li>
-      <a href="#">App per l'annotazione</a>
+      <a href="https://github.com/LaboratorioPAROLE/cola">App per l'annotazione</a>
       <span class="news-date">Novembre 2026: app COLÀ pronta all'uso</span>
     </li>
   </ul>
