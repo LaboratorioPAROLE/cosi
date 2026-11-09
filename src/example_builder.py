@@ -1,5 +1,6 @@
 import csv
 import re
+from functools import lru_cache
 from pathlib import Path
 from urllib.parse import quote
 
@@ -31,9 +32,14 @@ SPEAKER_PALETTE = [
     "#dd6b20",  # Arancione
 ]
 
+@lru_cache(maxsize=64)
+def _load_tsv_cached(path_str):
+    with open(path_str, encoding="utf-8") as f:
+        return tuple(csv.DictReader(f, delimiter="\t"))
+
 def load_tsv(path):
-    with open(path, encoding="utf-8") as f:
-        return list(csv.DictReader(f, delimiter="\t"))
+    # cache: la stessa conversazione viene letta una volta sola per build
+    return list(_load_tsv_cached(str(path)))
 
 def group_by_tu(rows):
     tus = {}
@@ -169,6 +175,33 @@ def conversation_url(corpus, conv_id, tus, context_keys, target_tu=None):
 
     return f"{base}#:~:text={_enc(start)},{_enc(end)}"
 
+# Numero di turni di contesto mostrati prima e dopo il turno target
+CONTEXT_WINDOW = 2
+
+def example_position(sd_row, corpus_root):
+    """
+    Posizione dell'occorrenza nella conversazione: (corpus, conv_id, indice del turno).
+    Serve a evitare due esempi dallo stesso turno o con contesti sovrapposti.
+    Restituisce None se corpus o token non si trovano.
+    """
+    corpus = sd_row.get("corpus")
+    conv_id = sd_row.get("conv_id")
+    token_id = sd_row.get("token_id")
+    if corpus not in CORPUS_MAP:
+        return None
+
+    corpus_path = Path(corpus_root).parent / CORPUS_MAP[corpus] / f"{conv_id}.vert.tsv"
+    if not corpus_path.exists():
+        return None
+
+    rows = load_tsv(corpus_path)
+    tu = next((r["tu_id"] for r in rows if r["token_id"] == token_id), None)
+    if tu is None:
+        return None
+
+    keys = sorted({r["tu_id"] for r in rows}, key=lambda x: int(x))
+    return corpus, conv_id, keys.index(tu)
+
 def build_example(sd_row, corpus_root):
 
     corpus = sd_row["corpus"]
@@ -195,7 +228,7 @@ def build_example(sd_row, corpus_root):
     tus = group_by_tu(rows)
     target_tu = target["tu_id"]
 
-    context_keys = get_context_turns(tus, target_tu)
+    context_keys = get_context_turns(tus, target_tu, window=CONTEXT_WINDOW)
 
     # Dizionario per assegnare un colore unico a ciascun parlante nell'esempio
     speaker_colors = {}

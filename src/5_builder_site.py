@@ -2,7 +2,7 @@ import yaml
 import json
 import csv
 from pathlib import Path
-from example_builder import build_example
+from example_builder import build_example, example_position, CONTEXT_WINDOW
 import shutil
 from urllib.parse import quote
 from datetime import date
@@ -825,6 +825,7 @@ def get_examples(tsv_path, target_micro, max_examples=2):
         return examples
 
     target_micro = target_micro.strip().lower()
+    chosen = []   # posizioni (corpus, conv_id, indice turno) degli esempi già presi
 
     with open(tsv_path, encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="\t")
@@ -842,6 +843,15 @@ def get_examples(tsv_path, target_micro, max_examples=2):
 
             if not found:
                 continue
+
+            # niente esempi dallo stesso turno o con contesto sovrapposto
+            pos = example_position(row, PROJECT_ROOT)
+            if pos is not None:
+                corpus, conv, idx = pos
+                if any(c == corpus and v == conv and abs(i - idx) <= 2 * CONTEXT_WINDOW
+                       for c, v, i in chosen):
+                    continue
+                chosen.append(pos)
 
             examples.append({
                 "html": build_example(row, PROJECT_ROOT),
@@ -1170,7 +1180,6 @@ microInput.addEventListener("input", render);
 render();
 </script>
 """
-
 
 (DOCS_DIR / "search.html").write_text(
     base_html("Cerca nel database", index_body, base_path=""),
