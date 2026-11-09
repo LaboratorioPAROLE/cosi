@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contatti – COSÌ</title>
+<title>Il Progetto COSÌ</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -201,6 +201,17 @@ body {
     color: #888;
     font-size: 0.85rem;
 }
+
+
+.footer {
+    text-align: center;
+    padding: 1.2rem 1rem;
+    font-size: 0.85rem;
+    color: #888;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+}
+    
 </style>
 </head>
 
@@ -241,20 +252,101 @@ body {
     </nav>
 
 </header>
-
+    
 <div class="container">
-
-    <div class="card">
-        <h2 class="section-title">Il Progetto</h2>
+<p class="contact-label">Che cos'è COSÌ</p>
         <p class="contact-text" style="color:#444;">
-            Under construction! 🚧 🚧
+            <strong>COSÌ</strong> (<em>Catalogo Online dei Segnali discorsivi dell'Italiano</em>) è il primo database annotato
+            dei segnali discorsivi dell'italiano basato sul parlato spontaneo. I segnali discorsivi sono elementi come
+            <em>allora</em>, <em>cioè</em>, <em>dunque</em> o <em>sai</em>, che non aggiungono contenuto proposizionale
+            all'enunciato ma svolgono un ruolo centrale nell'organizzazione dell'interazione: aprono o chiudono un turno,
+            introducono un argomento, riformulano, segnalano l'atteggiamento del parlante.
+        </p>
+        <p class="contact-text" style="color:#444;">
+            Nonostante la loro importanza, i segnali discorsivi sono ancora poco rappresentati nelle risorse linguistiche.
+            COSÌ nasce per colmare questa lacuna: la risorsa è costruita sul corpus di italiano parlato
+            <a href="https://kiparla.it" target="_blank" rel="noopener">KIParla</a> e descrive ciascun segnale discorsivo,
+            semplice o complesso, combinando dati di frequenza, informazioni sulle funzioni svolte e profili sociolinguistici d'uso.
+            Il progetto è ad accesso aperto e pienamente interoperabile con il corpus di partenza.
         </p>
     </div>
+ 
+    <div class="card">
+        <h2 class="section-title">Come estraiamo i dati</h2>
+ 
+        <p class="contact-label">1. Selezione dei candidati</p>
+        <p class="contact-text" style="color:#444;">
+            Il punto di partenza sono le liste di frequenza dei corpora KIParla e VoLIP. Dal corpus KIParla (moduli KIP, KIPasti,
+            ParlaTO e ParlaBO) abbiamo considerato le parole con almeno 100 occorrenze e individuato manualmente quelle che possono
+            funzionare come segnali discorsivi. La stessa procedura è stata applicata a bigrammi e trigrammi, estratti con
+            NoSketchEngine, per individuare i segnali complessi (formati da più parole). Le tre liste sono state poi confrontate
+            tramite un notebook Python, disponibile nel repository del progetto, ottenendo un elenco finale di
+            <strong>236 candidati</strong>: 174 segnali semplici, 53 bigrammi e 9 trigrammi.
+        </p>
+ 
+        <p class="contact-label">2. Estrazione delle occorrenze</p>
+        <p class="contact-text" style="color:#444;">
+            Per ogni candidato estraiamo in modo casuale dal corpus KIParla fino a 800 occorrenze (tutte, per i segnali meno frequenti),
+            insieme a tutti i metadati disponibili. Ogni occorrenza resta collegata al proprio identificativo nel corpus: questo
+            garantisce la tracciabilità del dato e permette di recuperare le informazioni sulla conversazione e sui parlanti,
+            nonché l'audio originale.
+        </p>
+ 
+        <p class="contact-label">3. Annotazione</p>
+        <p class="contact-text" style="color:#444;">
+            Le occorrenze vengono annotate su tre livelli:
+        </p>
+        <ul class="contact-text" style="color:#444;">
+            <li><strong>Riconoscimento</strong>: l'occorrenza funziona come segnale discorsivo oppure no? Per deciderlo usiamo test
+                diagnostici (omissibilità, sostituibilità con un altro segnale, distanza dal significato letterale), affiancati
+                da indicatori come la presenza di pause, verificata all'ascolto, e l'assenza di integrazione sintattica con il contesto.</li>
+            <li><strong>Macrofunzioni</strong>: interazionali, metatestuali e cognitive.</li>
+            <li><strong>Microfunzioni</strong>: compiti più specifici, come la presa del turno, la riformulazione o la modulazione
+                della certezza del parlante.</li>
+        </ul>
+        <p class="contact-text" style="color:#444;">
+            Poiché i segnali discorsivi sono spesso polifunzionali, una stessa occorrenza può ricevere più etichette.
+            Lo schema è stato validato con prove di accordo tra annotatori, da cui sono nate linee guida interne.
+            Per i dettagli si vedano le pagine <a href="architettura.html">Architettura del database</a> e
+            <a href="schema_annotazione.html">Schema di annotazione</a>.
+        </p>
+    </div>
+ 
+    <div class="card">
+        <h2 class="section-title">A cosa puntiamo</h2>
+ 
+        <p class="contact-text" style="color:#444;">
+            L'obiettivo è offrire la prima descrizione estesa dei segnali discorsivi di una lingua basata su un corpus di parlato
+            spontaneo, vario per area geografica e situazione comunicativa. Per ciascun segnale discorsivo COSÌ metterà a disposizione:
+        </p>
+        <ul class="contact-text" style="color:#444;">
+            <li>le occorrenze tratte da KIParla, con il loro contesto trascritto e audio;</li>
+            <li>i test di sostituzione usati per riconoscerle, per rendere l'annotazione trasparente e replicabile;</li>
+            <li>l'annotazione delle funzioni svolte, con i relativi dati di frequenza;</li>
+            <li>profili sociolinguistici d'uso (età, genere, provenienza dei parlanti) e distribuzione nei diversi tipi di testo
+                (conversazioni, interviste, lezioni).</li>
+        </ul>
+        <p class="contact-text" style="color:#444;">
+            Il sito offrirà visualizzazioni e statistiche consultabili da tutti, mentre i dati completi saranno disponibili in un
+            repository aperto, così che ognuno possa riesaminarli secondo i propri criteri. L'annotazione è inoltre pensata per
+            confluire come livello di analisi nel treebank di KIParla.
+        </p>
+        <p class="contact-text" style="color:#444;">
+            Una risorsa di questo tipo potrà servire alla ricerca in pragmatica e analisi del discorso, allo sviluppo di modelli
+            di elaborazione del linguaggio più sensibili al parlato e alla didattica dell'italiano, offrendo a chi impara la lingua
+            esempi autentici e liste di frequenza dei segnali discorsivi.
+        </p>
+    </div>
+    
 
     
     </div>
 
 </div>
 
+<footer class="footer">
+    © 2026 Laboratorio P.A.R.O.L.E. – Università di Salerno
+</footer>
+    
 </body>
 </html>
