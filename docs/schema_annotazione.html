@@ -206,7 +206,7 @@ body {
 
 .levels {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
     margin: 1rem 0 0.5rem 0;
 }
@@ -260,6 +260,27 @@ body {
     padding: 1rem 1.1rem;
 }
 
+/* Colori delle macrofunzioni, come nella Guida alle funzioni */
+.macro.interazionale { border-top-color: #ff922b; }
+.macro.metatestuale  { border-top-color: #51cf66; }
+.macro.cognitiva     { border-top-color: #4dabf7; }
+
+.macro-type {
+    margin: 0 0 2px 0;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: #999;
+}
+
+.meso-title {
+    margin: 0.9rem 0 0.3rem 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #2a5298;
+}
+
 .macro h3 {
     margin: 0 0 4px 0;
     color: #1e3c72;
@@ -294,8 +315,16 @@ body {
     vertical-align: 1px;
 }
 
+@media (max-width: 900px) {
+    .levels { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 800px) {
-    .levels, .macro-grid { grid-template-columns: 1fr; }
+    .macro-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+    .levels { grid-template-columns: 1fr; }
 }
 
 /* --- Footer --- */
@@ -388,25 +417,30 @@ body {
         <h2 class="section-title">Lo schema di annotazione</h2>
 
         <p class="contact-text" style="color:#444;">
-            Ogni occorrenza estratta dal corpus viene annotata su tre livelli annidati: prima si stabilisce se funziona
-            come segnale discorsivo, poi si indicano le funzioni che svolge, a due livelli di dettaglio.
+            Ogni occorrenza estratta dal corpus viene annotata su più livelli annidati: prima si stabilisce se funziona
+            come segnale discorsivo, poi si indicano le funzioni che svolge, dal livello più generale al più specifico.
         </p>
 
         <div class="levels">
             <div class="level">
                 <span class="level-num">1</span>
                 <span class="level-title">Riconoscimento</span>
-                <p>L'occorrenza funziona come segnale discorsivo (SD) oppure no?</p>
+                <p>L'occorrenza funziona come segnale discorsivo oppure no?</p>
             </div>
             <div class="level">
                 <span class="level-num">2</span>
-                <span class="level-title">Macrofunzioni</span>
-                <p>Interazionali, metatestuali o cognitive: a quale componente della situazione comunicativa è orientato il segnale.</p>
+                <span class="level-title">Macrofunzione</span>
+                <p>L'elemento dello scambio comunicativo su cui agisce il segnale: interazione, testualità o soggettività.</p>
             </div>
             <div class="level">
                 <span class="level-num">3</span>
-                <span class="level-title">Microfunzioni</span>
-                <p>Il compito specifico svolto dal segnale nel contesto, come la presa del turno o la riformulazione.</p>
+                <span class="level-title">Mesofunzione</span>
+                <p>Il dominio su cui opera il segnale, come la struttura del testo o il grado di certezza.</p>
+            </div>
+            <div class="level">
+                <span class="level-num">4</span>
+                <span class="level-title">Microfunzione</span>
+                <p>La funzione specifica svolta dal segnale nel contesto, come la presa di turno o la riformulazione.</p>
             </div>
         </div>
     </div>
@@ -433,13 +467,14 @@ body {
     </div>
 
     <div class="card">
-        <h2 class="section-title">2–3. Macro- e microfunzioni</h2>
+        <h2 class="section-title">2–4. Le funzioni</h2>
 
         <p class="contact-text" style="color:#444;">
             La classificazione delle funzioni si basa sulla tassonomia di Carla Bazzanella (1995, 2006, 2011), ormai
             consolidata negli studi sui segnali discorsivi dell'italiano. Dopo una prima prova di annotazione e la
-            discussione dei casi dubbi, lo schema è stato rielaborato: sono state aggiunte sei nuove microfunzioni,
-            contrassegnate qui sotto con <span class="new-badge">nuova</span>, e per ciascuna microfunzione sono state redatte linee guida interne.
+            discussione dei casi dubbi, lo schema è stato rielaborato: le microfunzioni sono state raggruppate in
+            mesofunzioni e ne sono state aggiunte di nuove, contrassegnate qui sotto con <span class="new-badge">nuova</span>.
+            Per ciascuna funzione sono state redatte linee guida interne.
         </p>
         <p class="contact-text" style="color:#444;">
             Poiché i segnali discorsivi sono spesso polifunzionali, una stessa occorrenza può ricevere più etichette
@@ -448,43 +483,64 @@ body {
         </p>
 
         <div class="macro-grid">
-            <div class="macro">
-                <h3>Interazionali</h3>
-                <p class="macro-desc">Orientate a chi ascolta: servono a gestire lo scambio verbale.</p>
+            <div class="macro interazionale">
+                <p class="macro-type">Funzione interazionale</p>
+                <h3>Interazione con l'interlocutore/trice</h3>
+                <p class="macro-desc">Gestisce il rapporto con l'interlocutore/trice e/o la struttura dello scambio interattivo.</p>
+                <p class="meso-title">Scambio interattivo</p>
                 <ul>
-                    <li>Presa del turno</li>
-                    <li>Richiesta di accordo / conferma</li>
-                    <li>Segnalazione di accordo <span class="new-badge">nuova</span></li>
-                    <li>Conferma di attenzione</li>
+                    <li>Presa di turno</li>
                     <li>Interruzione</li>
                     <li>Cessione del turno</li>
-                    <li>Marcatura di conoscenze condivise</li>
+                </ul>
+                <p class="meso-title">Rapporto con l'interlocutore</p>
+                <ul>
+                    <li>Marcatura della conoscenza condivisa</li>
+                    <li>Richiesta di accordo/conferma</li>
+                    <li>Accordo <span class="new-badge">nuova</span></li>
                     <li>Richiesta di attenzione</li>
-                    <li>Strategie di cortesia</li>
+                    <li>Conferma dell'attenzione</li>
+                    <li>Strategia di cortesia</li>
                 </ul>
             </div>
-            <div class="macro">
-                <h3>Metatestuali</h3>
-                <p class="macro-desc">Legate all'organizzazione interna del testo, come la gestione degli argomenti.</p>
+            <div class="macro metatestuale">
+                <p class="macro-type">Funzione metatestuale</p>
+                <h3>Testualità</h3>
+                <p class="macro-desc">Gestisce il flusso della produzione del testo, o organizza e struttura il testo prodotto.</p>
+                <p class="meso-title">Struttura del testo</p>
                 <ul>
-                    <li>Introduzione / cambio / ripresa dell'argomento</li>
-                    <li>Chiusura dell'argomento</li>
-                    <li>Prolettico (segnale di formulazione) <span class="new-badge">nuova</span></li>
-                    <li>Riformulazione</li>
-                    <li>Digressione</li>
-                    <li>Marcatura di citazione</li>
-                    <li>Riempitivo <span class="new-badge">nuova</span></li>
+                    <li>Gestione del topic</li>
+                    <li>Chiusura del topic</li>
+                    <li>Citazione/Discorso riportato</li>
+                </ul>
+                <p class="meso-title">Processo di formulazione</p>
+                <ul>
                     <li>Esemplificazione</li>
+                    <li>Prolettico/Analettico <span class="new-badge">nuova</span></li>
+                    <li>Riformulazione</li>
+                    <li>Filler <span class="new-badge">nuova</span></li>
+                    <li>Marca di generalizzazione <span class="new-badge">nuova</span></li>
                 </ul>
             </div>
-            <div class="macro">
-                <h3>Cognitive</h3>
-                <p class="macro-desc">Segnalano l'atteggiamento e la valutazione soggettiva di chi parla.</p>
+            <div class="macro cognitiva">
+                <p class="macro-type">Funzione cognitiva</p>
+                <h3>Soggettività e contenuto proposizionale</h3>
+                <p class="macro-desc">Marca processi cognitivi, la <i>stance</i> o la valutazione di chi parla rispetto all'enunciato o a suoi elementi.</p>
+                <p class="meso-title">Meccanismi cognitivi</p>
                 <ul>
-                    <li>Marcatura di inferenza</li>
-                    <li>Modulazione del grado di certezza</li>
+                    <li>Marcatura dell'inferenza</li>
+                </ul>
+                <p class="meso-title">Grado di certezza</p>
+                <ul>
+                    <li>Modulazione del grado di confidenza</li>
+                </ul>
+                <p class="meso-title">Riferimento</p>
+                <ul>
                     <li>Approssimazione <span class="new-badge">nuova</span></li>
                     <li>Specificazione <span class="new-badge">nuova</span></li>
+                </ul>
+                <p class="meso-title">Forza illocutiva</p>
+                <ul>
                     <li>Attenuazione <span class="new-badge">nuova</span></li>
                     <li>Intensificazione</li>
                 </ul>
@@ -492,10 +548,9 @@ body {
         </div>
 
         <p class="contact-text" style="color:#444; margin-top:1.2rem;">
-            Per la definizione di ogni funzione consulta la <a href="guida-funzioni.html">Guida alle funzioni</a>.
+            Per la definizione di ogni funzione, con esempi, consulta la <a href="guida-funzioni.html">Guida alle funzioni</a>.
         </p>
     </div>
-
     
     </div>
 
