@@ -327,6 +327,49 @@ body {
     .levels { grid-template-columns: 1fr; }
 }
 
+/* --- Banner guida alle funzioni (come nella pagina Progetto) --- */
+
+.annot-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.annot-row .annot-text {
+    flex: 1;
+}
+
+.annot-banner {
+    flex-shrink: 0;
+    width: 200px;
+    padding: 1.4rem 1.2rem;
+    background: #095775;
+    color: #ffffff;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    transition: background 0.2s;
+}
+
+.annot-banner:hover {
+    background: #b51700;
+}
+
+@media (max-width: 700px) {
+    .annot-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .annot-banner {
+        width: auto;
+    }
+}
+
 /* --- Footer --- */
 
 .footer {
@@ -469,18 +512,26 @@ body {
     <div class="card">
         <h2 class="section-title">2–4. Le funzioni</h2>
 
-        <p class="contact-text" style="color:#444;">
-            La classificazione delle funzioni si basa sulla tassonomia di Carla Bazzanella (1995, 2006, 2011), ormai
-            consolidata negli studi sui segnali discorsivi dell'italiano. Dopo una prima prova di annotazione e la
-            discussione dei casi dubbi, lo schema è stato rielaborato: le microfunzioni sono state raggruppate in
-            mesofunzioni e ne sono state aggiunte di nuove, contrassegnate qui sotto con <span class="new-badge">nuova</span>.
-            Per ciascuna funzione sono state redatte linee guida interne.
-        </p>
-        <p class="contact-text" style="color:#444;">
-            Poiché i segnali discorsivi sono spesso polifunzionali, una stessa occorrenza può ricevere più etichette
-            su ciascun livello. L'elenco delle microfunzioni resta aperto: nuove funzioni possono essere aggiunte per
-            descrivere fenomeni non ancora considerati.
-        </p>
+        <div class="annot-row">
+            <div class="annot-text">
+            <p class="contact-text" style="color:#444;">
+                La classificazione delle funzioni si basa sulla tassonomia di Carla Bazzanella (1995, 2006, 2011), ormai
+                consolidata negli studi sui segnali discorsivi dell'italiano. Dopo una prima prova di annotazione e la
+                discussione dei casi dubbi, lo schema è stato rielaborato: le microfunzioni sono state raggruppate in
+                mesofunzioni e ne sono state aggiunte di nuove, contrassegnate qui sotto con <span class="new-badge">nuova</span>.
+                Per ciascuna funzione sono state redatte linee guida interne.
+            </p>
+            <p class="contact-text" style="color:#444;">
+                Poiché i segnali discorsivi sono spesso polifunzionali, una stessa occorrenza può ricevere più etichette
+                su ciascun livello. L'elenco delle microfunzioni resta aperto: nuove funzioni possono essere aggiunte per
+                descrivere fenomeni non ancora considerati.
+            </p>
+            </div>
+
+            <a class="annot-banner" href="guida-funzioni.html">
+                Guarda la guida alle funzioni →
+            </a>
+        </div>
 
         <div class="macro-grid">
             <div class="macro interazionale">
@@ -546,10 +597,6 @@ body {
                 </ul>
             </div>
         </div>
-
-        <p class="contact-text" style="color:#444; margin-top:1.2rem;">
-            Per la definizione di ogni funzione, con esempi, consulta la <a href="guida-funzioni.html">Guida alle funzioni</a>.
-        </p>
     </div>
     
     </div>
