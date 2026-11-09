@@ -292,29 +292,29 @@ body {
         <h2 class="section-title">Architettura del database</h2>
 
         <p class="contact-text" style="color:#444;">
-            COSÌ è organizzato in due componenti, pensate per rispondere a esigenze diverse: un <strong>sito pubblico</strong>,
-            che presenta i segnali discorsivi in modo chiaro e consultabile, e un <strong>repository aperto</strong>, che conserva
-            tutti i dati su cui le descrizioni si basano. Il sito è pensato per chi vuole esplorare la risorsa;
-            il repository per chi vuole verificare, riusare o rianalizzare i dati.
+            COSÌ è organizzato in due componenti, pensate per rispondere a esigenze diverse: un <strong>sito</strong>,
+            che presenti i segnali discorsivi in modo chiaro e consultabile, e un <strong>repositorio</strong>, che conserva
+            tutti i dati su cui le descrizioni si basano. Il sito è pensato per chi voglia esplorare la risorsa;
+            il repositorio per chi voglia riutilizzare o rianalizzare i dati.
         </p>
     </div>
 
     <div class="card">
-        <h2 class="section-title">Il repository</h2>
+        <h2 class="section-title">Il repositorio</h2>
 
         <p class="contact-text" style="color:#444;">
-            Per ciascun segnale discorsivo il repository mette a disposizione tre file:
+            Per ciascun segnale discorsivo il repositorio mette a disposizione tre file:
         </p>
         <ul class="contact-text" style="color:#444;">
             <li><strong>Le occorrenze</strong> estratte dal corpus KIParla, con un contesto fisso di parole prima e dopo,
                 in cui è indicato se l'elemento funziona come segnale discorsivo oppure no.</li>
-            <li><strong>I test di sostituzione</strong> usati per riconoscere i segnali discorsivi, così che il procedimento
+            <li><strong>I test</strong> usati per riconoscere i segnali discorsivi, così che il procedimento
                 sia trasparente e replicabile.</li>
             <li><strong>L'annotazione funzionale</strong> delle occorrenze riconosciute come segnali discorsivi,
                 con macro- e microfunzioni.</li>
         </ul>
         <p class="contact-text" style="color:#444;">
-            Il repository è consultabile su
+            Il repositorio è consultabile su
             <a href="https://github.com/LaboratorioPAROLE/cosi" target="_blank" rel="noopener">GitHub</a>.
         </p>
     </div>
@@ -322,15 +322,12 @@ body {
     <div class="card">
         <h2 class="section-title">Il collegamento con KIParla</h2>
 
-        <p class="contact-label">Un legame token per token</p>
         <p class="contact-text" style="color:#444;">
             COSÌ è legato al corpus <a href="https://github.com/KIParla/KIParla-collection" target="_blank" rel="noopener">KIParla</a>
             token per token, attraverso un'architettura a pivot (vd. Pannitto &amp; Mauri 2026): ogni occorrenza annotata
             è collegata al proprio identificativo (<em>token_id</em>) nel corpus. In questo modo è possibile recuperare
             tutti i metadati della conversazione e di chi parla, e riascoltare l'occorrenza nel suo contesto audio.
         </p>
-
-        <p class="contact-label">Un livello di annotazione per il treebank</p>
         <p class="contact-text" style="color:#444;">
             L'annotazione dei segnali discorsivi è progettata per essere compatibile con il formato CoNLL usato per il treebank
             di KIParla, così da poter confluire nel treebank come ulteriore livello di analisi.
