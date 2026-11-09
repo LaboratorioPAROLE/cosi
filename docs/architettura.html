@@ -201,6 +201,50 @@ body {
     color: #888;
     font-size: 0.85rem;
 }
+
+/* --- Footer --- */
+
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #095775;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    color: #b51700;
+}
+
+.footer-links svg {
+    width: 18px;
+    height: 18px;
+}
 </style>
 </head>
 
@@ -246,8 +290,64 @@ body {
 
     <div class="card">
         <h2 class="section-title">Architettura del database</h2>
+
         <p class="contact-text" style="color:#444;">
-            Under construction! 🚧 🚧
+            COSÌ è organizzato in due componenti, pensate per rispondere a esigenze diverse: un <strong>sito pubblico</strong>,
+            che presenta i segnali discorsivi in modo chiaro e consultabile, e un <strong>repository aperto</strong>, che conserva
+            tutti i dati su cui le descrizioni si basano. Il sito è pensato per chi vuole esplorare la risorsa;
+            il repository per chi vuole verificare, riusare o rianalizzare i dati.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">Il repository</h2>
+
+        <p class="contact-text" style="color:#444;">
+            Per ciascun segnale discorsivo il repository mette a disposizione tre file:
+        </p>
+        <ul class="contact-text" style="color:#444;">
+            <li><strong>Le occorrenze</strong> estratte dal corpus KIParla, con un contesto fisso di parole prima e dopo,
+                in cui è indicato se l'elemento funziona come segnale discorsivo oppure no.</li>
+            <li><strong>I test di sostituzione</strong> usati per riconoscere i segnali discorsivi, così che il procedimento
+                sia trasparente e replicabile.</li>
+            <li><strong>L'annotazione funzionale</strong> delle occorrenze riconosciute come segnali discorsivi,
+                con macro- e microfunzioni.</li>
+        </ul>
+        <p class="contact-text" style="color:#444;">
+            Il repository è consultabile su
+            <a href="https://github.com/LaboratorioPAROLE/cosi" target="_blank" rel="noopener">GitHub</a>.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">Il collegamento con KIParla</h2>
+
+        <p class="contact-label">Un legame token per token</p>
+        <p class="contact-text" style="color:#444;">
+            COSÌ è legato al corpus <a href="https://github.com/KIParla/KIParla-collection" target="_blank" rel="noopener">KIParla</a>
+            token per token, attraverso un'architettura a pivot (vd. Pannitto &amp; Mauri 2026): ogni occorrenza annotata
+            è collegata al proprio identificativo (<em>token_id</em>) nel corpus. In questo modo è possibile recuperare
+            tutti i metadati della conversazione e di chi parla, e riascoltare l'occorrenza nel suo contesto audio.
+        </p>
+
+        <p class="contact-label">Un livello di annotazione per il treebank</p>
+        <p class="contact-text" style="color:#444;">
+            L'annotazione dei segnali discorsivi è progettata per essere compatibile con il formato CoNLL usato per il treebank
+            di KIParla, così da poter confluire nel treebank come ulteriore livello di analisi.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">Il sito</h2>
+
+        <p class="contact-text" style="color:#444;">
+            Il sito presenta ogni segnale discorsivo attraverso la sua frequenza, le funzioni che svolge e il suo profilo
+            sociolinguistico. Per ciascuna voce offrirà visualizzazioni e statistiche sull'uso nei diversi tipi di testo
+            presenti in KIParla (conversazioni, interviste, lezioni) e dati sulle caratteristiche di chi parla,
+            come l'età e la provenienza.
+        </p>
+        <p class="contact-text" style="color:#444;">
+            Puoi già esplorare le voci disponibili nella sezione <a href="search.html">Cerca nel database</a>.
         </p>
     </div>
 
@@ -255,6 +355,20 @@ body {
     </div>
 
 </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Laboratorio P.A.R.O.L.E. – Università di Salerno</span>
+    <div class="footer-links">
+      <a href="chi_siamo.html">Chi siamo</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="https://github.com/LaboratorioPAROLE/cosi" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
