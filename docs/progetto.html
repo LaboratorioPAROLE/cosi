@@ -211,7 +211,49 @@ body {
     background: #ffffff;
     border-top: 1px solid #e5e5e5;
 }
-    
+
+    /* --- Banner schema di annotazione --- */
+
+.annot-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.annot-row ul {
+    flex: 1;
+}
+
+.annot-banner {
+    flex-shrink: 0;
+    width: 200px;
+    padding: 1.4rem 1.2rem;
+    background: #095775;
+    color: #ffffff;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    transition: background 0.2s;
+}
+
+.annot-banner:hover {
+    background: #b51700;
+}
+
+@media (max-width: 700px) {
+    .annot-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .annot-banner {
+        width: auto;
+    }
+}
 </style>
 </head>
 
@@ -266,14 +308,13 @@ body {
     </div>
  
     <div class="card">
-        <h2 class="section-title">Come estraiamo i dati</h2>
+        <h2 class="section-title">Come vengono estratti i dati</h2>
  
         <p class="contact-label">1. Selezione dei candidati</p>
         <p class="contact-text" style="color:#444;">
-            Il punto di partenza sono le liste di frequenza dei corpora KIParla e VoLIP. Dal corpus KIParla (moduli KIP, KIPasti,
-            ParlaTO e ParlaBO) abbiamo considerato le parole con almeno 100 occorrenze e individuato manualmente quelle che possono
-            funzionare come segnali discorsivi. La stessa procedura è stata applicata a bigrammi e trigrammi, estratti con
-            NoSketchEngine, per individuare i segnali complessi (formati da più parole). Le tre liste sono state poi confrontate
+            Il punto di partenza per il progetto è stato costituito dalle liste di frequenza dei corpora KIParla e VoLIP. Dal corpus KIParla (e in particolare sulla base dei moduli KIP, KIPasti,
+            ParlaTO e ParlaBO, disponibili a metà 2025) abbiamo considerato le parole con almeno 100 occorrenze e individuato manualmente quelle che potrebbero
+            funzionare come segnali discorsivi. La stessa procedura è stata applicata a bigrammi e trigrammi, estratti per individuare i segnali discorsivi polirematici. Le tre liste sono state poi confrontate
             tramite un notebook Python, disponibile nel repository del progetto, ottenendo un elenco finale di
             <strong>236 candidati</strong>: 174 segnali semplici, 53 bigrammi e 9 trigrammi.
         </p>
@@ -288,16 +329,22 @@ body {
  
         <p class="contact-label">3. Annotazione</p>
         <p class="contact-text" style="color:#444;">
-            Le occorrenze vengono annotate su tre livelli:
+            Per ciascuna voce si estraggono casualmente un massimo di 800 occorrenze, che vengono annotate su tre livelli:
         </p>
-        <ul class="contact-text" style="color:#444;">
-            <li><strong>Riconoscimento</strong>: l'occorrenza funziona come segnale discorsivo oppure no? Per deciderlo usiamo test
-                diagnostici (omissibilità, sostituibilità con un altro segnale, distanza dal significato letterale), affiancati
-                da indicatori come la presenza di pause, verificata all'ascolto, e l'assenza di integrazione sintattica con il contesto.</li>
-            <li><strong>Macrofunzioni</strong>: interazionali, metatestuali e cognitive.</li>
-            <li><strong>Microfunzioni</strong>: compiti più specifici, come la presa del turno, la riformulazione o la modulazione
-                della certezza del parlante.</li>
-        </ul>
+        <div class="annot-row">
+            <ul class="contact-text" style="color:#444;">
+                <li><strong>Riconoscimento</strong>: l'occorrenza funziona come segnale discorsivo oppure no? Per deciderlo usiamo test
+            diagnostici (omissibilità, sostituibilità con un altro segnale, distanza dal significato letterale), affiancati
+            da indicatori come la presenza di pause, verificata all'ascolto, e l'assenza di integrazione sintattica con il contesto.</li>
+                <li><strong>Macrofunzioni</strong>: interazionali, metatestuali e cognitive.</li>
+                <li><strong>Microfunzioni</strong>: compiti più specifici, come la presa del turno, la riformulazione o la modulazione
+            della certezza del parlante.</li>
+            </ul>
+
+            <a class="annot-banner" href="schema_annotazione.html">
+                Guarda lo schema di annotazione →
+            </a>
+</div>
         <p class="contact-text" style="color:#444;">
             Poiché i segnali discorsivi sono spesso polifunzionali, una stessa occorrenza può ricevere più etichette.
             Lo schema è stato validato con prove di accordo tra annotatori, da cui sono nate linee guida interne.
