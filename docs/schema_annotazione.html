@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contatti – COSÌ</title>
+<title>Schema di annotazione – COSÌ</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -201,6 +201,146 @@ body {
     color: #888;
     font-size: 0.85rem;
 }
+
+/* --- Schema di annotazione --- */
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.level {
+    background: #f9fbff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.level-num {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 50%;
+    background: #095775;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.level-title {
+    display: block;
+    font-weight: 600;
+    color: #1e3c72;
+    margin-bottom: 4px;
+}
+
+.level p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: #444;
+}
+
+.macro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 1rem;
+}
+
+.macro {
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid #095775;
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+}
+
+.macro h3 {
+    margin: 0 0 4px 0;
+    color: #1e3c72;
+    font-size: 1.05rem;
+}
+
+.macro-desc {
+    margin: 0 0 0.8rem 0;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.macro ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.new-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 7px;
+    border-radius: 8px;
+    background: #fdf3f2;
+    border: 1px solid #8b1a10;
+    color: #8b1a10;
+    font-size: 0.7rem;
+    font-weight: 600;
+    vertical-align: 1px;
+}
+
+@media (max-width: 800px) {
+    .levels, .macro-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Footer --- */
+
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #095775;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    color: #b51700;
+}
+
+.footer-links svg {
+    width: 18px;
+    height: 18px;
+}
 </style>
 </head>
 
@@ -246,9 +386,113 @@ body {
 
     <div class="card">
         <h2 class="section-title">Lo schema di annotazione</h2>
+
         <p class="contact-text" style="color:#444;">
-            Under construction! 🚧 🚧
-            ma nel mentre puoi guardare la <a href="guida-funzioni.html">Guida alle funzioni</a>!
+            Ogni occorrenza estratta dal corpus viene annotata su tre livelli annidati: prima si stabilisce se funziona
+            come segnale discorsivo, poi si indicano le funzioni che svolge, a due livelli di dettaglio.
+        </p>
+
+        <div class="levels">
+            <div class="level">
+                <span class="level-num">1</span>
+                <span class="level-title">Riconoscimento</span>
+                <p>L'occorrenza funziona come segnale discorsivo (SD) oppure no?</p>
+            </div>
+            <div class="level">
+                <span class="level-num">2</span>
+                <span class="level-title">Macrofunzioni</span>
+                <p>Interazionali, metatestuali o cognitive: a quale componente della situazione comunicativa è orientato il segnale.</p>
+            </div>
+            <div class="level">
+                <span class="level-num">3</span>
+                <span class="level-title">Microfunzioni</span>
+                <p>Il compito specifico svolto dal segnale nel contesto, come la presa del turno o la riformulazione.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">1. Riconoscimento</h2>
+
+        <p class="contact-text" style="color:#444;">
+            Per decidere se un'occorrenza funziona come segnale discorsivo si usano test diagnostici pensati per ridurre
+            al minimo la soggettività:
+        </p>
+        <ul class="contact-text" style="color:#444;">
+            <li><strong>omissibilità</strong>: l'elemento si può eliminare senza cambiare il contenuto proposizionale dell'enunciato?</li>
+            <li><strong>sostituibilità</strong>: si può sostituire con un altro segnale discorsivo che svolge la stessa funzione?</li>
+            <li><strong>significato letterale</strong>: l'uso corrisponde al significato letterale dell'espressione? Lo si verifica
+                sostituendo l'elemento con sinonimi del suo uso non discorsivo.</li>
+        </ul>
+        <p class="contact-text" style="color:#444;">
+            A questi si aggiungono due indicatori: la presenza di pause prima o dopo l'elemento, verificata all'ascolto,
+            e l'assenza di integrazione (morfo)sintattica con il contesto. Un'espressione che introduce una completiva,
+            ad esempio, non è considerata un segnale discorsivo. I test non sono identici per tutti i candidati,
+            ma vengono adattati alle proprietà di ciascuna espressione.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">2–3. Macro- e microfunzioni</h2>
+
+        <p class="contact-text" style="color:#444;">
+            La classificazione delle funzioni si basa sulla tassonomia di Carla Bazzanella (1995, 2006, 2011), ormai
+            consolidata negli studi sui segnali discorsivi dell'italiano. Dopo una prima prova di annotazione e la
+            discussione dei casi dubbi, lo schema è stato rielaborato: sono state aggiunte sei nuove microfunzioni,
+            contrassegnate qui sotto con <span class="new-badge">nuova</span>, e per ciascuna microfunzione sono state redatte linee guida interne.
+        </p>
+        <p class="contact-text" style="color:#444;">
+            Poiché i segnali discorsivi sono spesso polifunzionali, una stessa occorrenza può ricevere più etichette
+            su ciascun livello. L'elenco delle microfunzioni resta aperto: nuove funzioni possono essere aggiunte per
+            descrivere fenomeni non ancora considerati.
+        </p>
+
+        <div class="macro-grid">
+            <div class="macro">
+                <h3>Interazionali</h3>
+                <p class="macro-desc">Orientate a chi ascolta: servono a gestire lo scambio verbale.</p>
+                <ul>
+                    <li>Presa del turno</li>
+                    <li>Richiesta di accordo / conferma</li>
+                    <li>Segnalazione di accordo <span class="new-badge">nuova</span></li>
+                    <li>Conferma di attenzione</li>
+                    <li>Interruzione</li>
+                    <li>Cessione del turno</li>
+                    <li>Marcatura di conoscenze condivise</li>
+                    <li>Richiesta di attenzione</li>
+                    <li>Strategie di cortesia</li>
+                </ul>
+            </div>
+            <div class="macro">
+                <h3>Metatestuali</h3>
+                <p class="macro-desc">Legate all'organizzazione interna del testo, come la gestione degli argomenti.</p>
+                <ul>
+                    <li>Introduzione / cambio / ripresa dell'argomento</li>
+                    <li>Chiusura dell'argomento</li>
+                    <li>Prolettico (segnale di formulazione) <span class="new-badge">nuova</span></li>
+                    <li>Riformulazione</li>
+                    <li>Digressione</li>
+                    <li>Marcatura di citazione</li>
+                    <li>Riempitivo <span class="new-badge">nuova</span></li>
+                    <li>Esemplificazione</li>
+                </ul>
+            </div>
+            <div class="macro">
+                <h3>Cognitive</h3>
+                <p class="macro-desc">Segnalano l'atteggiamento e la valutazione soggettiva di chi parla.</p>
+                <ul>
+                    <li>Marcatura di inferenza</li>
+                    <li>Modulazione del grado di certezza</li>
+                    <li>Approssimazione <span class="new-badge">nuova</span></li>
+                    <li>Specificazione <span class="new-badge">nuova</span></li>
+                    <li>Attenuazione <span class="new-badge">nuova</span></li>
+                    <li>Intensificazione</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="contact-text" style="color:#444; margin-top:1.2rem;">
+            Per la definizione di ogni funzione consulta la <a href="guida-funzioni.html">Guida alle funzioni</a>.
         </p>
     </div>
 
@@ -256,6 +500,20 @@ body {
     </div>
 
 </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Laboratorio P.A.R.O.L.E. – Università di Salerno</span>
+    <div class="footer-links">
+      <a href="chi_siamo.html">Chi siamo</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="https://github.com/LaboratorioPAROLE/cosi" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
