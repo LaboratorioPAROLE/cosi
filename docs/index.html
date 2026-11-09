@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -478,6 +477,268 @@ th.sortable[aria-sort="ascending"] .sort-icon,
 th.sortable[aria-sort="descending"] .sort-icon {
     color: #2a5298;
 }
+
+/* =========================================
+   HOME: INTRO, NUMERI, NEWS
+   ========================================= */
+.home-tagline {
+    margin: -0.4rem 0 1.2rem 0;
+    color: #2a5298;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.home-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.home-text a {
+    color: #095775;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.home-text a:hover {
+    color: #b51700;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 1.4rem 0;
+}
+
+/* Box dei numeri a forma di freccia: arrivano dai bordi della pagina verso il centro */
+body { overflow-x: hidden; }
+
+.stats {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+.stat {
+    --punta: 26px;
+    /* Forme delle frecce */
+    --da-sinistra: polygon(0 0, calc(100% - var(--punta)) 0, 100% 50%, calc(100% - var(--punta)) 100%, 0 100%);
+    --verso-destra: polygon(0 0, calc(100% - var(--punta)) 0, 100% 50%, calc(100% - var(--punta)) 100%, 0 100%, var(--punta) 50%);
+    --verso-sinistra: polygon(var(--punta) 0, 100% 0, calc(100% - var(--punta)) 50%, 100% 100%, var(--punta) 100%, 0 50%);
+    --da-destra: polygon(var(--punta) 0, 100% 0, 100% 100%, var(--punta) 100%, 0 50%);
+    --forma: var(--verso-destra);
+
+    position: relative;
+    isolation: isolate;
+    background: #8b1a10; /* fa da bordo */
+    clip-path: var(--forma);
+    padding: 1rem calc(var(--punta) + 14px);
+    text-align: center;
+}
+
+/* Riempimento rosato all'interno del bordo */
+.stat::before {
+    content: "";
+    position: absolute;
+    inset: 2px 3px;
+    z-index: -1;
+    background: #fdf3f2;
+    clip-path: var(--forma);
+}
+
+/* Desktop: le prime due arrivano da sinistra, le ultime due da destra */
+.stat:nth-child(1) { --forma: var(--da-sinistra); }
+.stat:nth-child(2) { --forma: var(--verso-destra); }
+.stat:nth-child(3) { --forma: var(--verso-sinistra); }
+.stat:nth-child(4) { --forma: var(--da-destra); }
+
+/* Il lato attaccato al bordo della pagina non ha cornice */
+.stat:nth-child(1)::before { left: 0; }
+.stat:nth-child(4)::before { right: 0; }
+
+@media (max-width: 700px) {
+    /* Telefono: due righe, una freccia da ogni lato */
+    .stat:nth-child(odd)  { --forma: var(--da-sinistra); }
+    .stat:nth-child(even) { --forma: var(--da-destra); }
+    .stat:nth-child(odd)::before  { left: 0; right: 3px; }
+    .stat:nth-child(even)::before { left: 3px; right: 0; }
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #8b1a10;
+    line-height: 1.2;
+}
+
+.stat-label {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.35;
+}
+
+/* Link con immagine e nuvoletta da fumetto */
+.link-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 1rem;
+}
+
+@media (max-width: 700px) {
+    .link-tiles { grid-template-columns: repeat(2, 1fr); }
+}
+
+.link-tile {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.link-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.link-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.link-bubble {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    background: #ffffff;
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 8px 10px;
+    text-align: center;
+    color: #095775;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.link-tile:hover .link-bubble {
+    color: #b51700;
+}
+
+/* Codina della nuvoletta: bordo nero... */
+.link-bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 26px;
+    border-width: 14px 12px 0 0;
+    border-style: solid;
+    border-color: #1a1a1a transparent transparent transparent;
+}
+
+/* ...e interno bianco */
+.link-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    left: 28px;
+    border-width: 10px 8px 0 0;
+    border-style: solid;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+@media (max-width: 700px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+.news-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.news-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.news-list li:last-child {
+    border-bottom: none;
+}
+
+.news-list a {
+    color: #095775;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.news-list a:hover {
+    color: #b51700;
+}
+
+.news-date {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #095775;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    color: #b51700;
+}
+
+.footer-links svg {
+    width: 18px;
+    height: 18px;
+}
 </style>
 
 <script>
@@ -586,22 +847,95 @@ function loadPlot(divId, jsonPath) {
 
 <div class="card">
   <h2>Benvenuto in COSÌ</h2>
+  <p class="home-tagline">Catalogo Online dei Segnali discorsivi dell'Italiano</p>
 
-  <p>
-    COSÌ è una risorsa dedicata allo studio dei segnali discorsivi nell'italiano parlato.
+  <p class="home-text">
+    COSÌ è il primo database annotato dei segnali discorsivi dell'italiano basato sul parlato spontaneo.
+    Costruito sul corpus <a href="https://kiparla.it" target="_blank" rel="noopener">KIParla</a>, permette di esplorare
+    le funzioni pragmatiche dei segnali, la loro distribuzione nei contesti comunicativi e le caratteristiche
+    sociolinguistiche di chi li usa.
   </p>
 
-  <p>
-    Il database permette di esplorare le funzioni pragmatiche dei segnali,
-    la loro distribuzione nei contesti comunicativi e le caratteristiche sociolinguistiche.
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">236</span>
+      <span class="stat-label">segnali discorsivi candidati, semplici e complessi</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">800</span>
+      <span class="stat-label">occorrenze annotate al massimo per ogni voce</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">moduli del corpus KIParla: KIP, KIPasti, ParlaTO, ParlaBO</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3</span>
+      <span class="stat-label">livelli di annotazione: riconoscimento, macro- e microfunzioni</span>
+    </div>
+  </div>
+
+  <p class="home-text">
+    La risorsa è ad accesso aperto e pensata per crescere nel tempo. Ogni occorrenza è collegata al corpus KIParla,
+    così da poterla ascoltare nel suo contesto audio e da recuperare i metadati della conversazione e dei parlanti.
   </p>
 
-  <p>
-    Vai alla sezione <b>Cerca nel database</b> per esplorare i dati.
+  <p class="home-text">
+    I dati annotati e la documentazione del progetto sono depositati su GitHub.
   </p>
+
+  <div class="link-tiles">
+    <a class="link-tile" href="search.html">
+      <img class="link-img" src="foto/link_cerca.png" alt="">
+      <span class="link-bubble">Cerca nel database</span>
+    </a>
+    <!-- TODO: sostituire "#" con l'indirizzo del repository GitHub di COSÌ -->
+    <a class="link-tile" href="#" target="_blank" rel="noopener">
+      <img class="link-img" src="foto/link_github_cosi.png" alt="">
+      <span class="link-bubble">COSÌ su GitHub</span>
+    </a>
+    <a class="link-tile" href="https://kiparla.it" target="_blank" rel="noopener">
+      <img class="link-img" src="foto/link_kiparla.png" alt="">
+      <span class="link-bubble">Corpus KIParla</span>
+    </a>
+    <a class="link-tile" href="https://github.com/KIParla" target="_blank" rel="noopener">
+      <img class="link-img" src="foto/link_github_kiparla.png" alt="">
+      <span class="link-bubble">KIParla su GitHub</span>
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <h3>News</h3>
+  <!-- TODO: sostituire con le notizie reali (titolo, link, data) -->
+  <ul class="news-list">
+    <li>
+      <a href="#">Titolo della notizia</a>
+      <span class="news-date">GG Mese 2026</span>
+    </li>
+    <li>
+      <a href="#">Titolo della notizia</a>
+      <span class="news-date">GG Mese 2026</span>
+    </li>
+  </ul>
 </div>
 
 </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Laboratorio P.A.R.O.L.E. – Università di Salerno</span>
+    <div class="footer-links">
+      <a href="chi_siamo.html">Chi siamo</a>
+      <a href="contatti.html">Contatti</a>
+      <!-- TODO: sostituire "#" con l'indirizzo del repository GitHub di COSÌ -->
+      <a href="#" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
