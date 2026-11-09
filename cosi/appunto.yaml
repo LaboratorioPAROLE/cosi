@@ -1,0 +1,21 @@
+nomeSD: appunto
+file: appunto.tsv
+nOccTot: 1909
+fascia_frequenza: medio-alta
+varianti: ~
+
+source:
+  lemma: appunto
+  pos: avverbio
+  form: ~
+
+descrizione_macro: |
+  
+
+descrizione_micro: |
+  
+
+grafici:
+  type: ../imgs/appunto/type.html
+  age: ../imgs/appunto/age.html
+  region: ../imgs/appunto/region_map.html

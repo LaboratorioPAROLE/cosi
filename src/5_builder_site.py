@@ -55,8 +55,8 @@ GITHUB_TSV_RAW = "https://raw.githubusercontent.com/LaboratorioPAROLE/cosi/main/
 # URL pubblico del sito (GitHub Pages): da correggere se diverso
 SITE_URL = "https://laboratorioparole.github.io/cosi/"
 
-CITE_EDITOR = "Laboratorio PAROLE"
-CITE_WORK = "COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano v0.1"
+CITE_AUTHOR = "Laboratorio P.A.R.O.L.E."
+CITE_WORK = "COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano"
 CITE_PUBLISHER = "Università di Salerno"
 CITE_PLACE = "Salerno"
 CITE_YEAR = date.today().year
@@ -72,7 +72,7 @@ def citation_html(nome_sd, name):
     voce = escape(str(nome_sd))
 
     text = (
-        f'{escape(CITE_EDITOR)} ({CITE_YEAR}). \u201c{voce}\u201d. In '
+        f'{escape(CITE_AUTHOR)} ({CITE_YEAR}). \u201c{voce}\u201d. In '
         f'<i>{escape(CITE_WORK)}</i>. {escape(CITE_PLACE)}: {escape(CITE_PUBLISHER)}. '
         f'<a href="{url}">{url}</a> '
         f'(ultima consultazione: <span class="cite-date"></span>).'
@@ -81,7 +81,7 @@ def citation_html(nome_sd, name):
     key = "cosi-" + "".join(c if c.isalnum() else "-" for c in name.lower())
     bibtex = (
         f"@misc{{{key},\n"
-        f"  editor       = {{{{{CITE_EDITOR}}}}},\n"
+        f"  author       = {{{{{CITE_AUTHOR}}}}},\n"
         f"  title        = {{{{{nome_sd}}}}},\n"
         f"  howpublished = {{In \\emph{{{BIB_WORK}}}}},\n"
         f"  publisher    = {{{CITE_PUBLISHER}}},\n"
@@ -99,7 +99,7 @@ def citation_html(nome_sd, name):
         .replace('&lt;span class="cite-date"&gt;&lt;/span&gt;', '<span class="cite-date"></span>'))
 
     return f"""
-<div class="card cite-card">
+<div class="card cite-card" id="cita">
     <h3>Come citare questa voce</h3>
     <p class="cite-text" id="cite-text">{text}</p>
     <div class="cite-actions">
@@ -530,6 +530,93 @@ th.sortable .sort-icon {{
     color: #999;
 }}
 
+/* Titolo della voce + pulsante "Cita" */
+.title-row {{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}}
+
+.cite-jump {{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    padding: 6px 12px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+}}
+
+.cite-jump:hover {{
+    border-color: #b51700;
+    color: #b51700;
+}}
+
+.cite-jump svg {{
+    width: 16px;
+    height: 16px;
+}}
+
+html {{
+    scroll-behavior: smooth;
+}}
+
+#cita {{
+    scroll-margin-top: 20px;
+}}
+
+/* Footer */
+.footer {{
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 2rem;
+}}
+
+.footer-inner {{
+    max-width: 1100px;
+    margin: auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: #666;
+}}
+
+.footer-links {{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+}}
+
+.footer-links a {{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #095775;
+    text-decoration: none;
+    font-weight: 500;
+}}
+
+.footer-links a:hover {{
+    color: #b51700;
+}}
+
+.footer-links svg {{
+    width: 16px;
+    height: 16px;
+}}
+
 /* Come citare questa voce */
 .cite-text {{
     font-size: 0.95rem;
@@ -704,6 +791,20 @@ function loadPlot(divId, jsonPath) {{
 {body}
 </div>
 
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Laboratorio P.A.R.O.L.E. – Università di Salerno</span>
+    <div class="footer-links">
+      <a href="{base_path}chi_siamo.html">Chi siamo</a>
+      <a href="{base_path}contatti.html">Contatti</a>
+      <a href="https://github.com/LaboratorioPAROLE/cosi" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
 """
@@ -847,9 +948,17 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     body = f"""
 <div class="card">
 
-    <h2 style="font-size: 1.6rem; margin-bottom: 0.4rem;">
-        {signal["nomeSD"]}
-    </h2>
+    <div class="title-row">
+        <h2 style="font-size: 1.6rem; margin-bottom: 0.4rem;">
+            {signal["nomeSD"]}
+        </h2>
+        <a class="cite-jump" href="#cita" title="Come citare questa voce" aria-label="Come citare questa voce">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M9.5 6C6.5 6 4 8.5 4 11.5V18h6v-6H7c0-1.7 1.1-3 2.5-3V6zm10 0c-3 0-5.5 2.5-5.5 5.5V18h6v-6h-3c0-1.7 1.1-3 2.5-3V6z"/>
+            </svg>
+            Cita
+        </a>
+    </div>
 
     <div style="font-size: 1rem; color: #555; margin-bottom: 1rem;">
         da <b>{signal["source"]["lemma"]}</b>
@@ -1062,29 +1171,6 @@ render();
 </script>
 """
 
-home_body = """
-<div class="card">
-  <h2>Benvenuto in COSÌ</h2>
-
-  <p>
-    COSÌ è una risorsa dedicata allo studio dei segnali discorsivi nell'italiano parlato.
-  </p>
-
-  <p>
-    Il database permette di esplorare le funzioni pragmatiche dei segnali,
-    la loro distribuzione nei contesti comunicativi e le caratteristiche sociolinguistiche.
-  </p>
-
-  <p>
-    Vai alla sezione <b>Cerca nel database</b> per esplorare i dati.
-  </p>
-</div>
-"""
-
-(DOCS_DIR / "index.html").write_text(
-    base_html("Home", home_body, base_path=""),
-    encoding="utf-8"
-)
 
 (DOCS_DIR / "search.html").write_text(
     base_html("Cerca nel database", index_body, base_path=""),

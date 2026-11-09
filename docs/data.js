@@ -6,6 +6,12 @@ const DATA = [
     "link": "segnali/allora.html"
   },
   {
+    "lemma": "appunto",
+    "frequenza": "medio-alta",
+    "micro": "Filler, Introduzione o ripresa del topic, Marcatura dell'inferenza, Esemplificazione, Riformulazione",
+    "link": "segnali/appunto.html"
+  },
+  {
     "lemma": "bene",
     "frequenza": "medio-bassa",
     "micro": "Chiusura del topic, Conferma dell'attenzione, Introduzione o ripresa del topic, Accordo, Presa di turno",
