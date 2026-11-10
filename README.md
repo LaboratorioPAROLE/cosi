@@ -157,7 +157,7 @@ Tutte le regioni concorrono al calcolo, anche quelle con pochi dati. Nella mappa
 
 Per citare il catalogo, si prega di fare riferimento alla presentazione del progetto ([abstract](https://eventi.unibo.it/talkingdata2025/abstracts/voghera-et-al.pdf/@@download/file/Voghera%20et.%20al.pdf)):
 
-Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. In _Talking Data - Methodological and theoretical challenges raised by spoken interaction data_, 8-10 Ottobre 2025. Università di Bologna, Bologna.
+> Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. In _Talking Data - Methodological and theoretical challenges raised by spoken interaction data_, 8-10 Ottobre 2025. Università di Bologna, Bologna.
 
 ### Voci individuali
 
