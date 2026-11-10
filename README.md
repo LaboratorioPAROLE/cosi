@@ -152,8 +152,16 @@ Tutte le regioni concorrono al calcolo, anche quelle con pochi dati. Nella mappa
 ---
  
 ## Come citare
- 
-Le voci del catalogo si citano come voci di un'opera di consultazione, in stile Chicago con *s.v.* (*sub voce*) e con la versione corrente del catalogo. In fondo a ogni pagina c'è il riquadro **Come citare questa voce**, con la citazione pronta e i pulsanti per copiarla o per copiare il BibTeX. Esempio:
+
+### Citare il catalogo
+
+Per citare il catalogo, è possibile citare la presentazione ([abstract](https://eventi.unibo.it/talkingdata2025/abstracts/voghera-et-al.pdf/@@download/file/Voghera%20et.%20al.pdf)):
+
+Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. In _Talking Data - Methodological and theoretical challenges raised by spoken interaction data_, 8-10 Ottobre 2025. Università di Bologna, Bologna.
+
+### Voci individuali
+
+In fondo a ogni pagina c'è il riquadro **Come citare questa voce**, con la citazione pronta in stile Chicago con *s.v.* (*sub voce*) e con la versione corrente del catalogo. Esempio:
  
 > *COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano*, versione 0.1 (Salerno: Laboratorio P.A.R.O.L.E., Università di Salerno, 2026), s.v. "dunque", consultato il gg mese aaaa, https://laboratorioparole.github.io/cosi/segnali/dunque.html.
 
@@ -193,12 +201,5 @@ Il sito carica Plotly.js da CDN e la geometria delle regioni da [openpolis/geojs
 | Luisa Troncone       | ltroncone(@)unisa.it         |
 
 ---
-## Prodotti della ricerca
-### Presentazioni
-* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. Così: an online repertoire of italian discourse markers. _Talking Data - Methodological and theoretical challenges raised by spoken interaction data_. Università di Bologna.
-* Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone. 2026. Segnali discorsivi e tipi di interazione: uno studio corpus-based a partire da COSÌ (Catalogo Online dei Segnali discorsivi dell’Italiano). _XXVI AItLA - L’interazione comunicativa: relazioni, pratiche, prospettive_. Università di Bologna.
-* Pisciotta, Flavio, Luisa Troncone, Giovanni Di Paola, Miriam Voghera, Andrea Sansò, Alfonsina Buoniconto, Carmela Sammarco, Pasquale Esposito, Iolanda Alfano. 2026, da presentare. Coppie funzionalmente simili di segnali discorsivi italiani e distribuzione sociolinguistica: uno studio quantitativo corpus-based. _DISROM9 - Congresso Internazionale sui Marcatori Discorsivi nelle Lingue Romanze_. Università di Oviedo.
 
-### Articoli
-Coming soon!
 COSÌ - Catalogo Online dei Segnali discorsivi dell’Italiano  © 2025 by Laboratorio PAROLE Unisa is licensed under Creative Commons Attribution 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/
