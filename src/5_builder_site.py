@@ -359,6 +359,10 @@ input {{
     padding: 0;
 }}
 
+.ex-cell {{
+    padding: 10px 15px;
+}}
+
 .example-card.error {{
     color: #e53e3e;
     background-color: #fff5f5;
@@ -572,6 +576,196 @@ html {{
     scroll-margin-top: 20px;
 }}
 
+/* Note dei grafici (su mobile la nota esce dal grafico) */
+.plot-note {{
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0.4rem 0 0 0;
+    text-align: center;
+}}
+
+/* Pulsante menu: visibile solo su mobile */
+.nav-toggle {{
+    display: none;
+}}
+
+.navbar {{
+    flex-wrap: wrap;
+}}
+
+@media (max-width: 700px) {{
+
+    /* --- spazi --- */
+    .container {{ padding: 1rem; }}
+    .card {{ padding: 1rem; border-radius: 12px; }}
+
+    /* --- menu ☰ --- */
+    .nav-toggle {{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 6px auto 8px auto;
+        padding: 8px 16px;
+        border: 1px solid #d5dcea;
+        border-radius: 10px;
+        background: #f9fbff;
+        color: #095775;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+    }}
+
+    .nav-toggle-bars,
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {{
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        position: relative;
+    }}
+
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {{
+        content: "";
+        position: absolute;
+        left: 0;
+    }}
+
+    .nav-toggle-bars::before {{ top: -6px; }}
+    .nav-toggle-bars::after  {{ top: 6px; }}
+
+    .navbar {{
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin: 0;
+        padding: 0 0 8px 0;
+        border-top: 1px solid #eee;
+    }}
+
+    .navbar.open {{ display: flex; }}
+
+    .navbar > a,
+    .dropdown > a {{
+        display: block;
+        padding: 12px 1.2rem;
+        border-bottom: 1px solid #f1f1f1;
+    }}
+
+    /* sottomenu: niente hover, si apre al tocco */
+    .dropdown:hover .dropdown-content {{ display: none; }}
+
+    .dropdown-content,
+    .dropdown.open .dropdown-content {{
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 0;
+        background: #f9fbff;
+    }}
+
+    .dropdown.open .dropdown-content {{ display: block; }}
+
+    .dropdown-content a {{
+        padding: 10px 2.2rem;
+        border-bottom: 1px solid #f1f1f1;
+    }}
+
+    /* --- microfunzioni ed esempi --- */
+    /* righe come griglie: freccia | microfunzione | frequenza */
+    .micro-table,
+    .micro-table tbody {{ display: block; }}
+
+    .micro-table tr {{
+        display: grid;
+        grid-template-columns: 22px 1fr auto;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }}
+
+    .micro-table th,
+    .micro-table td {{ padding: 10px 6px; border-bottom: none; }}
+
+    .micro-table .col-macro {{ display: none; }}
+    .micro-table .col-arrow {{ width: auto !important; padding-right: 0; }}
+
+    /* riga degli esempi: una cella a tutta larghezza */
+    .micro-table tr[id^="ex"] {{ grid-template-columns: 1fr; }}
+    .micro-table tr[id^="ex"][style*="none"] {{ display: none !important; }}
+
+    .micro-table td.ex-cell {{ padding: 8px 2px; }}
+
+    .example-card {{ padding: 10px 12px; margin: 8px 0 10px 0; }}
+
+    .example-header {{
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+    }}
+
+    .example-actions {{ justify-content: flex-start; }}
+
+    /* turni: parlante sopra la battuta invece che a fianco */
+    .transcript-table,
+    .transcript-table tbody,
+    .transcript-table tr,
+    .transcript-table td {{
+        display: block;
+        width: auto;
+    }}
+
+    .transcript-table td {{ border-bottom: none; }}
+
+    .speaker-col {{
+        width: auto;
+        min-width: 0;
+        font-size: 0.78rem;
+        padding: 6px 8px 0 8px;
+    }}
+
+    .text-col {{
+        font-size: 0.92rem;
+        padding: 0 8px 6px 8px;
+    }}
+
+    /* --- pagina di ricerca: ogni segnale diventa una scheda --- */
+    .search-table thead tr,
+    .search-table tbody tr {{
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }}
+
+    .search-table th,
+    .search-table td {{
+        border-bottom: none;
+        padding: 10px 6px;
+    }}
+
+    .search-table th:nth-child(2),
+    .search-table td:nth-child(2) {{ text-align: right; }}
+
+    .search-table th:nth-child(3) {{ display: none; }}
+
+    .search-table td:nth-child(3) {{
+        grid-column: 1 / -1;
+        padding-top: 0;
+        font-size: 0.85rem;
+        color: #666;
+    }}
+
+    .search-table .badge {{ white-space: nowrap; }}
+
+    /* --- grafici --- */
+    .plot-container {{ height: 360px; }}
+    .plot-map {{ height: 440px; }}
+}}
+
 /* Footer */
 .footer {{
     background: #ffffff;
@@ -691,7 +885,7 @@ function toggle(id) {{
     const arrow = document.getElementById('arrow-' + id);
     const isHidden = el.style.display === "none";
 
-    el.style.display = isHidden ? "table-row" : "none";
+    el.style.display = isHidden ? "" : "none";
     if (arrow) {{
         arrow.textContent = isHidden ? "▲" : "↕";
     }}
@@ -733,6 +927,89 @@ function toggleBib(btn) {{
     btn.textContent = pre.hidden ? "Mostra BibTeX" : "Nascondi BibTeX";
 }}
 
+// ---------- Menu mobile ----------
+const MOBILE = window.matchMedia("(max-width: 700px)");
+
+function toggleNav(btn) {{
+    const nav = document.getElementById("main-nav");
+    const open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+}}
+
+// "Progetto ▾": su mobile il primo tocco apre il sottomenu, il secondo va alla pagina
+function openDropdown(ev, link) {{
+    if (!MOBILE.matches) return true;
+    const dd = link.parentElement;
+    if (dd.classList.contains("open")) return true;
+    ev.preventDefault();
+    dd.classList.add("open");
+    return false;
+}}
+
+// ---------- Grafici su mobile ----------
+function adaptForMobile(div, fig) {{
+    const L = fig.layout || {{}};
+    const isMap = fig.data.some(t => t.type === "choropleth");
+
+    // il titolo è già nella card: lo togliamo per guadagnare spazio
+    L.title = {{text: ""}};
+
+    // la nota sulla proiezione esce dal grafico e va sotto, come testo
+    if (L.annotations && L.annotations.length) {{
+        L.annotations.forEach(a => {{
+            const p = document.createElement("p");
+            p.className = "plot-note";
+            p.innerHTML = a.text;
+            div.after(p);
+        }});
+        L.annotations = [];
+    }}
+
+    L.dragmode = false;
+
+    if (isMap) {{
+        L.margin = {{l: 0, r: 0, t: 0, b: 70}};
+        // inquadratura fissa sull'Italia: la mappa riempie lo spazio disponibile
+        L.geo = Object.assign({{}}, L.geo, {{
+            fitbounds: false,
+            projection: {{type: "mercator"}},
+            lataxis: {{range: [36.4, 47.2]}},
+            lonaxis: {{range: [6.4, 18.7]}}
+        }});
+        // barra dei colori orizzontale sotto la mappa
+        const cb = {{
+            orientation: "h", x: 0.5, xanchor: "center",
+            y: -0.02, yanchor: "top", thickness: 10, len: 0.85,
+            title: {{side: "top", font: {{size: 11}}}}, tickfont: {{size: 10}}
+        }};
+        if (L.coloraxis) {{
+            L.coloraxis.colorbar = Object.assign({{}}, L.coloraxis.colorbar, cb,
+                {{title: Object.assign({{}}, (L.coloraxis.colorbar || {{}}).title, cb.title)}});
+        }}
+        fig.data.forEach(t => {{
+            if (t.type === "scattergeo" && t.mode === "text") {{
+                t.textfont = Object.assign({{}}, t.textfont, {{size: 10}});
+            }}
+        }});
+        if (L.legend) {{
+            L.legend = Object.assign({{}}, L.legend, {{y: -0.25, font: {{size: 10}}}});
+        }}
+    }} else {{
+        L.margin = {{l: 50, r: 10, t: 10, b: 10}};
+        L.xaxis = Object.assign({{}}, L.xaxis, {{
+            automargin: true, tickangle: -35, tickfont: {{size: 10}},
+            title: {{text: ""}}
+        }});
+        L.yaxis = Object.assign({{}}, L.yaxis, {{
+            automargin: true, tickfont: {{size: 10}}
+        }});
+        L.yaxis.title = Object.assign({{}}, L.yaxis.title, {{font: {{size: 11}}}});
+    }}
+
+    fig.layout = L;
+    return fig;
+}}
+
 function loadPlot(divId, jsonPath) {{
     fetch(jsonPath, {{cache: "no-cache"}})
         .then(r => {{
@@ -740,7 +1017,14 @@ function loadPlot(divId, jsonPath) {{
             return r.json();
         }})
         .then(fig => {{
-            Plotly.newPlot(divId, fig.data, fig.layout, {{responsive: true}});
+            const div = document.getElementById(divId);
+            const config = {{responsive: true}};
+            if (MOBILE.matches) {{
+                fig = adaptForMobile(div, fig);
+                config.displayModeBar = false;
+                config.scrollZoom = false;
+            }}
+            Plotly.newPlot(divId, fig.data, fig.layout, config);
         }})
         .catch(err => {{
             document.getElementById(divId).innerText = "Grafico non disponibile";
@@ -770,11 +1054,17 @@ function loadPlot(divId, jsonPath) {{
         </a>
     </div>
 
-    <nav class="navbar">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav"
+            onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+        Menu
+    </button>
+
+    <nav class="navbar" id="main-nav">
         <a href="{base_path}index.html">Home</a>
         <a href="{base_path}chi_siamo.html">Chi siamo</a>
         <div class="dropdown">
-            <a href="{base_path}progetto.html">Progetto ▾</a>
+            <a href="{base_path}progetto.html" onclick="return openDropdown(event, this)">Progetto ▾</a>
             <div class="dropdown-content">
                 <a href="{base_path}architettura.html">Architettura del database</a>
                 <a href="{base_path}schema_annotazione.html">Schema di annotazione</a>
@@ -911,7 +1201,8 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
     micro_flat = [(m, k, v) for m, vals in micro.items() for k, v in vals.items()]
     micro_sorted = sorted(micro_flat, key=lambda x: -x[2])
 
-    micro_html = "<table><tr><th style='width:30px;'></th><th>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>"
+    micro_html = ("<table class='micro-table'><tr><th class='col-arrow' style='width:30px;'></th>"
+                  "<th class='col-macro'>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>")
 
     for i, (m, k, v) in enumerate(micro_sorted[:10]):
 
@@ -929,14 +1220,14 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
         micro_html += f"""
 <tr style="background:{color}; cursor:pointer;" onclick="toggle('ex{i}')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex{i}">↕</span></td>
-    <td>{m}</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex{i}">↕</span></td>
+    <td class="col-macro">{m}</td>
     <td>{k}</td>
     <td>{v}</td>
 </tr>
 
 <tr id="ex{i}" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">{examples_html}</td>
+    <td colspan="4" class="ex-cell">{examples_html}</td>
 </tr>
 """
 
@@ -1030,7 +1321,7 @@ for signal_file in SIGNALS_DIR.glob("*.yaml"):
 
 <div class="card">
     <h3>Regioni</h3>
-    <div id="plot-region" class="plot-container"></div>
+    <div id="plot-region" class="plot-container plot-map"></div>
 </div>
 
 {citation_html(signal["nomeSD"], name)}
@@ -1069,7 +1360,7 @@ index_body = r"""
 </div>
 
 <div class="card">
-<table>
+<table class="search-table">
 <thead>
 <tr>
 <th class="sortable" data-key="lemma" aria-sort="none">Segnale<span class="sort-icon">↕</span></th>

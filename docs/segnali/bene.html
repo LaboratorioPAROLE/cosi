@@ -241,6 +241,10 @@ input {
     padding: 0;
 }
 
+.ex-cell {
+    padding: 10px 15px;
+}
+
 .example-card.error {
     color: #e53e3e;
     background-color: #fff5f5;
@@ -454,6 +458,196 @@ html {
     scroll-margin-top: 20px;
 }
 
+/* Note dei grafici (su mobile la nota esce dal grafico) */
+.plot-note {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0.4rem 0 0 0;
+    text-align: center;
+}
+
+/* Pulsante menu: visibile solo su mobile */
+.nav-toggle {
+    display: none;
+}
+
+.navbar {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+
+    /* --- spazi --- */
+    .container { padding: 1rem; }
+    .card { padding: 1rem; border-radius: 12px; }
+
+    /* --- menu ☰ --- */
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 6px auto 8px auto;
+        padding: 8px 16px;
+        border: 1px solid #d5dcea;
+        border-radius: 10px;
+        background: #f9fbff;
+        color: #095775;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .nav-toggle-bars,
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .nav-toggle-bars::before { top: -6px; }
+    .nav-toggle-bars::after  { top: 6px; }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin: 0;
+        padding: 0 0 8px 0;
+        border-top: 1px solid #eee;
+    }
+
+    .navbar.open { display: flex; }
+
+    .navbar > a,
+    .dropdown > a {
+        display: block;
+        padding: 12px 1.2rem;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    /* sottomenu: niente hover, si apre al tocco */
+    .dropdown:hover .dropdown-content { display: none; }
+
+    .dropdown-content,
+    .dropdown.open .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 0;
+        background: #f9fbff;
+    }
+
+    .dropdown.open .dropdown-content { display: block; }
+
+    .dropdown-content a {
+        padding: 10px 2.2rem;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    /* --- microfunzioni ed esempi --- */
+    /* righe come griglie: freccia | microfunzione | frequenza */
+    .micro-table,
+    .micro-table tbody { display: block; }
+
+    .micro-table tr {
+        display: grid;
+        grid-template-columns: 22px 1fr auto;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .micro-table th,
+    .micro-table td { padding: 10px 6px; border-bottom: none; }
+
+    .micro-table .col-macro { display: none; }
+    .micro-table .col-arrow { width: auto !important; padding-right: 0; }
+
+    /* riga degli esempi: una cella a tutta larghezza */
+    .micro-table tr[id^="ex"] { grid-template-columns: 1fr; }
+    .micro-table tr[id^="ex"][style*="none"] { display: none !important; }
+
+    .micro-table td.ex-cell { padding: 8px 2px; }
+
+    .example-card { padding: 10px 12px; margin: 8px 0 10px 0; }
+
+    .example-header {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .example-actions { justify-content: flex-start; }
+
+    /* turni: parlante sopra la battuta invece che a fianco */
+    .transcript-table,
+    .transcript-table tbody,
+    .transcript-table tr,
+    .transcript-table td {
+        display: block;
+        width: auto;
+    }
+
+    .transcript-table td { border-bottom: none; }
+
+    .speaker-col {
+        width: auto;
+        min-width: 0;
+        font-size: 0.78rem;
+        padding: 6px 8px 0 8px;
+    }
+
+    .text-col {
+        font-size: 0.92rem;
+        padding: 0 8px 6px 8px;
+    }
+
+    /* --- pagina di ricerca: ogni segnale diventa una scheda --- */
+    .search-table thead tr,
+    .search-table tbody tr {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .search-table th,
+    .search-table td {
+        border-bottom: none;
+        padding: 10px 6px;
+    }
+
+    .search-table th:nth-child(2),
+    .search-table td:nth-child(2) { text-align: right; }
+
+    .search-table th:nth-child(3) { display: none; }
+
+    .search-table td:nth-child(3) {
+        grid-column: 1 / -1;
+        padding-top: 0;
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .search-table .badge { white-space: nowrap; }
+
+    /* --- grafici --- */
+    .plot-container { height: 360px; }
+    .plot-map { height: 440px; }
+}
+
 /* Footer */
 .footer {
     background: #ffffff;
@@ -573,7 +767,7 @@ function toggle(id) {
     const arrow = document.getElementById('arrow-' + id);
     const isHidden = el.style.display === "none";
 
-    el.style.display = isHidden ? "table-row" : "none";
+    el.style.display = isHidden ? "" : "none";
     if (arrow) {
         arrow.textContent = isHidden ? "▲" : "↕";
     }
@@ -615,6 +809,89 @@ function toggleBib(btn) {
     btn.textContent = pre.hidden ? "Mostra BibTeX" : "Nascondi BibTeX";
 }
 
+// ---------- Menu mobile ----------
+const MOBILE = window.matchMedia("(max-width: 700px)");
+
+function toggleNav(btn) {
+    const nav = document.getElementById("main-nav");
+    const open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+}
+
+// "Progetto ▾": su mobile il primo tocco apre il sottomenu, il secondo va alla pagina
+function openDropdown(ev, link) {
+    if (!MOBILE.matches) return true;
+    const dd = link.parentElement;
+    if (dd.classList.contains("open")) return true;
+    ev.preventDefault();
+    dd.classList.add("open");
+    return false;
+}
+
+// ---------- Grafici su mobile ----------
+function adaptForMobile(div, fig) {
+    const L = fig.layout || {};
+    const isMap = fig.data.some(t => t.type === "choropleth");
+
+    // il titolo è già nella card: lo togliamo per guadagnare spazio
+    L.title = {text: ""};
+
+    // la nota sulla proiezione esce dal grafico e va sotto, come testo
+    if (L.annotations && L.annotations.length) {
+        L.annotations.forEach(a => {
+            const p = document.createElement("p");
+            p.className = "plot-note";
+            p.innerHTML = a.text;
+            div.after(p);
+        });
+        L.annotations = [];
+    }
+
+    L.dragmode = false;
+
+    if (isMap) {
+        L.margin = {l: 0, r: 0, t: 0, b: 70};
+        // inquadratura fissa sull'Italia: la mappa riempie lo spazio disponibile
+        L.geo = Object.assign({}, L.geo, {
+            fitbounds: false,
+            projection: {type: "mercator"},
+            lataxis: {range: [36.4, 47.2]},
+            lonaxis: {range: [6.4, 18.7]}
+        });
+        // barra dei colori orizzontale sotto la mappa
+        const cb = {
+            orientation: "h", x: 0.5, xanchor: "center",
+            y: -0.02, yanchor: "top", thickness: 10, len: 0.85,
+            title: {side: "top", font: {size: 11}}, tickfont: {size: 10}
+        };
+        if (L.coloraxis) {
+            L.coloraxis.colorbar = Object.assign({}, L.coloraxis.colorbar, cb,
+                {title: Object.assign({}, (L.coloraxis.colorbar || {}).title, cb.title)});
+        }
+        fig.data.forEach(t => {
+            if (t.type === "scattergeo" && t.mode === "text") {
+                t.textfont = Object.assign({}, t.textfont, {size: 10});
+            }
+        });
+        if (L.legend) {
+            L.legend = Object.assign({}, L.legend, {y: -0.25, font: {size: 10}});
+        }
+    } else {
+        L.margin = {l: 50, r: 10, t: 10, b: 10};
+        L.xaxis = Object.assign({}, L.xaxis, {
+            automargin: true, tickangle: -35, tickfont: {size: 10},
+            title: {text: ""}
+        });
+        L.yaxis = Object.assign({}, L.yaxis, {
+            automargin: true, tickfont: {size: 10}
+        });
+        L.yaxis.title = Object.assign({}, L.yaxis.title, {font: {size: 11}});
+    }
+
+    fig.layout = L;
+    return fig;
+}
+
 function loadPlot(divId, jsonPath) {
     fetch(jsonPath, {cache: "no-cache"})
         .then(r => {
@@ -622,7 +899,14 @@ function loadPlot(divId, jsonPath) {
             return r.json();
         })
         .then(fig => {
-            Plotly.newPlot(divId, fig.data, fig.layout, {responsive: true});
+            const div = document.getElementById(divId);
+            const config = {responsive: true};
+            if (MOBILE.matches) {
+                fig = adaptForMobile(div, fig);
+                config.displayModeBar = false;
+                config.scrollZoom = false;
+            }
+            Plotly.newPlot(divId, fig.data, fig.layout, config);
         })
         .catch(err => {
             document.getElementById(divId).innerText = "Grafico non disponibile";
@@ -652,11 +936,17 @@ function loadPlot(divId, jsonPath) {
         </a>
     </div>
 
-    <nav class="navbar">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav"
+            onclick="toggleNav(this)">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+        Menu
+    </button>
+
+    <nav class="navbar" id="main-nav">
         <a href="../index.html">Home</a>
         <a href="../chi_siamo.html">Chi siamo</a>
         <div class="dropdown">
-            <a href="../progetto.html">Progetto ▾</a>
+            <a href="../progetto.html" onclick="return openDropdown(event, this)">Progetto ▾</a>
             <div class="dropdown-content">
                 <a href="../architettura.html">Architettura del database</a>
                 <a href="../schema_annotazione.html">Schema di annotazione</a>
@@ -729,16 +1019,16 @@ function loadPlot(divId, jsonPath) {
 
 <div class="card">
     <h3>Microfunzioni</h3>
-    <table><tr><th style='width:30px;'></th><th>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>
+    <table class='micro-table'><tr><th class='col-arrow' style='width:30px;'></th><th class='col-macro'>Macrofunzione</th><th>Microfunzione</th><th>Frequenza</th></tr>
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex0')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex0">↕</span></td>
-    <td>Metatestuale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex0">↕</span></td>
+    <td class="col-macro">Metatestuale</td>
     <td>Chiusura del topic</td>
     <td>60</td>
 </tr>
 
 <tr id="ex0" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA028</span>
@@ -820,14 +1110,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex1')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex1">↕</span></td>
-    <td>Interazionale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex1">↕</span></td>
+    <td class="col-macro">Interazionale</td>
     <td>Conferma dell'attenzione</td>
     <td>43</td>
 </tr>
 
 <tr id="ex1" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOD2008</span>
@@ -909,14 +1199,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex2')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex2">↕</span></td>
-    <td>Metatestuale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex2">↕</span></td>
+    <td class="col-macro">Metatestuale</td>
     <td>Introduzione o ripresa del topic</td>
     <td>18</td>
 </tr>
 
 <tr id="ex2" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA014</span>
@@ -998,14 +1288,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex3')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex3">↕</span></td>
-    <td>Interazionale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex3">↕</span></td>
+    <td class="col-macro">Interazionale</td>
     <td>Accordo</td>
     <td>17</td>
 </tr>
 
 <tr id="ex3" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA028</span>
@@ -1087,14 +1377,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex4')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex4">↕</span></td>
-    <td>Interazionale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex4">↕</span></td>
+    <td class="col-macro">Interazionale</td>
     <td>Presa di turno</td>
     <td>9</td>
 </tr>
 
 <tr id="ex4" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA011</span>
@@ -1176,14 +1466,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex5')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex5">↕</span></td>
-    <td>Interazionale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex5">↕</span></td>
+    <td class="col-macro">Interazionale</td>
     <td>Interruzione</td>
     <td>5</td>
 </tr>
 
 <tr id="ex5" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA009</span>
@@ -1265,14 +1555,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex6')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex6">↕</span></td>
-    <td>Metatestuale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex6">↕</span></td>
+    <td class="col-macro">Metatestuale</td>
     <td>Filler</td>
     <td>4</td>
 </tr>
 
 <tr id="ex6" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBC001</span>
@@ -1344,14 +1634,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d6eaff; cursor:pointer;" onclick="toggle('ex7')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex7">↕</span></td>
-    <td>Cognitiva</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex7">↕</span></td>
+    <td class="col-macro">Cognitiva</td>
     <td>Intensificazione</td>
     <td>4</td>
 </tr>
 
 <tr id="ex7" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIPasti, KPN029</span>
@@ -1433,14 +1723,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#d4f5d4; cursor:pointer;" onclick="toggle('ex8')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex8">↕</span></td>
-    <td>Metatestuale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex8">↕</span></td>
+    <td class="col-macro">Metatestuale</td>
     <td>Citazione/Discorso Riportato</td>
     <td>3</td>
 </tr>
 
 <tr id="ex8" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">KIP, BOA3011</span>
@@ -1522,14 +1812,14 @@ function loadPlot(divId, jsonPath) {
 </tr>
 
 <tr style="background:#ffe0cc; cursor:pointer;" onclick="toggle('ex9')">
-    <td style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex9">↕</span></td>
-    <td>Interazionale</td>
+    <td class="col-arrow" style="text-align:center; color:#555; font-size:0.85rem;"><span id="arrow-ex9">↕</span></td>
+    <td class="col-macro">Interazionale</td>
     <td>Strategia di cortesia</td>
     <td>1</td>
 </tr>
 
 <tr id="ex9" style="display:none; background:#fafafa">
-    <td colspan="4" style="padding: 10px 15px;">
+    <td colspan="4" class="ex-cell">
     <div class="example-card">
         <div class="example-header">
             <span class="conv-id">ParlaBO, PBA015</span>
@@ -1586,7 +1876,7 @@ function loadPlot(divId, jsonPath) {
 
 <div class="card">
     <h3>Regioni</h3>
-    <div id="plot-region" class="plot-container"></div>
+    <div id="plot-region" class="plot-container plot-map"></div>
 </div>
 
 

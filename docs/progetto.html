@@ -289,7 +289,111 @@ body {
         width: auto;
     }
 }
+
+/* Pulsante menu: visibile solo su mobile */
+.nav-toggle { display: none; }
+.navbar { flex-wrap: wrap; }
+
+@media (max-width: 700px) {
+
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 6px auto 8px auto;
+        padding: 8px 16px;
+        border: 1px solid #d5dcea;
+        border-radius: 10px;
+        background: #f9fbff;
+        color: #095775;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .nav-toggle-bars,
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .nav-toggle-bars::before { top: -6px; }
+    .nav-toggle-bars::after  { top: 6px; }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin: 0;
+        padding: 0 0 8px 0;
+        border-top: 1px solid #eee;
+    }
+
+    .navbar.open { display: flex; }
+
+    .navbar > a,
+    .dropdown > a {
+        display: block;
+        padding: 12px 1.2rem;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    /* sottomenu: niente hover, si apre al tocco */
+    .dropdown:hover .dropdown-content { display: none; }
+
+    .dropdown-content,
+    .dropdown.open .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 0;
+        background: #f9fbff;
+    }
+
+    .dropdown.open .dropdown-content { display: block; }
+
+    .dropdown-content a {
+        padding: 10px 2.2rem;
+        border-bottom: 1px solid #f1f1f1;
+    }
+}
+
 </style>
+
+<script>
+const NAV_MOBILE = window.matchMedia("(max-width: 700px)");
+
+function toggleNav(btn) {
+    const nav = document.getElementById("main-nav");
+    const open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+}
+
+// "Progetto ▾": su mobile il primo tocco apre il sottomenu, il secondo va alla pagina
+function openDropdown(ev, link) {
+    if (!NAV_MOBILE.matches) return true;
+    const dd = link.parentElement;
+    if (dd.classList.contains("open")) return true;
+    ev.preventDefault();
+    dd.classList.add("open");
+    return false;
+}
+</script>
+
 </head>
 
 <body>
@@ -313,20 +417,27 @@ body {
     </a>
 </div>
 
-     <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="chi_siamo.html">Chi siamo</a>
-        <div class="dropdown">
-            <a href="progetto.html">Progetto ▾</a>
-            <div class="dropdown-content">
-                <a href="architettura.html">Architettura del database</a>
-                <a href="schema_annotazione.html">Schema di annotazione</a>
-            </div>
+<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav"
+        onclick="toggleNav(this)">
+    <span class="nav-toggle-bars" aria-hidden="true"></span>
+    Menu
+</button>
+
+<nav class="navbar" id="main-nav">
+    <a href="index.html">Home</a>
+    <a href="chi_siamo.html">Chi siamo</a>
+    <div class="dropdown">
+        <a href="progetto.html" onclick="return openDropdown(event, this)">Progetto ▾</a>
+        <div class="dropdown-content">
+            <a href="architettura.html">Architettura del database</a>
+            <a href="schema_annotazione.html">Schema di annotazione</a>
         </div>
-        <a href="search.html">Cerca nel database</a>
-        <a href="prodotti.html">Prodotti della ricerca</a>
-        <a href="contatti.html">Contatti</a>
-    </nav>
+    </div>
+    <a href="search.html">Cerca nel database</a>
+    <a href="prodotti.html">Prodotti della ricerca</a>
+    <a href="contatti.html">Contatti</a>
+</nav>
+
 
 </header>
     
