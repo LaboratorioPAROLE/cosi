@@ -928,8 +928,10 @@ function loadPlot(divId, jsonPath) {
                 <img class="logo-dipsum" src="../logo_dipsum.png" alt="DipSUM - Dipartimento di Studi Umanistici">
             </a>
         </div>
-
-        <img class="logo-main" src="../logo_cosi.png" alt="COSÌ logo">
+        <a href="https://laboratorioparole.github.io/cosi/" target="_blank" rel="noopener">
+            <img class="logo-main" src="../logo_cosi.png" alt="COSÌ logo">
+        </a>
+        
 
         <a class="side side-right" href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
             <img class="logo-parole" src="../logo_parole.png" alt="P.A.R.O.L.E.">
@@ -1536,22 +1538,21 @@ function loadPlot(divId, jsonPath) {
 
 <div class="card cite-card" id="cita">
     <h3>Come citare questa voce</h3>
-    <p class="cite-text" id="cite-text">Laboratorio P.A.R.O.L.E. (2026). “dunque”. In <i>COSÌ. Catalogo Online dei Segnali discorsivi dell&#x27;Italiano</i>. Salerno: Università di Salerno. <a href="https://laboratorioparole.github.io/cosi/segnali/dunque.html">https://laboratorioparole.github.io/cosi/segnali/dunque.html</a> (ultima consultazione: <span class="cite-date"></span>).</p>
+    <p class="cite-text" id="cite-text"><i>COSÌ. Catalogo Online dei Segnali discorsivi dell&#x27;Italiano</i>, versione 0.1 (Fisciano: Laboratorio P.A.R.O.L.E., Università di Salerno, 2026), s.v. “dunque”, consultato il <span class="cite-date"></span>, <a href="https://laboratorioparole.github.io/cosi/segnali/dunque.html">https://laboratorioparole.github.io/cosi/segnali/dunque.html</a>.</p>
     <div class="cite-actions">
         <button type="button" class="cite-btn" onclick="copyCite('cite-text', this)">Copia citazione</button>
         <button type="button" class="cite-btn" onclick="copyCite('cite-bib', this)">Copia BibTeX</button>
         <button type="button" class="cite-btn cite-btn-ghost" onclick="toggleBib(this)">Mostra BibTeX</button>
     </div>
-    <pre class="cite-bib" id="cite-bib" hidden>@misc{cosi-dunque,
-  author       = {{Laboratorio P.A.R.O.L.E.}},
-  title        = {{dunque}},
-  howpublished = {In \emph{COS\`{I}. Catalogo Online dei Segnali discorsivi dell'Italiano}},
-  publisher    = {Università di Salerno},
-  address      = {Salerno},
-  year         = {2026},
-  url          = {https://laboratorioparole.github.io/cosi/segnali/dunque.html},
-  urldate      = {<span class="cite-date-iso"></span>},
-  note         = {Ultima consultazione: <span class="cite-date"></span>}
+    <pre class="cite-bib" id="cite-bib" hidden>@incollection{cosi_dunque_2026,
+  title     = {dunque},
+  booktitle = {COSÌ: Catalogo Online dei Segnali discorsivi dell'Italiano},
+  edition   = {pre-release v0.1},
+  publisher = {Laboratorio P.A.R.O.L.E., Università di Salerno},
+  address   = {Fisciano},
+  year      = {2026},
+  url       = {https://laboratorioparole.github.io/cosi/segnali/dunque.html},
+  urldate   = {<span class="cite-date-iso"></span>}
 }</pre>
 </div>
 

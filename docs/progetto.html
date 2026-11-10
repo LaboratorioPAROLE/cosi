@@ -247,6 +247,120 @@ body {
     height: 18px;
 }
 
+/* --- Titolo con pulsante "Cita" --- */
+
+.title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 2px solid #eef1f6;
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.title-row .section-title {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.cite-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.cite-jump:hover {
+    border-color: #b51700;
+    color: #b51700;
+}
+
+.cite-jump svg {
+    width: 16px;
+    height: 16px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#cita {
+    scroll-margin-top: 20px;
+}
+
+/* --- Come citare COSÌ --- */
+
+.cite-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    background: #f9fbff;
+    border-left: 3px solid #095775;
+    padding: 0.8rem 1rem;
+    margin: 0 0 1rem 0;
+    word-break: break-word;
+}
+
+.cite-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cite-text a {
+    color: #095775;
+}
+
+.cite-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid #d5dcea;
+    border-radius: 10px;
+    background: #f9fbff;
+    color: #095775;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cite-btn:hover {
+    border-color: #b51700;
+    color: #b51700;
+}
+
+.cite-btn.copied {
+    border-color: #2f855a;
+    color: #2f855a;
+}
+
+.cite-btn-ghost {
+    background: none;
+    border-color: transparent;
+}
+
+.cite-bib {
+    margin: 1rem 0 0 0;
+    padding: 0.9rem 1rem;
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
     /* --- Banner schema di annotazione --- */
 
 .annot-row {
@@ -392,6 +506,34 @@ function openDropdown(ev, link) {
     dd.classList.add("open");
     return false;
 }
+
+// Copia della citazione o del BibTeX
+function copyCite(id, btn) {
+    const text = document.getElementById(id).textContent.trim();
+    const label = btn.textContent;
+    const done = () => {
+        btn.textContent = "Copiato ✓";
+        btn.classList.add("copied");
+        setTimeout(() => { btn.textContent = label; btn.classList.remove("copied"); }, 1800);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done);
+    } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        done();
+    }
+}
+
+function toggleBib(btn) {
+    const pre = document.getElementById("cite-bib");
+    pre.hidden = !pre.hidden;
+    btn.textContent = pre.hidden ? "Mostra BibTeX" : "Nascondi BibTeX";
+}
 </script>
 
 </head>
@@ -410,7 +552,9 @@ function openDropdown(ev, link) {
         </a>
     </div>
 
-    <img class="logo-main" src="logo_cosi.png" alt="COSÌ logo">
+    <a href="https://laboratorioparole.github.io/cosi/" target="_blank" rel="noopener">
+            <img class="logo-main" src="logo_cosi.png" alt="COSÌ logo">
+    </a>
 
     <a class="side side-right" href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
         <img class="logo-parole" src="logo_parole.png" alt="P.A.R.O.L.E.">
@@ -443,10 +587,17 @@ function openDropdown(ev, link) {
     
 <div class="container">
         <div class="card">
-        <h2 class="section-title">Il Progetto</h2>
+        <div class="title-row">
+            <h2 class="section-title">Il Progetto</h2>
+            <a class="cite-jump" href="#cita" title="Come citare COSÌ" aria-label="Come citare COSÌ">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M9.5 6C6.5 6 4 8.5 4 11.5V18h6v-6H7c0-1.7 1.1-3 2.5-3V6zm10 0c-3 0-5.5 2.5-5.5 5.5V18h6v-6h-3c0-1.7 1.1-3 2.5-3V6z"/>
+                </svg>
+                Come citare COSÌ
+            </a>
+        </div>
  
         <p class="contact-label">Che cos'è COSÌ</p>
-        <p class="contact-text" style="color:#444;">
         <p class="contact-text" style="color:#444;">
             <strong>COSÌ</strong> (<em>Catalogo Online dei Segnali discorsivi dell'Italiano</em>) è il primo database annotato
             di segnali discorsivi dell'italiano. Nonostante la loro importanza, infatti, i segnali discorsivi sono ancora poco rappresentati nelle risorse linguistiche.
@@ -528,9 +679,31 @@ function openDropdown(ev, link) {
             esempi autentici e liste di frequenza dei segnali discorsivi.
         </p>
     </div>
-    
 
-    
+    <!-- COME CITARE -->
+    <div class="card" id="cita">
+        <h2 class="section-title">Come citare COSÌ</h2>
+
+        <p class="contact-text" style="color:#444;">
+            Se usi COSÌ nel tuo lavoro, ti chiediamo di citare il progetto con il riferimento seguente.
+            Per citare una singola voce del catalogo, usa il riquadro in fondo alla pagina della voce.
+        </p>
+
+        <p class="cite-text" id="cite-text">Voghera, Miriam, Andrea Sansò, Iolanda Alfano, Alfonsina Buoniconto, Violetta Cataldo, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Carmela Sammarco, Luisa Troncone. 2025. COSÌ: An online repertoire of Italian discourse markers. In <i>Talking Data – Methodological and theoretical challenges raised by spoken interaction data</i>, 8-10 ottobre, Università di Bologna, Bologna. <a href="https://eventi.unibo.it/talkingdata2025/abstracts/voghera-et-al.pdf" target="_blank" rel="noopener">https://eventi.unibo.it/talkingdata2025/abstracts/voghera-et-al.pdf</a></p>
+
+        <div class="cite-actions">
+            <button type="button" class="cite-btn" onclick="copyCite('cite-text', this)">Copia citazione</button>
+            <button type="button" class="cite-btn" onclick="copyCite('cite-bib', this)">Copia BibTeX</button>
+            <button type="button" class="cite-btn cite-btn-ghost" onclick="toggleBib(this)">Mostra BibTeX</button>
+        </div>
+
+<pre class="cite-bib" id="cite-bib" hidden>@misc{voghera_cosi_2025,
+  author       = {Voghera, Miriam and Sansò, Andrea and Alfano, Iolanda and Buoniconto, Alfonsina and Cataldo, Violetta and Di Paola, Giovanni and Esposito, Pasquale and Pisciotta, Flavio and Sammarco, Carmela and Troncone, Luisa},
+  title        = {{COSÌ}: An online repertoire of {Italian} discourse markers},
+  howpublished = {Comunicazione presentata al convegno \emph{Talking Data -- Methodological and theoretical challenges raised by spoken interaction data}, Università di Bologna, Bologna, 8--10 ottobre 2025},
+  year         = {2025},
+  url          = {https://eventi.unibo.it/talkingdata2025/abstracts/voghera-et-al.pdf}
+}</pre>
     </div>
 
 </div>

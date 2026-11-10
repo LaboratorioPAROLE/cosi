@@ -55,14 +55,15 @@ GITHUB_TSV_RAW = "https://raw.githubusercontent.com/LaboratorioPAROLE/cosi/main/
 # URL pubblico del sito (GitHub Pages): da correggere se diverso
 SITE_URL = "https://laboratorioparole.github.io/cosi/"
 
-CITE_AUTHOR = "Laboratorio P.A.R.O.L.E."
+# Versione corrente del catalogo: da aggiornare a ogni release
+COSI_VERSION = "0.1"
+COSI_EDITION = f"pre-release v{COSI_VERSION}"   # usato nel BibTeX
+
 CITE_WORK = "COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano"
-CITE_PUBLISHER = "Università di Salerno"
-CITE_PLACE = "Salerno"
+CITE_PUBLISHER = "Laboratorio P.A.R.O.L.E., Università di Salerno"
+CITE_PLACE = "Fisciano"
 CITE_YEAR = date.today().year
 
-# COSÌ in BibTeX con l'accento in forma sicura per LaTeX
-BIB_WORK = "COS\\`{I}. Catalogo Online dei Segnali discorsivi dell'Italiano"
 
 
 def citation_html(nome_sd, name):
@@ -71,25 +72,27 @@ def citation_html(nome_sd, name):
     url = f"{SITE_URL}segnali/{quote(name)}.html"
     voce = escape(str(nome_sd))
 
+    # Stile Chicago per opere di consultazione: opera, versione, s.v. voce
     text = (
-        f'{escape(CITE_AUTHOR)} ({CITE_YEAR}). \u201c{voce}\u201d. In '
-        f'<i>{escape(CITE_WORK)}</i>. {escape(CITE_PLACE)}: {escape(CITE_PUBLISHER)}. '
-        f'<a href="{url}">{url}</a> '
-        f'(ultima consultazione: <span class="cite-date"></span>).'
+        f'<i>{escape(CITE_WORK)}</i>, versione {escape(COSI_VERSION)} '
+        f'({escape(CITE_PLACE)}: {escape(CITE_PUBLISHER)}, {CITE_YEAR}), '
+        f's.v. \u201c{voce}\u201d, consultato il <span class="cite-date"></span>, '
+        f'<a href="{url}">{url}</a>.'
     )
 
-    key = "cosi-" + "".join(c if c.isalnum() else "-" for c in name.lower())
+    # BibTeX: voce dentro un'opera (@incollection + booktitle), leggibile da
+    # BibTeX classico, biblatex, Zotero e Mendeley
+    key = "cosi_" + "".join(c if c.isalnum() else "_" for c in name.lower()) + f"_{CITE_YEAR}"
     bibtex = (
-        f"@misc{{{key},\n"
-        f"  author       = {{{{{CITE_AUTHOR}}}}},\n"
-        f"  title        = {{{{{nome_sd}}}}},\n"
-        f"  howpublished = {{In \\emph{{{BIB_WORK}}}}},\n"
-        f"  publisher    = {{{CITE_PUBLISHER}}},\n"
-        f"  address      = {{{CITE_PLACE}}},\n"
-        f"  year         = {{{CITE_YEAR}}},\n"
-        f"  url          = {{{url}}},\n"
-        f'  urldate      = {{<span class="cite-date-iso"></span>}},\n'
-        f'  note         = {{Ultima consultazione: <span class="cite-date"></span>}}\n'
+        f"@incollection{{{key},\n"
+        f"  title     = {{{nome_sd}}},\n"
+        f"  booktitle = {{COSÌ: Catalogo Online dei Segnali discorsivi dell'Italiano}},\n"
+        f"  edition   = {{{COSI_EDITION}}},\n"
+        f"  publisher = {{{CITE_PUBLISHER}}},\n"
+        f"  address   = {{{CITE_PLACE}}},\n"
+        f"  year      = {{{CITE_YEAR}}},\n"
+        f"  url       = {{{url}}},\n"
+        f'  urldate   = {{<span class="cite-date-iso"></span>}}\n'
         f"}}"
     )
     # escape per l'HTML, poi ripristino degli span della data
@@ -1046,8 +1049,10 @@ function loadPlot(divId, jsonPath) {{
                 <img class="logo-dipsum" src="{base_path}logo_dipsum.png" alt="DipSUM - Dipartimento di Studi Umanistici">
             </a>
         </div>
-
-        <img class="logo-main" src="{base_path}logo_cosi.png" alt="COSÌ logo">
+        <a href="https://laboratorioparole.github.io/cosi/" target="_blank" rel="noopener">
+            <img class="logo-main" src="{base_path}logo_cosi.png" alt="COSÌ logo">
+        </a>
+        
 
         <a class="side side-right" href="https://www.dipsum.unisa.it/dipartimento/strutture?id=75" target="_blank" rel="noopener">
             <img class="logo-parole" src="{base_path}logo_parole.png" alt="P.A.R.O.L.E.">
