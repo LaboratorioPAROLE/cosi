@@ -2,32 +2,23 @@
 
 ## Membre e membri
 
-Miriam Voghera (PI), Andrea Sansò (PI), Iolanda Alfano, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone
+Miriam Voghera (PI), Andrea Sansò (PI), Iolanda Alfano, Raffaele Annunziata, Alfonsina Buoniconto, Giovanni Di Paola, Pasquale Esposito, Flavio Pisciotta, Giuseppe Pisegna, Carmela Sammarco, Luisa Troncone
 
 **Laboratorio PAROLE, DipSUm - Dipartimento di Studi Umanistici, Università di Salerno**
 
 
 ## Presentazione
 
-**COSÌ** (Catalogo Online dei Segnali discorsivi dell'Italiano) è un progetto in corso all'Università di Salerno, Dipartimento di Studi Umanistici, Laboratorio PAROLE. Il progetto mira a costruire un catalogo online dei segnali discorsivi (= SD) dell'italiano. Esso consterà di una risorsa ampia e corpus-based per l'analisi, l'annotazione, e l'esplorazione dei SD nell'italiano contemporaneo.
+**COSÌ** (Catalogo Online dei Segnali discorsivi dell'Italiano) è un progetto in corso al [Laboratorio P.A.R.O.L.E.](https://www.dipsum.unisa.it/dipartimento/strutture?id=75) del Dipartimento di Studi Umanistici (DipSUM) dell'Università di Salerno. Il progetto mira a costruire un catalogo online dei segnali discorsivi (= SD) dell'italiano. Esso consterà di una risorsa ampia e corpus-based per l'analisi, l'annotazione, e l'esplorazione dei SD nell'italiano contemporaneo. 
+
+Per ogni segnale (*capito*, *comunque*, *diciamo*, *dunque*, *quindi*, *sai*…) il database raccoglie occorrenze estratte dai corpora KIParla, annotate manualmente per **macrofunzione** (interazionale, metatestuale, cognitiva) e **microfunzione**, e arricchite con i metadati della conversazione e del parlante. I dati sono consultabili sul sito generato in `docs/`.
 
 
 COSÌ rientra nella filosofia dei **linked data**, ed è stato progettato per interagire con il corpus KIParla. Per ogni SD, si renderà disponibile:
+- occorrenze del KIParla annotate e relativo cotesto;
+- test di sostituzione adoperati per l'identificazione del SD;
+- file con annotazione funzionale.
 
-    - occorrenze del KIParla annotate e relativo cotesto;
-    - test di sostituzione adoperati per l'identificazione del SD;
-    - file con annotazione funzionale.
-
----
-
----
-## Architettura
-
-# COSÌ – Corpus di Segnali dell'Italiano parlato
-
-COSÌ è una risorsa per lo studio dei **segnali discorsivi** (SD) nell'italiano parlato, sviluppata dal Laboratorio [P.A.R.O.L.E.](https://www.dipsum.unisa.it/dipartimento/strutture?id=75) del Dipartimento di Studi Umanistici (DipSUM) dell'Università di Salerno.
-
-Per ogni segnale (*capito*, *comunque*, *diciamo*, *dunque*, *quindi*, *sai*…) il database raccoglie occorrenze estratte dai corpora KIParla, annotate manualmente per **macrofunzione** (interazionale, metatestuale, cognitiva) e **microfunzione**, e arricchite con i metadati della conversazione e del parlante. I dati sono consultabili sul sito generato in `docs/`.
 
 ---
 
@@ -119,7 +110,7 @@ Genera il sito statico in `docs/`: copia `cosi/imgs` in `docs/imgs`, crea una pa
 
 ---
 
-## Metodi di calcolo
+## Calcolo delle misure di frequenza
 
 ### Frequenze normalizzate
 Per ogni valore di metadato:
@@ -140,7 +131,7 @@ conteggio proiettato = conteggio × fattore
 
 Le frequenze normalizzate si calcolano sul conteggio proiettato. Nei grafici questi segnali sono indicati come *proiezione*, e i tooltip riportano sia il conteggio reale sia quello proiettato. La proiezione assume che il campione rifletta la distribuzione dell'intera popolazione: sulle categorie con pochi casi l'incertezza è alta.
 
-### Macroaree
+### Macroaree geografiche
 Le regioni sono raggruppate in tre macroaree, seguendo la suddivisione utilizzata nel KIParla (si veda il modulo [KIPasti](https://github.com/KIParla/KIPasti)):
 
 | Macroarea | Regioni |
@@ -157,7 +148,14 @@ somma occorrenze SD delle regioni dell'area / somma token del corpus delle regio
 
 Tutte le regioni concorrono al calcolo, anche quelle con pochi dati. Nella mappa regionale invece sono escluse (in grigio) le regioni con meno di 40.000 token nel corpus; nella mappa per macroarea sono incluse ma segnalate come poco affidabili nel tooltip.
 
+
 ---
+ 
+## Come citare
+ 
+Le voci del catalogo si citano come voci di un'opera di consultazione, in stile Chicago con *s.v.* (*sub voce*) e con la versione corrente del catalogo. In fondo a ogni pagina c'è il riquadro **Come citare questa voce**, con la citazione pronta e i pulsanti per copiarla o per copiare il BibTeX. Esempio:
+ 
+> *COSÌ. Catalogo Online dei Segnali discorsivi dell'Italiano*, versione 0.1 (Salerno: Laboratorio P.A.R.O.L.E., Università di Salerno, 2026), s.v. "dunque", consultato il gg mese aaaa, https://laboratorioparole.github.io/cosi/segnali/dunque.html.
 
 ## Requisiti
 
